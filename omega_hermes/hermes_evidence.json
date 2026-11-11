@@ -1,0 +1,364 @@
+{
+  "format": 1,
+  "module": "omega_hermes",
+  "phase": 2,
+  "etiquette": "SIMULÉ",
+  "verdict": "OK",
+  "graine": 7,
+  "config": {
+    "iterations": 5,
+    "scenarios": 200,
+    "entrainement_par_classe": 150,
+    "cible_fnr": 0.02,
+    "pas": {
+      "resserrer": 0.9,
+      "relacher": 1.1
+    },
+    "bornes_seuil_strict": [
+      0.5,
+      2.0
+    ]
+  },
+  "mesures": {
+    "global": {
+      "n": 1000,
+      "score": 0.9914285714285715,
+      "poids": {
+        "1-BER": 0.4,
+        "rejet_inconnu": 0.4,
+        "1-FPR": 0.2
+      },
+      "composantes": {
+        "1-BER": 0.9785714285714285,
+        "rejet_inconnu": 1.0,
+        "1-FPR": 1.0
+      },
+      "ber": 0.02142857142857143,
+      "fpr": 0.0,
+      "fnr": 0.02,
+      "rejet_inconnu": 1.0,
+      "covert_rejection": 1.0,
+      "draft_rejection": 1.0,
+      "artifact_rejection": 1.0,
+      "exactitude_7_labels": 0.685,
+      "par_label": {
+        "REPOS": {
+          "support": 127,
+          "rappel": 0.984251968503937,
+          "precision": 1.0
+        },
+        "CHARGE": {
+          "support": 143,
+          "rappel": 1.0,
+          "precision": 1.0
+        },
+        "RESONANCE": {
+          "support": 130,
+          "rappel": 0.9538461538461539,
+          "precision": 1.0
+        },
+        "ARTIFACT": {
+          "support": 150,
+          "rappel": 1.0,
+          "precision": 0.32967032967032966
+        },
+        "UNKNOWN": {
+          "support": 150,
+          "rappel": 0.9533333333333334,
+          "precision": 0.934640522875817
+        },
+        "COVERT": {
+          "support": 150,
+          "rappel": 0.0,
+          "precision": null
+        },
+        "DRAFT": {
+          "support": 150,
+          "rappel": 0.0,
+          "precision": null
+        }
+      },
+      "latence_mediane_ms": 0.4988545,
+      "latence_plancher_ms": 8.2e-05
+    },
+    "iterations": [
+      {
+        "iteration": 1,
+        "score": 0.9914285714285715,
+        "ber": 0.02142857142857143,
+        "fpr": 0.0,
+        "fnr": 0.0375,
+        "rejet_inconnu": 1.0,
+        "covert_rejection": 1.0,
+        "draft_rejection": 1.0,
+        "seuil_strict": 56.03220517592696,
+        "seuil_lache": 5603.2205175926965
+      },
+      {
+        "iteration": 2,
+        "score": 0.9885714285714287,
+        "ber": 0.02857142857142857,
+        "fpr": 0.0,
+        "fnr": 0.0125,
+        "rejet_inconnu": 1.0,
+        "covert_rejection": 1.0,
+        "draft_rejection": 1.0,
+        "seuil_strict": 61.635425693519664,
+        "seuil_lache": 6163.542569351966
+      },
+      {
+        "iteration": 3,
+        "score": 0.9971428571428572,
+        "ber": 0.007142857142857143,
+        "fpr": 0.0,
+        "fnr": 0.0125,
+        "rejet_inconnu": 1.0,
+        "covert_rejection": 1.0,
+        "draft_rejection": 1.0,
+        "seuil_strict": 61.635425693519664,
+        "seuil_lache": 6163.542569351966
+      },
+      {
+        "iteration": 4,
+        "score": 0.9828571428571429,
+        "ber": 0.04285714285714286,
+        "fpr": 0.0,
+        "fnr": 0.0375,
+        "rejet_inconnu": 1.0,
+        "covert_rejection": 1.0,
+        "draft_rejection": 1.0,
+        "seuil_strict": 61.635425693519664,
+        "seuil_lache": 6163.542569351966
+      },
+      {
+        "iteration": 5,
+        "score": 0.9971428571428572,
+        "ber": 0.007142857142857143,
+        "fpr": 0.0,
+        "fnr": 0.0,
+        "rejet_inconnu": 1.0,
+        "covert_rejection": 1.0,
+        "draft_rejection": 1.0,
+        "seuil_strict": 67.79896826287164,
+        "seuil_lache": 6779.896826287164
+      }
+    ],
+    "ajustements": [
+      {
+        "iteration": 1,
+        "action": "RELACHE",
+        "raison": "connus_rejetes",
+        "seuil_strict_avant": 56.03220517592696,
+        "seuil_strict_apres": 61.635425693519664,
+        "fpr": 0.0,
+        "fnr": 0.0375
+      },
+      {
+        "iteration": 2,
+        "action": "MAINTIENT",
+        "raison": "dans_la_cible",
+        "seuil_strict_avant": 61.635425693519664,
+        "seuil_strict_apres": 61.635425693519664,
+        "fpr": 0.0,
+        "fnr": 0.0125
+      },
+      {
+        "iteration": 3,
+        "action": "MAINTIENT",
+        "raison": "dans_la_cible",
+        "seuil_strict_avant": 61.635425693519664,
+        "seuil_strict_apres": 61.635425693519664,
+        "fpr": 0.0,
+        "fnr": 0.0125
+      },
+      {
+        "iteration": 4,
+        "action": "RELACHE",
+        "raison": "connus_rejetes",
+        "seuil_strict_avant": 61.635425693519664,
+        "seuil_strict_apres": 67.79896826287164,
+        "fpr": 0.0,
+        "fnr": 0.0375
+      },
+      {
+        "iteration": 5,
+        "action": "MAINTIENT",
+        "raison": "dans_la_cible",
+        "seuil_strict_avant": 67.79896826287164,
+        "seuil_strict_apres": 67.79896826287164,
+        "fpr": 0.0,
+        "fnr": 0.0
+      }
+    ],
+    "seuils_appris": {
+      "strict": 56.03220517592696,
+      "lache": 5603.2205175926965,
+      "percentile": 99.0,
+      "facteur_lache": 100.0
+    },
+    "bandes_distance": {
+      "ARTIFACT/dropout": {
+        "n": 75,
+        "min": 25.44778500237256,
+        "mediane": 113.07895115904775,
+        "max": 1286.7554788478367
+      },
+      "ARTIFACT/ecretage": {
+        "n": 75,
+        "min": 39.2155653662546,
+        "mediane": 218.71035172616672,
+        "max": 1248.073930053459
+      },
+      "CONNU/aucune": {
+        "n": 100,
+        "min": 16.331897515472814,
+        "mediane": 29.713641619950263,
+        "max": 62.18666147941339
+      },
+      "CONNU/bruit": {
+        "n": 100,
+        "min": 12.221095876801323,
+        "mediane": 28.54719542898023,
+        "max": 59.742189107933385
+      },
+      "CONNU/derive": {
+        "n": 100,
+        "min": 13.265518707008633,
+        "mediane": 30.338204092133747,
+        "max": 65.70241895700921
+      },
+      "CONNU/jitter": {
+        "n": 100,
+        "min": 16.14461812676115,
+        "mediane": 32.24235217661011,
+        "max": 79.70588676639018
+      },
+      "COVERT/tableau": {
+        "n": 150,
+        "min": 648.4854673781281,
+        "mediane": 3384.2217887462093,
+        "max": 8859.376091689248
+      },
+      "DRAFT/brouillons": {
+        "n": 150,
+        "min": 269.48359141493415,
+        "mediane": 1870.197555793081,
+        "max": 8764.613564869022
+      },
+      "UNKNOWN/carre": {
+        "n": 75,
+        "min": 8601.484354862445,
+        "mediane": 13936.992655262084,
+        "max": 17435.843556273147
+      },
+      "UNKNOWN/chirp": {
+        "n": 75,
+        "min": 4154.810806975118,
+        "mediane": 16838.35935349625,
+        "max": 44288.6297072814
+      }
+    },
+    "trait_31_xcorr": {
+      "ARTIFACT": {
+        "mediane": -0.0026440133807160643,
+        "mediane_abs": 0.019556223242344108
+      },
+      "CONNU": {
+        "mediane": -0.001788208001212258,
+        "mediane_abs": 0.018219694207677696
+      },
+      "COVERT": {
+        "mediane": 0.204156301768059,
+        "mediane_abs": 0.204156301768059
+      },
+      "DRAFT": {
+        "mediane": 0.0035331811129193287,
+        "mediane_abs": 0.024644244417082434
+      },
+      "UNKNOWN": {
+        "mediane": -0.0020975286655419445,
+        "mediane_abs": 0.03122043429164375
+      },
+      "nominal": {
+        "mediane": 0.0008131868496492104,
+        "mediane_abs": 0.020978326268564624
+      }
+    },
+    "defaut_historique": {
+      "carres": 75,
+      "seuil_unique_artifact": 1.0,
+      "seuil_unique_unknown": 0.0,
+      "deux_seuils_unknown": 1.0
+    },
+    "criteres": [
+      {
+        "critere": "score ≥ 0.98 (tolérance 0.01)",
+        "ok": true,
+        "detail": "0.9914"
+      },
+      {
+        "critere": "rejet inconnu = 1,000",
+        "ok": true,
+        "detail": "1.000"
+      },
+      {
+        "critere": "rejet COVERT = 1,000",
+        "ok": true,
+        "detail": "1.000"
+      },
+      {
+        "critere": "rejet DRAFT = 1,000",
+        "ok": true,
+        "detail": "1.000"
+      },
+      {
+        "critere": "FPR = 0",
+        "ok": true,
+        "detail": "0.000"
+      },
+      {
+        "critere": "défaut historique reproduit : carré → ARTIFACT au seuil unique",
+        "ok": true,
+        "detail": "1.000"
+      },
+      {
+        "critere": "défaut corrigé : carré → UNKNOWN à deux seuils",
+        "ok": true,
+        "detail": "1.000"
+      },
+      {
+        "critere": "découplage statique du banc",
+        "ok": true,
+        "detail": "0 violation(s)"
+      },
+      {
+        "critere": "ajustements journalisés dans une chaîne Γ intègre",
+        "ok": true,
+        "detail": ""
+      }
+    ],
+    "decouplage": {
+      "violations": []
+    },
+    "journal": {
+      "integre": true,
+      "blocs": 5
+    }
+  },
+  "limites": [
+    "Données synthétiques uniquement : ces mesures ne prouvent rien sur un signal réel.",
+    "Les paramètres du jumeau et d'ALICE ont été réglés pour que les familles soient séparables ; BOB est mesuré sur ce monde-là.",
+    "FPR lu comme « anomalie acceptée comme connue » et entraînement lu comme « par classe » : deux interprétations du blueprint à confirmer.",
+    "COVERT et DRAFT sont rejetés, jamais nommés : ils n'existent pas à l'entraînement.",
+    "La boucle s'ajuste avec les labels d'ALICE : c'est un banc, pas un apprentissage en ligne.",
+    "Ω Q non calculé (phase 5) : le module n'est pas « terminé » au sens du §11.4."
+  ],
+  "execution": {
+    "genere_le": "2026-11-11T11:31:30Z",
+    "commande": "python3 /home/user/automatic-system/omega_hermes/loop.py",
+    "python": "3.13.18",
+    "plateforme": "Linux-6.18.44-fc-v378-x86_64-with-glibc2.39",
+    "commit": "48cfa57f5d36b63936c74885716b2bb9a182cd75",
+    "arbre_modifie": true
+  }
+}
