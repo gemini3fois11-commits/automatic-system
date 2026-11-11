@@ -132,9 +132,14 @@ class Alice:
     def lot(self, n: int = 200):
         """Un lot mélangé dont la composition suit MIX_200 (mise à l'échelle de n)."""
         rng = self._flux.suivant()
+        # Méthode des plus forts restes : exactement n scénarios, proportions de MIX_200.
+        parts = [effectif * n / 200 for _, _, effectif in MIX_200]
+        entiers = [int(p) for p in parts]
+        for i in sorted(range(len(parts)), key=lambda i: (entiers[i] - parts[i], i))[:n - sum(entiers)]:
+            entiers[i] += 1
         plan = []
-        for label, famille, effectif in MIX_200:
-            plan += [(label, famille)] * round(effectif * n / 200)
+        for (label, famille, _), k in zip(MIX_200, entiers):
+            plan += [(label, famille)] * k
         plan = [plan[i] for i in rng.permutation(len(plan))]
         X, labels, familles = [], [], []
         for i, (label, famille) in enumerate(plan):

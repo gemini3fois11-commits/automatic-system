@@ -1,0 +1,50 @@
+{
+  "format": 1,
+  "module": "ai_mode",
+  "phase": 4,
+  "etiquette": "SIMULÉ",
+  "verdict": "OK",
+  "graine": 7,
+  "config": {
+    "banc": "Banc(graine, 150 par classe)"
+  },
+  "mesures": {
+    "agents": 4,
+    "decisions": 120,
+    "exactitude": 1.0,
+    "par_action": {
+      "ACCEPTER": 48,
+      "SIGNALER": 16,
+      "QUARANTAINE": 56
+    },
+    "anomalies_acceptees": 0,
+    "erreurs": [],
+    "journal_integre": true,
+    "criteres": [
+      {
+        "critere": "aucune anomalie acceptée",
+        "ok": true
+      },
+      {
+        "critere": "exactitude ≥ 0,95",
+        "ok": true
+      },
+      {
+        "critere": "chaque décision inscrite avec son hypothèse",
+        "ok": true
+      }
+    ]
+  },
+  "limites": [
+    "Données synthétiques uniquement : rien ici ne prouve quoi que ce soit sur un système réel.",
+    "Agents simulés ; la politique est écrite à la main, pas apprise."
+  ],
+  "execution": {
+    "genere_le": "2026-11-11T11:57:05Z",
+    "commande": "python3 /home/user/automatic-system/omega_hermes/phase4.py",
+    "python": "3.13.18",
+    "plateforme": "Linux-6.18.44-fc-v378-x86_64-with-glibc2.39",
+    "commit": "3818595c1b85ea968d9399e0334d074e7afd6855",
+    "arbre_modifie": true
+  }
+}

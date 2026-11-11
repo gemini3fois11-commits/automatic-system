@@ -1,0 +1,707 @@
+{
+  "format": 1,
+  "module": "reverie",
+  "phase": 4,
+  "etiquette": "SIMULÉ",
+  "verdict": "OK",
+  "graine": 7,
+  "config": {
+    "banc": "Banc(graine, 150 par classe)"
+  },
+  "mesures": {
+    "respire": {
+      "n": 20,
+      "acceptation": 1.0,
+      "distance_moyenne": 29.047345472383313
+    },
+    "dort": {
+      "n": 10,
+      "sans_jugement": true
+    },
+    "reve": {
+      "n": 60,
+      "accepte": 0,
+      "structure": 59,
+      "bruit": 1,
+      "par_famille": {
+        "chirp_libre": {
+          "accepte": 0,
+          "structure": 12,
+          "bruit": 0
+        },
+        "carre_libre": {
+          "accepte": 0,
+          "structure": 12,
+          "bruit": 0
+        },
+        "impulsions_libres": {
+          "accepte": 0,
+          "structure": 11,
+          "bruit": 1
+        },
+        "melange": {
+          "accepte": 0,
+          "structure": 12,
+          "bruit": 0
+        },
+        "derives_croisees": {
+          "accepte": 0,
+          "structure": 12,
+          "bruit": 0
+        }
+      }
+    },
+    "choisi": [
+      {
+        "indice": 29,
+        "famille": "derives_croisees",
+        "score": 1.285199252518158,
+        "decision": "UNKNOWN"
+      },
+      {
+        "indice": 24,
+        "famille": "derives_croisees",
+        "score": 1.2832182001507555,
+        "decision": "UNKNOWN"
+      },
+      {
+        "indice": 6,
+        "famille": "carre_libre",
+        "score": 1.2227935992022236,
+        "decision": "UNKNOWN"
+      }
+    ],
+    "reves": [
+      {
+        "indice": 0,
+        "famille": "chirp_libre",
+        "decision": "UNKNOWN",
+        "etat": "structure",
+        "distance": 15799.428599337598,
+        "xcorr": 0.012354266049447405,
+        "ecretage": 0.0,
+        "score": 0.5123542660494474
+      },
+      {
+        "indice": 1,
+        "famille": "carre_libre",
+        "decision": "UNKNOWN",
+        "etat": "structure",
+        "distance": 15418.572070199813,
+        "xcorr": 0.014678923792502593,
+        "ecretage": 0.8611764705882353,
+        "score": 0.9452671590866202
+      },
+      {
+        "indice": 2,
+        "famille": "impulsions_libres",
+        "decision": "UNKNOWN",
+        "etat": "structure",
+        "distance": 158877.94279044174,
+        "xcorr": -0.04132153502031189,
+        "ecretage": 0.0,
+        "score": 0.5413215350203119
+      },
+      {
+        "indice": 3,
+        "famille": "melange",
+        "decision": "ARTIFACT",
+        "etat": "structure",
+        "distance": 1746.4025676781434,
+        "xcorr": 0.02178843919764616,
+        "ecretage": 0.0,
+        "score": 0.09970802857463394
+      },
+      {
+        "indice": 4,
+        "famille": "derives_croisees",
+        "decision": "UNKNOWN",
+        "etat": "structure",
+        "distance": 16998.20385919096,
+        "xcorr": -0.3421475492268144,
+        "ecretage": 0.0,
+        "score": 0.8421475492268145
+      },
+      {
+        "indice": 5,
+        "famille": "chirp_libre",
+        "decision": "UNKNOWN",
+        "etat": "structure",
+        "distance": 23145.736770911575,
+        "xcorr": 0.0035323032924984106,
+        "ecretage": 0.0,
+        "score": 0.5035323032924984
+      },
+      {
+        "indice": 6,
+        "famille": "carre_libre",
+        "decision": "UNKNOWN",
+        "etat": "structure",
+        "distance": 13777.409357827657,
+        "xcorr": 0.29691124626104715,
+        "ecretage": 0.851764705882353,
+        "score": 1.2227935992022236
+      },
+      {
+        "indice": 7,
+        "famille": "impulsions_libres",
+        "decision": "UNKNOWN",
+        "etat": "structure",
+        "distance": 275235.53408504056,
+        "xcorr": -0.030314751542014406,
+        "ecretage": 0.0,
+        "score": 0.5303147515420144
+      },
+      {
+        "indice": 8,
+        "famille": "melange",
+        "decision": "ARTIFACT",
+        "etat": "structure",
+        "distance": 3120.5919574657655,
+        "xcorr": 0.06548430657325248,
+        "ecretage": 0.0,
+        "score": 0.20471637622265748
+      },
+      {
+        "indice": 9,
+        "famille": "derives_croisees",
+        "decision": "UNKNOWN",
+        "etat": "structure",
+        "distance": 25153.915147693948,
+        "xcorr": -0.2849805559043382,
+        "ecretage": 0.0,
+        "score": 0.7849805559043381
+      },
+      {
+        "indice": 10,
+        "famille": "chirp_libre",
+        "decision": "UNKNOWN",
+        "etat": "structure",
+        "distance": 45501.203866556585,
+        "xcorr": -0.003279259546119933,
+        "ecretage": 0.0,
+        "score": 0.50327925954612
+      },
+      {
+        "indice": 11,
+        "famille": "carre_libre",
+        "decision": "UNKNOWN",
+        "etat": "structure",
+        "distance": 13758.613433313742,
+        "xcorr": -0.01562690769794985,
+        "ecretage": 0.8941176470588236,
+        "score": 0.9626857312273616
+      },
+      {
+        "indice": 12,
+        "famille": "impulsions_libres",
+        "decision": "UNKNOWN",
+        "etat": "structure",
+        "distance": 1639842.301500876,
+        "xcorr": 0.05465431820018976,
+        "ecretage": 0.0,
+        "score": 0.5546543182001897
+      },
+      {
+        "indice": 13,
+        "famille": "melange",
+        "decision": "ARTIFACT",
+        "etat": "structure",
+        "distance": 3227.0247017388497,
+        "xcorr": 0.047766889950849045,
+        "ecretage": 0.0,
+        "score": 0.19174769043901507
+      },
+      {
+        "indice": 14,
+        "famille": "derives_croisees",
+        "decision": "UNKNOWN",
+        "etat": "structure",
+        "distance": 60131.067461562954,
+        "xcorr": -0.6361123335221991,
+        "ecretage": 0.0,
+        "score": 1.136112333522199
+      },
+      {
+        "indice": 15,
+        "famille": "chirp_libre",
+        "decision": "UNKNOWN",
+        "etat": "structure",
+        "distance": 18454.47771233351,
+        "xcorr": 0.030680417276847602,
+        "ecretage": 0.0,
+        "score": 0.5306804172768476
+      },
+      {
+        "indice": 16,
+        "famille": "carre_libre",
+        "decision": "UNKNOWN",
+        "etat": "structure",
+        "distance": 11876.236711930773,
+        "xcorr": -0.007691603365273107,
+        "ecretage": 0.8580392156862745,
+        "score": 0.9367112112084104
+      },
+      {
+        "indice": 17,
+        "famille": "impulsions_libres",
+        "decision": "UNKNOWN",
+        "etat": "structure",
+        "distance": 152200.53790994192,
+        "xcorr": 0.01260671169538089,
+        "ecretage": 0.0,
+        "score": 0.5126067116953809
+      },
+      {
+        "indice": 18,
+        "famille": "melange",
+        "decision": "UNKNOWN",
+        "etat": "structure",
+        "distance": 5735.209554573444,
+        "xcorr": 0.03692403338326453,
+        "ecretage": 0.0,
+        "score": 0.2928130143972339
+      },
+      {
+        "indice": 19,
+        "famille": "derives_croisees",
+        "decision": "UNKNOWN",
+        "etat": "structure",
+        "distance": 39758.668607367355,
+        "xcorr": -0.4824956513539422,
+        "ecretage": 0.0,
+        "score": 0.9824956513539422
+      },
+      {
+        "indice": 20,
+        "famille": "chirp_libre",
+        "decision": "UNKNOWN",
+        "etat": "structure",
+        "distance": 14801.849630627465,
+        "xcorr": 0.013376152697808882,
+        "ecretage": 0.0,
+        "score": 0.5133761526978089
+      },
+      {
+        "indice": 21,
+        "famille": "carre_libre",
+        "decision": "UNKNOWN",
+        "etat": "structure",
+        "distance": 13208.71168761611,
+        "xcorr": -0.023563165865042986,
+        "ecretage": 0.8203921568627451,
+        "score": 0.9337592442964155
+      },
+      {
+        "indice": 22,
+        "famille": "impulsions_libres",
+        "decision": "UNKNOWN",
+        "etat": "structure",
+        "distance": 137160.37315927722,
+        "xcorr": 0.20475473850079595,
+        "ecretage": 0.0,
+        "score": 0.704754738500796
+      },
+      {
+        "indice": 23,
+        "famille": "melange",
+        "decision": "ARTIFACT",
+        "etat": "structure",
+        "distance": 3144.771248178272,
+        "xcorr": -0.0809349070978252,
+        "ecretage": 0.0,
+        "score": 0.22124578895159508
+      },
+      {
+        "indice": 24,
+        "famille": "derives_croisees",
+        "decision": "UNKNOWN",
+        "etat": "structure",
+        "distance": 83956.53578527541,
+        "xcorr": -0.7832182001507555,
+        "ecretage": 0.0,
+        "score": 1.2832182001507555
+      },
+      {
+        "indice": 25,
+        "famille": "chirp_libre",
+        "decision": "UNKNOWN",
+        "etat": "structure",
+        "distance": 8734.98038284727,
+        "xcorr": -0.008407950740868059,
+        "ecretage": 0.0,
+        "score": 0.3981383011447849
+      },
+      {
+        "indice": 26,
+        "famille": "carre_libre",
+        "decision": "UNKNOWN",
+        "etat": "structure",
+        "distance": 13877.346603200309,
+        "xcorr": -6.103888176773052e-05,
+        "ecretage": 0.847843137254902,
+        "score": 0.9239826075092188
+      },
+      {
+        "indice": 27,
+        "famille": "impulsions_libres",
+        "decision": "UNKNOWN",
+        "etat": "structure",
+        "distance": 132047.8049867969,
+        "xcorr": -0.09586527785206049,
+        "ecretage": 0.0,
+        "score": 0.5958652778520604
+      },
+      {
+        "indice": 28,
+        "famille": "melange",
+        "decision": "ARTIFACT",
+        "etat": "structure",
+        "distance": 2917.886146752232,
+        "xcorr": 0.0002764798677321331,
+        "ecretage": 0.0,
+        "score": 0.13046438419841155
+      },
+      {
+        "indice": 29,
+        "famille": "derives_croisees",
+        "decision": "UNKNOWN",
+        "etat": "structure",
+        "distance": 76108.8683594118,
+        "xcorr": -0.7851992525181578,
+        "ecretage": 0.0,
+        "score": 1.285199252518158
+      },
+      {
+        "indice": 30,
+        "famille": "chirp_libre",
+        "decision": "ARTIFACT",
+        "etat": "structure",
+        "distance": 4843.234526364817,
+        "xcorr": 0.009786407530220718,
+        "ecretage": 0.0,
+        "score": 0.22587796198351612
+      },
+      {
+        "indice": 31,
+        "famille": "carre_libre",
+        "decision": "UNKNOWN",
+        "etat": "structure",
+        "distance": 12134.222253627115,
+        "xcorr": -0.05468916900645516,
+        "ecretage": 0.8203921568627451,
+        "score": 0.9648852474378278
+      },
+      {
+        "indice": 32,
+        "famille": "impulsions_libres",
+        "decision": "UNKNOWN",
+        "etat": "structure",
+        "distance": 692928.278591193,
+        "xcorr": 0.005288549075211313,
+        "ecretage": 0.0,
+        "score": 0.5052885490752113
+      },
+      {
+        "indice": 33,
+        "famille": "melange",
+        "decision": "ARTIFACT",
+        "etat": "structure",
+        "distance": 1814.1867963196885,
+        "xcorr": -0.008128912967619554,
+        "ecretage": 0.0,
+        "score": 0.08907284470400224
+      },
+      {
+        "indice": 34,
+        "famille": "derives_croisees",
+        "decision": "UNKNOWN",
+        "etat": "structure",
+        "distance": 63519.59090819618,
+        "xcorr": -0.6490009422751392,
+        "ecretage": 0.0,
+        "score": 1.1490009422751393
+      },
+      {
+        "indice": 35,
+        "famille": "chirp_libre",
+        "decision": "UNKNOWN",
+        "etat": "structure",
+        "distance": 9946.413243813842,
+        "xcorr": -0.08401426720645364,
+        "ecretage": 0.0,
+        "score": 0.5277953575894136
+      },
+      {
+        "indice": 36,
+        "famille": "carre_libre",
+        "decision": "UNKNOWN",
+        "etat": "structure",
+        "distance": 14515.615381478865,
+        "xcorr": 0.007812738429493588,
+        "ecretage": 0.8886274509803922,
+        "score": 0.9521264639196897
+      },
+      {
+        "indice": 37,
+        "famille": "impulsions_libres",
+        "decision": "UNKNOWN",
+        "etat": "structure",
+        "distance": 81567.93545742956,
+        "xcorr": -0.06259322705057421,
+        "ecretage": 0.0,
+        "score": 0.5625932270505742
+      },
+      {
+        "indice": 38,
+        "famille": "melange",
+        "decision": "ARTIFACT",
+        "etat": "structure",
+        "distance": 2361.550081800883,
+        "xcorr": -0.05679511923284873,
+        "ecretage": 0.0,
+        "score": 0.16216086712668107
+      },
+      {
+        "indice": 39,
+        "famille": "derives_croisees",
+        "decision": "UNKNOWN",
+        "etat": "structure",
+        "distance": 31938.873725598416,
+        "xcorr": -0.41353898225246727,
+        "ecretage": 0.0,
+        "score": 0.9135389822524673
+      },
+      {
+        "indice": 40,
+        "famille": "chirp_libre",
+        "decision": "ARTIFACT",
+        "etat": "structure",
+        "distance": 4267.618244565339,
+        "xcorr": -0.3197947955693439,
+        "ecretage": 0.0,
+        "score": 0.5102039643306883
+      },
+      {
+        "indice": 41,
+        "famille": "carre_libre",
+        "decision": "UNKNOWN",
+        "etat": "structure",
+        "distance": 14739.596604343473,
+        "xcorr": 0.01562690769794985,
+        "ecretage": 0.8454901960784313,
+        "score": 0.9383720057371655
+      },
+      {
+        "indice": 42,
+        "famille": "impulsions_libres",
+        "decision": "UNKNOWN",
+        "etat": "structure",
+        "distance": 126324.70977130861,
+        "xcorr": -0.10471746392014936,
+        "ecretage": 0.0,
+        "score": 0.6047174639201494
+      },
+      {
+        "indice": 43,
+        "famille": "melange",
+        "decision": "ARTIFACT",
+        "etat": "structure",
+        "distance": 3997.1730507107513,
+        "xcorr": -0.1759629260114814,
+        "ecretage": 0.0,
+        "score": 0.3543055879752859
+      },
+      {
+        "indice": 44,
+        "famille": "derives_croisees",
+        "decision": "UNKNOWN",
+        "etat": "structure",
+        "distance": 37866.611620054326,
+        "xcorr": -0.4585695973998448,
+        "ecretage": 0.0,
+        "score": 0.9585695973998448
+      },
+      {
+        "indice": 45,
+        "famille": "chirp_libre",
+        "decision": "UNKNOWN",
+        "etat": "structure",
+        "distance": 7669.265272022148,
+        "xcorr": 0.03010444393807409,
+        "ecretage": 0.0,
+        "score": 0.37228557209207913
+      },
+      {
+        "indice": 46,
+        "famille": "carre_libre",
+        "decision": "UNKNOWN",
+        "etat": "structure",
+        "distance": 13145.41192074994,
+        "xcorr": 0.01562690769794986,
+        "ecretage": 0.8768627450980392,
+        "score": 0.9540582802469695
+      },
+      {
+        "indice": 47,
+        "famille": "impulsions_libres",
+        "decision": "UNKNOWN",
+        "etat": "bruit",
+        "distance": 146610.04599696273,
+        "xcorr": 0.011367963016425288,
+        "ecretage": 0.0,
+        "score": 0.5113679630164253
+      },
+      {
+        "indice": 48,
+        "famille": "melange",
+        "decision": "ARTIFACT",
+        "etat": "structure",
+        "distance": 3575.966773894551,
+        "xcorr": 0.06680095641448765,
+        "ecretage": 0.0,
+        "score": 0.22635057447194756
+      },
+      {
+        "indice": 49,
+        "famille": "derives_croisees",
+        "decision": "UNKNOWN",
+        "etat": "structure",
+        "distance": 51526.90896162963,
+        "xcorr": -0.6208657704214859,
+        "ecretage": 0.0,
+        "score": 1.120865770421486
+      },
+      {
+        "indice": 50,
+        "famille": "chirp_libre",
+        "decision": "UNKNOWN",
+        "etat": "structure",
+        "distance": 16616.039172637807,
+        "xcorr": -0.11545423795372024,
+        "ecretage": 0.0,
+        "score": 0.6154542379537202
+      },
+      {
+        "indice": 51,
+        "famille": "carre_libre",
+        "decision": "UNKNOWN",
+        "etat": "structure",
+        "distance": 10726.357053920961,
+        "xcorr": -0.025949404935593192,
+        "ecretage": 0.9058823529411765,
+        "score": 0.9574705792950254
+      },
+      {
+        "indice": 52,
+        "famille": "impulsions_libres",
+        "decision": "UNKNOWN",
+        "etat": "structure",
+        "distance": 626386.078912532,
+        "xcorr": -0.07790302750460296,
+        "ecretage": 0.0,
+        "score": 0.577903027504603
+      },
+      {
+        "indice": 53,
+        "famille": "melange",
+        "decision": "ARTIFACT",
+        "etat": "structure",
+        "distance": 1960.6763671598908,
+        "xcorr": -0.011515264558503614,
+        "ecretage": 0.0,
+        "score": 0.09899515050105498
+      },
+      {
+        "indice": 54,
+        "famille": "derives_croisees",
+        "decision": "UNKNOWN",
+        "etat": "structure",
+        "distance": 49706.61703631484,
+        "xcorr": -0.5738231033380388,
+        "ecretage": 0.0,
+        "score": 1.0738231033380388
+      },
+      {
+        "indice": 55,
+        "famille": "chirp_libre",
+        "decision": "UNKNOWN",
+        "etat": "structure",
+        "distance": 38718.80804865629,
+        "xcorr": 0.01549308976987697,
+        "ecretage": 0.0,
+        "score": 0.515493089769877
+      },
+      {
+        "indice": 56,
+        "famille": "carre_libre",
+        "decision": "UNKNOWN",
+        "etat": "structure",
+        "distance": 8773.504661621631,
+        "xcorr": -0.09412988907124033,
+        "ecretage": 0.8988235294117647,
+        "score": 0.9349908495599338
+      },
+      {
+        "indice": 57,
+        "famille": "impulsions_libres",
+        "decision": "UNKNOWN",
+        "etat": "structure",
+        "distance": 462726.91708937386,
+        "xcorr": 0.0057346324961552566,
+        "ecretage": 0.0,
+        "score": 0.5057346324961552
+      },
+      {
+        "indice": 58,
+        "famille": "melange",
+        "decision": "ARTIFACT",
+        "etat": "structure",
+        "distance": 3566.460326563545,
+        "xcorr": -0.1358385183287928,
+        "ecretage": 0.0,
+        "score": 0.294963985342172
+      },
+      {
+        "indice": 59,
+        "famille": "derives_croisees",
+        "decision": "UNKNOWN",
+        "etat": "structure",
+        "distance": 41018.863640721815,
+        "xcorr": -0.4842526527823713,
+        "ecretage": 0.0,
+        "score": 0.9842526527823713
+      }
+    ],
+    "criteres": [
+      {
+        "critere": "souffle stable (acceptation ≥ 0,9)",
+        "ok": true
+      },
+      {
+        "critere": "DORT : aucun appel à BOB",
+        "ok": true
+      },
+      {
+        "critere": "CHOISI reproductible : mêmes élus au second cycle",
+        "ok": true
+      },
+      {
+        "critere": "l'élection n'invente aucune classe : tous les élus sont des rejets",
+        "ok": true
+      }
+    ]
+  },
+  "limites": [
+    "Données synthétiques uniquement : rien ici ne prouve quoi que ce soit sur un système réel.",
+    "L'élection ordonne des candidats, elle ne crée pas de classe."
+  ],
+  "execution": {
+    "genere_le": "2026-11-11T11:57:05Z",
+    "commande": "python3 /home/user/automatic-system/omega_hermes/phase4.py",
+    "python": "3.13.18",
+    "plateforme": "Linux-6.18.44-fc-v378-x86_64-with-glibc2.39",
+    "commit": "3818595c1b85ea968d9399e0334d074e7afd6855",
+    "arbre_modifie": true
+  }
+}

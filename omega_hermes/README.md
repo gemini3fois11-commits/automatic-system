@@ -19,11 +19,28 @@ rejet de l'inconnu**, pas la reconnaissance du normal.
 | `loop.py` | Boucle 200 × 5, ajustements journalisés, évidence |
 | `decouplage.py` | Vérification statique : le banc n'importe qu'une liste blanche et n'ouvre rien |
 
+### Phase 4
+
+| Fichier | Rôle |
+|---|---|
+| `swarm.py` | Essaim de 8 nœuds, battement de 5 s simulé : latence de détection, messages cachés, ampleur, fausses alarmes ; balayage de 4 niveaux de compromission |
+| `reverie.py` | RESPIRE / DORT / RÊVE / CHOISI : 5 familles de rêves jugées par BOB, élection reproductible |
+| `ai_mode.py` | Agents ACCEPTER / SIGNALER / QUARANTAINE avec hypothèse écrite et journalisée |
+| `evasion.py` | 960 cas : un attaquant baisse l'amplitude de son canal caché ; courbe et plancher de détection |
+| `attrape.py` | Chaque rejet mis en quarantaine avec un motif chiffré dans une chaîne Γ |
+| `brouillons.py` | DRAFT isolé : rejet, puis distinction DRAFT / COVERT par le trait 31 |
+| `guardian.py` | Dynamique de frappe par catégories et timings ; **les caractères sont refusés à l'entrée** |
+
+Leçon mesurée en phase 4 : une première politique d'agent « plateaux → SIGNALER » envoyait
+les ondes carrées étrangères en « capteur défaillant ». C'est le piège du §4.3 qui revient au
+niveau de l'agent ; la décision UNKNOWN de BOB prime désormais sur l'indice de plateau.
+
 ## Usage
 
 ```bash
 python3 -m omega_hermes.loop                       # graine 7, 200 × 5, 150 par classe
 python3 -m omega_hermes.loop --graine 8 --journal ajustements.jsonl
+python3 -m omega_hermes.phase4                     # 7 modules, 7 évidences
 ```
 
 Décisions : une classe connue, `ARTIFACT` ou `UNKNOWN`. Ajustements journalisés :
@@ -33,7 +50,7 @@ Décisions : une classe connue, `ARTIFACT` ou `UNKNOWN`. Ajustements journalisé
 ## Tests
 
 ```bash
-python3 -m unittest omega_hermes.test_twin omega_hermes.test_eyes omega_hermes.test_bob omega_hermes.test_hermes
+python3 -m unittest omega_hermes.test_twin omega_hermes.test_eyes omega_hermes.test_bob omega_hermes.test_hermes omega_hermes.test_phase4
 ```
 
 `test_bob` reproduit d'abord le défaut historique (seuil unique : une onde
