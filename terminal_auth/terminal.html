@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Terminal authentifié</title>
+<link rel="stylesheet" href="/terminal.css">
+</head>
+<body>
+<main>
+  <header>
+    <h1>Terminal authentifié</h1>
+    <p class="note">Boucle locale uniquement · allowlist stricte · chaque commande est journalisée dans Γ.</p>
+  </header>
+  <section id="setup" hidden>
+    <h2>Configuration initiale</h2>
+    <p>Choisissez le mot de passe du terminal (12 caractères minimum). Il ne sera jamais affiché ni transmis ailleurs.</p>
+    <form id="form-setup"><input type="password" id="mdp-setup" autocomplete="new-password" minlength="12" required aria-label="Nouveau mot de passe"><button>Enregistrer</button></form>
+  </section>
+  <section id="login" hidden>
+    <h2>Connexion</h2>
+    <form id="form-login"><input type="password" id="mdp-login" autocomplete="current-password" required aria-label="Mot de passe"><button>Ouvrir la session</button></form>
+  </section>
+  <section id="console" hidden>
+    <pre id="sortie" aria-live="polite"></pre>
+    <form id="form-exec"><span aria-hidden="true">$</span><input id="commande" autocomplete="off" spellcheck="false" aria-label="Commande"><button>Exécuter</button></form>
+    <button id="logout" class="secondaire">Fermer la session</button>
+  </section>
+  <p id="message" role="status"></p>
+</main>
+<script src="/terminal.js"></script>
+</body>
+</html>

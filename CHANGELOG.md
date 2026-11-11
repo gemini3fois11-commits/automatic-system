@@ -9,4 +9,6 @@
 - Phase 1 · `socle_preuve` · **OK** `[VÉRIFIÉ]` · 2026-11-11T11:39:44Z · [évidence](socle_preuve/preuve_evidence.json)
 - Phase 1 · `systeme_rinv` · **OK** `[VÉRIFIÉ]` · 2026-11-11T11:39:45Z · [évidence](rinv/systeme_evidence.json)
 - Phase 2 · `omega_hermes` · **OK** `[SIMULÉ]` · 2026-11-11T11:39:46Z · [évidence](omega_hermes/hermes_evidence.json)
+- Phase 3 · `agent_guard` · **OK** `[VÉRIFIÉ]` · 2026-11-11T11:52:14Z · [évidence](agent_guard/guard_evidence.json)
+- Phase 3 · `portes_terrain` · **OK** `[VÉRIFIÉ]` · 2026-11-11T11:53:04Z · [évidence](outils/phase3_evidence.json)
 - Phase 5 · `cryoloop` · **OK** `[SIMULÉ]` · 2026-11-11T11:39:50Z · [évidence](cryoloop/cryoloop_evidence.json)

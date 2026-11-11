@@ -1,0 +1,14 @@
+:root { --fond: #f7f7f5; --texte: #1d1d1b; --doux: #6b6b66; --accent: #1f5fbf; --cadre: #d9d9d4; --console: #111; --console-texte: #e8e8e3; }
+@media (prefers-color-scheme: dark) { :root { --fond: #151514; --texte: #ecece8; --doux: #a0a09a; --accent: #7aa7ff; --cadre: #33332f; } }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--fond); color: var(--texte); font: 16px/1.5 system-ui, sans-serif; }
+main { max-width: 860px; margin: 0 auto; padding: 24px 16px; }
+h1 { font-size: 1.5rem; margin: 0 0 4px; } h2 { font-size: 1.1rem; }
+.note, #message { color: var(--doux); }
+form { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+input { flex: 1; min-width: 0; padding: 10px; border: 1px solid var(--cadre); border-radius: 6px; background: transparent; color: inherit; font: inherit; }
+button { padding: 10px 16px; border: 0; border-radius: 6px; background: var(--accent); color: #fff; font: inherit; cursor: pointer; }
+button.secondaire { background: transparent; color: var(--accent); border: 1px solid var(--cadre); margin-top: 12px; }
+pre { background: var(--console); color: var(--console-texte); padding: 16px; border-radius: 8px; min-height: 240px; max-height: 60vh; overflow: auto; white-space: pre-wrap; word-break: break-word; font: 14px/1.45 ui-monospace, monospace; }
+#form-exec span { font-family: ui-monospace, monospace; color: var(--doux); }
+#form-exec input { font-family: ui-monospace, monospace; }
