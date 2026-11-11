@@ -1,2 +1,6 @@
 __pycache__/
 *.pyc
+.src/
+*.secret
+*.cle
+*.jsonl.tmp

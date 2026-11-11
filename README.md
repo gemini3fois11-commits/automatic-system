@@ -18,3 +18,37 @@
 ```sh
 python3 -m unittest
 ```
+
+## Plateforme OMEGA-HERMÈS / LOOP — reconstruction
+
+Plan de référence : [`master-blueprint-omega-hermes.md`](master-blueprint-omega-hermes.md).
+Version : voir [`VERSION`](VERSION). Ce qui a été livré, phase par phase : [`CHANGELOG.md`](CHANGELOG.md)
+(généré depuis les évidences). Ce que le dépôt protège et ne protège pas : [`SECURITY.md`](SECURITY.md).
+
+**Mission — proposée, en attente de confirmation du propriétaire :**
+*Démontrer qu'un système défensif peut prouver son propre refus — et le prouver à un témoin indépendant.*
+
+### Compatibilité
+
+| Élément | Déclaré par le blueprint | Testé dans ce dépôt |
+|---|---|---|
+| Python | 3.12.3 | voir le champ `execution.python` de chaque `*_evidence.json` |
+| Dépendances | bibliothèque standard + `numpy` | bibliothèque standard seule jusqu'ici |
+| Modèle HF | `all-MiniLM-L6-v2` local, `HF_MODEL_DIR` explicite | non utilisé (phase 6) |
+
+### Démarrage
+
+```bash
+python3 -m unittest                      # toutes les suites
+python3 -m socle_preuve demo             # démonstration du témoin, écrit l'évidence
+python3 -m outils.verifier_phase0        # contrôle du squelette
+python3 -m outils.changelog              # régénère CHANGELOG.md
+```
+
+### Avancement
+
+| Phase | Contenu | État |
+|---|---|---|
+| 0 | Squelette et conventions | voir `outils/phase0_evidence.json` |
+| 1 | Socle de preuve : chaîne Γ, témoin, Ed25519 | voir `socle_preuve/preuve_evidence.json` |
+| 2 à 7 | HERMÈS, portes, essaim, plateforme, connaissance, présentation | `[SPÉCIFIÉ]` |
