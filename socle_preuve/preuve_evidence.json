@@ -1,0 +1,123 @@
+{
+  "format": 1,
+  "module": "socle_preuve",
+  "phase": 1,
+  "etiquette": "VÉRIFIÉ",
+  "verdict": "OK",
+  "graine": 7,
+  "config": {
+    "blocs_par_journal": 12,
+    "bloc_vise": 4,
+    "codes_sortie": {
+      "0": "intègre",
+      "2": "usage",
+      "3": "chaîne rompue",
+      "4": "témoin en désaccord"
+    }
+  },
+  "mesures": {
+    "scenarios": [
+      {
+        "scenario": "chaîne intacte, vérification locale",
+        "exit_attendu": 0,
+        "exit_obtenu": 0,
+        "sortie": "INTÈGRE — 12 bloc(s), tête 6c5ef45b88b6e93c…",
+        "ok": true
+      },
+      {
+        "scenario": "chaîne intacte, témoin HMAC",
+        "exit_attendu": 0,
+        "exit_obtenu": 0,
+        "sortie": "INTÈGRE — 12 bloc(s), tête 6c5ef45b88b6e93c… — témoin en accord sur 12 bloc(s)",
+        "ok": true
+      },
+      {
+        "scenario": "falsification simple du bloc 4",
+        "exit_attendu": 3,
+        "exit_obtenu": 3,
+        "sortie": "ROMPUE — seq 4 : hash_invalide",
+        "ok": true
+      },
+      {
+        "scenario": "réécriture du bloc 4 avec recalcul, vérification locale seule",
+        "exit_attendu": 0,
+        "exit_obtenu": 0,
+        "sortie": "INTÈGRE — 12 bloc(s), tête deaea1acbc469ec7…",
+        "ok": true
+      },
+      {
+        "scenario": "réécriture du bloc 4 avec recalcul, témoin HMAC",
+        "exit_attendu": 4,
+        "exit_obtenu": 4,
+        "sortie": "TÉMOIN EN DÉSACCORD — seq 4 : desaccord_temoin (blocs 4, 5, 6, 7, 8, 9, 10, 11)",
+        "ok": true
+      },
+      {
+        "scenario": "réécriture + sceaux refaits avec un faux secret",
+        "exit_attendu": 4,
+        "exit_obtenu": 4,
+        "sortie": "TÉMOIN EN DÉSACCORD — seq 0 : sceau_invalide (blocs 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11)",
+        "ok": true
+      },
+      {
+        "scenario": "journal tronqué de 2 blocs",
+        "exit_attendu": 4,
+        "exit_obtenu": 4,
+        "sortie": "TÉMOIN EN DÉSACCORD — seq 10 : temoin_orphelin (blocs 10, 11)",
+        "ok": true
+      },
+      {
+        "scenario": "chaîne intacte, témoin Ed25519 (clé publique épinglée)",
+        "exit_attendu": 0,
+        "exit_obtenu": 0,
+        "sortie": "INTÈGRE — 12 bloc(s), tête e19b807c12d0c59c… — témoin en accord sur 12 bloc(s)",
+        "ok": true
+      },
+      {
+        "scenario": "réécriture du bloc 4 avec recalcul, témoin Ed25519",
+        "exit_attendu": 4,
+        "exit_obtenu": 4,
+        "sortie": "TÉMOIN EN DÉSACCORD — seq 4 : desaccord_temoin (blocs 4, 5, 6, 7, 8, 9, 10, 11)",
+        "ok": true
+      },
+      {
+        "scenario": "secret HMAC en mode 644",
+        "exit_attendu": 2,
+        "exit_obtenu": 2,
+        "sortie": "erreur : secret_permissions : /tmp/tmp6tn2sh09/temoin.secret doit être en mode 600 (actuel 644)",
+        "ok": true
+      }
+    ],
+    "scenarios_reussis": 10,
+    "rfc8032": {
+      "controles": 12,
+      "reussis": 12,
+      "vecteurs": [
+        "TEST 1",
+        "TEST 2",
+        "TEST 3",
+        "TEST SHA(abc)"
+      ]
+    },
+    "ed25519_ms": {
+      "iterations": 200,
+      "plancher_ms": 7.2e-05,
+      "signer_mediane": 3.0656895,
+      "verifier_mediane": 3.2155720000000003
+    }
+  },
+  "limites": [
+    "Secret du témoin et journal sur la même machine : un attaquant qui la contrôle peut réécrire et resceller (§3.2).",
+    "Une troncature cohérente du journal et du fichier témoin n'est pas détectable sans ancre de tête externe.",
+    "4 vecteurs RFC 8032 sur 5 : TEST 1024 non transcrit.",
+    "Ed25519 pur Python, pas à temps constant : vérification et démonstration seulement.",
+    "Durées mesurées sur la machine indiquée dans execution.plateforme."
+  ],
+  "execution": {
+    "genere_le": "2026-11-11T11:08:47Z",
+    "commande": "python3 /home/user/automatic-system/socle_preuve/__main__.py demo",
+    "python": "3.13.18",
+    "plateforme": "Linux-6.18.44-fc-v378-x86_64-with-glibc2.39",
+    "commit": "70950490c158b2a3ea90fef19814a3d1a0af0c63"
+  }
+}

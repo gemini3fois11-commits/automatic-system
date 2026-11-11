@@ -20,13 +20,23 @@ ETIQUETTES = frozenset({
 FORMAT = 1
 
 
-def _commit() -> str | None:
+def _git(*args) -> str | None:
     try:
-        out = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True,
-                             timeout=5, cwd=os.path.dirname(os.path.abspath(__file__)))
-        return out.stdout.strip() or None
+        out = subprocess.run(["git", *args], capture_output=True, text=True, timeout=5,
+                             cwd=os.path.dirname(os.path.abspath(__file__)))
+        return out.stdout.strip() if out.returncode == 0 else None
     except (OSError, subprocess.SubprocessError):
         return None
+
+
+def _arbre_modifie() -> bool | None:
+    """Vrai si du code suivi diffère du commit : l'évidence ne prouve alors rien sur ce commit."""
+    etat = _git("status", "--porcelain", "--untracked-files=normal")
+    if etat is None:
+        return None
+    lignes = [l for l in etat.splitlines() if not l.endswith("_evidence.json")
+              and not l.endswith("CHANGELOG.md")]
+    return bool(lignes)
 
 
 def ecrire(chemin, *, module: str, phase: int, etiquette: str, verdict: str,
@@ -54,7 +64,8 @@ def ecrire(chemin, *, module: str, phase: int, etiquette: str, verdict: str,
             "commande": " ".join([os.path.basename(sys.executable)] + sys.argv),
             "python": platform.python_version(),
             "plateforme": platform.platform(),
-            "commit": _commit(),
+            "commit": _git("rev-parse", "HEAD") or None,
+            "arbre_modifie": _arbre_modifie(),
         },
     }
     chemin = os.fspath(chemin)
