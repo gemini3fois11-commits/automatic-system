@@ -1,0 +1,68 @@
+{
+  "format": 1,
+  "module": "fusion",
+  "phase": 6,
+  "etiquette": "VÉRIFIÉ",
+  "verdict": "ECHEC",
+  "graine": 7,
+  "config": {},
+  "mesures": {
+    "hf_actif": false,
+    "k_rrf": 60,
+    "mrr_par_strategie": {
+      "tfidf": 0.84375,
+      "bm25": 0.84375,
+      "entites": 0.7511473737888832
+    },
+    "mrr_fusion": 0.766798418972332,
+    "rangs_fusion": {
+      "Quel est le satellite naturel de la Terre ?": 11,
+      "Quelle étoile se trouve au centre du système solaire ?": 23,
+      "Quelle planète est surnommée la planète rouge ?": 1,
+      "Qu'est-ce qu'une fonction de hachage cryptographique ?": 1,
+      "Quelles fonctions composent la famille SHA-2 ?": 1,
+      "Qui a inventé le code Morse ?": 1,
+      "À quoi sert le filtre de Kalman ?": 1,
+      "Quelle est la complexité de la transformation de Fourier rapide ?": 1
+    },
+    "questions": 8,
+    "variantes_ecartees": {
+      "rrf_documents_puis_morceaux": 0.7540002689256421,
+      "rrf_morceaux_plafond_3_par_document": 0.558
+    },
+    "mode": "rrf_morceaux",
+    "criteres": [
+      {
+        "critere": "3 stratégies indépendantes + fusion RRF k = 60",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "critere": "voie neuronale absente déclarée (hf_actif = false), repli sur 3 stratégies",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "critere": "MRR de la fusion ≥ meilleure stratégie − 0,05",
+        "ok": false,
+        "detail": "tfidf 0.844 · bm25 0.844 · entites 0.751 · fusion 0.767"
+      }
+    ]
+  },
+  "limites": [
+    "Sur ce corpus, la fusion RRF fait moins bien que TF-IDF seul : la stratégie « entités » classe d'un bloc tous les morceaux d'un document cité dans la question (« Terre » pour la Lune).",
+    "Variantes essayées puis abandonnées pour ne pas ajuster le système à l'évaluation : fusion par documents (MRR 0.754), plafond de 3 morceaux par document (0,558, mesure d'une version antérieure du code).",
+    "Analyse des pertes : (1) « satellite naturel de la Terre » — TF-IDF et BM25 placent en tête la phrase exacte de l'article Lune, mais la stratégie entités vote pour l'article Terre et la fusion la suit ; (2) « étoile au centre du système solaire » — toutes les stratégies ratent le rang 1, le boost du titre attirant vers l'article Système solaire.",
+    "La mesure par titre de document est elle-même imparfaite : pour « Qui a inventé le code Morse ? », TF-IDF répond juste depuis l'article Télégraphie électrique (« inventé par Samuel Morse en 1838 ») et la mesure le compte au rang 2. Une mesure par présence de la réponse serait plus juste ; elle n'a pas été substituée après coup au critère fixé d'avance.",
+    "Embeddings non utilisés : le téléchargement du modèle exige une instruction explicite.",
+    "8 questions fixées à l'avance ; échantillon trop petit pour conclure sur la généralisation."
+  ],
+  "execution": {
+    "genere_le": "2026-11-11T19:15:47Z",
+    "commande": "python3 /home/user/automatic-system/rag_wiki/fusion.py --eval",
+    "python": "3.13.18",
+    "plateforme": "Linux-6.18.44-fc-v378-x86_64-with-glibc2.39",
+    "commit": "a8a2e952ef58f602d687f937efc165db8fae05ad",
+    "arbre_modifie": true
+  }
+}

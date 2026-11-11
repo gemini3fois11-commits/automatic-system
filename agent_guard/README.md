@@ -31,7 +31,7 @@ journal garde l'empreinte du chemin et du corps, jamais leur contenu.
 ## Tests
 
 ```bash
-python3 -m unittest agent_guard.test_guard
+python3 -m unittest agent_guard.test_guard agent_guard.test_charge
 python3 -m agent_guard.banc            # écrit agent_guard/guard_evidence.json
 ```
 
@@ -45,3 +45,5 @@ python3 -m agent_guard.banc            # écrit agent_guard/guard_evidence.json
 - Le GARDIEN ne couvre que le trafic qui passe par lui ; rien n'y force un agent.
 - Pas de tunnel TLS : tout HTTPS est refusé, par conception.
 - Heuristiques : signal, jamais preuve. Elles produiront des faux positifs.
+- Un refus envoyé sans lire le corps (corps trop gros, chunked) est suivi d'une fermeture différée
+  bornée à 4 Mio et 2 s : au-delà, le client voit une connexion coupée au lieu du 413.

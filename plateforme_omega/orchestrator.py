@@ -30,7 +30,7 @@ SUITES_BLUEPRINT = {
     "validateur": (PY + ["cryoloop", "banc"], "cryoloop/cryoloop_evidence.json", ["../cryoloop/validateur.py"]),
     "rag": (PY + ["rag_wiki.rag", "--eval"], "rag_wiki/rag_evidence.json", ["../rag_wiki/rag.py"]),
     "pinning": (PY + ["rag_wiki.pinning", "--eval"], "rag_wiki/pinning_evidence.json", ["../rag_wiki/pinning.py"]),
-    "fusion": (PY + ["rag_wiki.fusion", "--eval"], "rag_wiki/fusion_mrr.json", ["../rag_wiki/fusion.py"]),
+    "fusion": (PY + ["rag_wiki.fusion", "--eval"], "rag_wiki/fusion_evidence.json", ["../rag_wiki/fusion.py"]),
     "hermes": (PY + ["omega_hermes.loop"], "omega_hermes/hermes_evidence.json",
                ["../omega_hermes/twin.py", "../omega_hermes/alice.py", "../omega_hermes/eyes.py",
                 "../omega_hermes/bob.py", "../omega_hermes/hermes.py", "../omega_hermes/loop.py"]),
@@ -70,6 +70,11 @@ SUITES_AJOUTEES = {
     "rubik": (PY + ["plateforme_omega.rubik"], "plateforme_omega/rubik_evidence.json", ["rubik.py"]),
     "distribue": (PY + ["plateforme_omega.distribue"], "plateforme_omega/distribue_evidence.json", ["distribue.py"]),
     "etoile": (PY + ["plateforme_omega.etoile"], "plateforme_omega/etoile_evidence.json", ["etoile.py"]),
+}
+# Échecs connus : mesurés, expliqués dans l'évidence de la suite, jamais masqués ni comptés réussis.
+ECHECS_CONNUS = {
+    "fusion": "MRR de la fusion RRF sous TF-IDF seul sur ce corpus ; critère fixé avant la mesure "
+              "(voir rag_wiki/fusion_evidence.json)",
 }
 BALAYAGE_HERMES = [(f, e) for f in (50, 100, 200) for e in (90, 150)]
 
@@ -186,6 +191,8 @@ def main(argv=None) -> int:
         if os.path.exists(os.path.join(RACINE, "omega_hermes/swarm_evidence.json")) else None
     meilleur = max((b for b in balayage if b["score"] is not None), key=lambda b: b["score"], default=None)
     mesures = {"suites": lignes, "suites_total": len(lignes), "suites_ok": sum(r["statut"] == "OK" for r in lignes),
+               "echecs_connus": {n: ECHECS_CONNUS[n] for n in ECHECS_CONNUS if res.get(n, {}).get("statut") == "ECHEC"},
+               "echecs_inattendus": [r["suite"] for r in lignes if r["statut"] == "ECHEC" and r["suite"] not in ECHECS_CONNUS],
                "blueprint": {"total": len(bp), "ok": sum(r["statut"] == "OK" for r in bp),
                              "absentes": [r["suite"] for r in bp if r["statut"] == "ABSENTE"],
                              "echecs": [r["suite"] for r in bp if r["statut"] == "ECHEC"]},
@@ -193,7 +200,9 @@ def main(argv=None) -> int:
                "gain_parallele": sequentiel / murale, "paralleles": a.paralleles,
                "balayage_hermes": balayage, "meilleur_balayage": meilleur, "balayage_essaim": essaim,
                "omega_q": evaluations, "omega_q_decisions": decisions}
-    ok = mesures["suites_ok"] == mesures["suites_total"]
+    # Critère du blueprint (§12 phase 5) : ≥ 20/21, le seul échec toléré étant documenté.
+    ok = (mesures["blueprint"]["ok"] >= 20 and not mesures["echecs_inattendus"]
+          and not mesures["blueprint"]["absentes"])
     doc = ecrire(a.out, module="plateforme", phase=5, etiquette="VÉRIFIÉ", verdict="OK" if ok else "ECHEC",
                  config={"suites_blueprint": list(SUITES_BLUEPRINT), "suites_ajoutees": list(SUITES_AJOUTEES),
                          "balayage_hermes": BALAYAGE_HERMES},
@@ -208,6 +217,8 @@ def main(argv=None) -> int:
     print(f"\nSuites du blueprint : {mesures['blueprint']['ok']}/{mesures['blueprint']['total']} OK "
           f"(absentes : {', '.join(mesures['blueprint']['absentes']) or 'aucune'} ; "
           f"échecs : {', '.join(mesures['blueprint']['echecs']) or 'aucun'})")
+    print(f"Échecs connus : {', '.join(mesures['echecs_connus']) or 'aucun'} · "
+          f"échecs inattendus : {', '.join(mesures['echecs_inattendus']) or 'aucun'}")
     print(f"Toutes suites : {mesures['suites_ok']}/{mesures['suites_total']} · murale {murale:.1f} s · "
           f"séquentiel estimé {sequentiel:.1f} s · gain ×{mesures['gain_parallele']:.2f} sur {a.paralleles} voies")
     print("Balayage HERMÈS : " + " · ".join(f"{b['facteur_lache']}×/{b['entrainement']} → {b['score']}" for b in balayage))

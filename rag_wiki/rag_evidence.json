@@ -1,0 +1,82 @@
+{
+  "format": 1,
+  "module": "rag",
+  "phase": 6,
+  "etiquette": "VÉRIFIÉ",
+  "verdict": "OK",
+  "graine": 7,
+  "config": {},
+  "mesures": {
+    "documents": 12,
+    "morceaux": 1649,
+    "vocabulaire": 12635,
+    "methode_collecte": "Action API de Wikipédia en français, action=query, prop=extracts, explaintext, un titre par requête — pas Spécial:Exporter, pas le jeu Hugging Face, pas Wikidata",
+    "annees_par_document": {
+      "Terre": 60,
+      "Lune": 213,
+      "Soleil": 104,
+      "Mars (planète)": 224,
+      "Système solaire": 114,
+      "Cryptographie": 37,
+      "Fonction de hachage": 5,
+      "SHA-2": 19,
+      "Télégraphie électrique": 166,
+      "Code Morse international": 38,
+      "Filtre de Kalman": 3,
+      "Transformation de Fourier rapide": 28
+    },
+    "mrr": 0.84375,
+    "rangs": {
+      "Quel est le satellite naturel de la Terre ?": 1,
+      "Quelle étoile se trouve au centre du système solaire ?": 4,
+      "Quelle planète est surnommée la planète rouge ?": 1,
+      "Qu'est-ce qu'une fonction de hachage cryptographique ?": 1,
+      "Quelles fonctions composent la famille SHA-2 ?": 1,
+      "Qui a inventé le code Morse ?": 2,
+      "À quoi sert le filtre de Kalman ?": 1,
+      "Quelle est la complexité de la transformation de Fourier rapide ?": 1
+    },
+    "criteres": [
+      {
+        "critere": "corpus réel : 12 documents tracés (révision, URL)",
+        "ok": true,
+        "detail": "2026-11-11T18:57:05+00:00"
+      },
+      {
+        "critere": "chiffres et dates conservés dans chaque document (≥ 3 années à 4 chiffres)",
+        "ok": true,
+        "detail": "minimum 3, total 1011"
+      },
+      {
+        "critere": "découpage ~500 caractères, chevauchement 100",
+        "ok": true,
+        "detail": "1649 morceaux, 12635 termes"
+      },
+      {
+        "critere": "MRR TF-IDF sur 8 questions ≥ 0,75",
+        "ok": true,
+        "detail": "0.844"
+      },
+      {
+        "critere": "réponse extractive citée, jamais inventée",
+        "ok": true,
+        "detail": ""
+      }
+    ]
+  },
+  "limites": [
+    "Le MRR du corpus fixe ne se transfère pas à une recherche live.",
+    "Source : Wikipédia en français par l'Action API. Le jeu Hugging Face wikimedia/wikipedia (20231101.fr) et Wikidata ne sont pas utilisés ; aucun modèle n'est entraîné sur ces textes.",
+    "Les débris de formules mathématiques de l'extraction Wikipédia sont nettoyés et les morceaux de moins de 20 mots écartés : sans cela, le boost du titre plaçait des morceaux vides en tête.",
+    "8 questions : échantillon minuscule ; un MRR de 1,000 ne prouve pas la généralisation.",
+    "Texte CC BY-SA 4.0 des contributeurs de Wikipédia, à la révision indiquée."
+  ],
+  "execution": {
+    "genere_le": "2026-11-11T19:15:46Z",
+    "commande": "python3 /home/user/automatic-system/rag_wiki/rag.py --eval",
+    "python": "3.13.18",
+    "plateforme": "Linux-6.18.44-fc-v378-x86_64-with-glibc2.39",
+    "commit": "a8a2e952ef58f602d687f937efc165db8fae05ad",
+    "arbre_modifie": true
+  }
+}

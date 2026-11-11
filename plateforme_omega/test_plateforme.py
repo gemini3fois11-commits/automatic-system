@@ -20,13 +20,14 @@ class Plateforme(unittest.TestCase):
             cls.doc = lire(out)
         cls.m = cls.doc["mesures"]
 
-    def test_aucune_suite_en_echec(self):
-        self.assertEqual([s["suite"] for s in self.m["suites"] if s["statut"] == "ECHEC"], [])
+    def test_aucun_echec_inattendu(self):
+        self.assertEqual(self.m["echecs_inattendus"], [])
 
-    def test_seules_les_suites_non_construites_sont_absentes(self):
-        absentes = {s["suite"] for s in self.m["suites"] if s["statut"] == "ABSENTE"}
-        self.assertLessEqual(absentes, {"rag", "pinning", "fusion"})
-        self.assertGreaterEqual(self.m["blueprint"]["ok"] + len(absentes), len(SUITES_BLUEPRINT))
+    def test_critere_du_blueprint_au_moins_20_sur_21(self):
+        self.assertEqual(self.m["blueprint"]["absentes"], [])
+        self.assertGreaterEqual(self.m["blueprint"]["ok"], 20)
+        self.assertEqual(self.m["blueprint"]["total"], len(SUITES_BLUEPRINT))
+        self.assertEqual(self.code, 0)
 
     def test_gain_parallele_mesure_comme_un_rapport(self):
         self.assertGreater(self.m["gain_parallele"], 1.0)

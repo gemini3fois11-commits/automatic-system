@@ -160,7 +160,7 @@ class Gestion(Gestionnaire):
         if n < 0 or n > CORPS_MAX:
             self.refuser(413, "corps_trop_gros", self.command, hote, chemin)
             return
-        corps = self.rfile.read(n) if n else b""
+        corps = self.lire_corps(n)
         sig = signaux(url, hote, chemin, corps)
         try:
             port = u.port or 80

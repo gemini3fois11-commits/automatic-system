@@ -36,8 +36,11 @@ python3 -m unittest plateforme_omega.test_plateforme     # rejoue un cycle compl
 
 ## Limites honnêtes
 
-- Les suites `rag`, `pinning` et `fusion` sont **absentes** tant que la phase 6 n'est pas construite :
-  l'orchestrateur les compte comme absentes, jamais comme réussies.
+- **Un échec connu : `fusion`.** Sur le corpus de ce dépôt, la fusion RRF fait moins bien que TF-IDF
+  seul ; le critère, fixé avant la mesure, échoue et n'a pas été retouché. L'orchestrateur le liste
+  dans `echecs_connus` avec sa raison ; tout autre échec est « inattendu » et fait échouer le cycle.
+  Critère du blueprint : au moins 20 suites sur 21, le seul échec toléré étant documenté.
+- Une suite dont le module n'existe pas est comptée **absente**, jamais réussie.
 - Gain parallèle = somme des durées / durée murale, sur la machine indiquée dans l'évidence.
 - Ω Q : S est la part de critères réussis de l'évidence de la suite ; P et R ne valent que si
   l'évidence mesure un gain ou une reprise, sinon 0 avec drapeau. Les poids viennent du blueprint
@@ -45,4 +48,10 @@ python3 -m unittest plateforme_omega.test_plateforme     # rejoue un cycle compl
 - MTD : le blueprint donne le niveau 1 comme meilleur Q. Ici, un attaquant qui vise une surface
   non tournée contourne toute rotation partielle ; les deux modèles d'attaquant diffèrent.
 - Le flake `watcher` du blueprint n'existe pas ici (horloges injectées). En revanche, la charge
-  parallèle a révélé un vrai bogue de concurrence dans le terminal, corrigé : voir son README.
+  parallèle a révélé **trois vrais défauts**, tous corrigés et couverts par des tests de régression
+  plutôt que masqués par une relance :
+  1. terminal — une commande ayant fermé sa sortie sans être encore sortie était tuée ;
+  2. portes HTTP et serveur TLS — une erreur renvoyée sans lire le corps de la requête se
+     transformait en connexion coupée côté client (RST du noyau) ; fermeture différée bornée ;
+  3. portes HTTP — file d'écoute de 5 connexions, débordée par une rafale locale ; portée à 128.
+- La suite `pinning` ne fait plus dépendre son verdict du réseau : le contrôle live est une observation.

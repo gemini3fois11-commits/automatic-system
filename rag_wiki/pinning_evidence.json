@@ -1,0 +1,69 @@
+{
+  "format": 1,
+  "module": "pinning",
+  "phase": 6,
+  "etiquette": "VÉRIFIÉ",
+  "verdict": "OK",
+  "graine": 7,
+  "config": {},
+  "mesures": {
+    "epingles_sha256_spki": {
+      "int-ye2.der": "s/tdAOmUzd8syaTuqfgGvFcn6DzA5Cmb+Vby1ST+U3Y=",
+      "root-ye.der": "sCkq5UWXjg+7mKu9lMhhYF5bGLsy7VI/UNW3tccdR7w=",
+      "isrg-root-x2.der": "diGVwiVYbubAI3RW4hB9xU8e/CH2GnkuvVFZE8zmgzI="
+    },
+    "fichiers": [
+      "PINNED_OK",
+      "épingle au rang 0"
+    ],
+    "interception": [
+      "PINNED_FAIL",
+      "aucune_epingle"
+    ],
+    "live": [
+      "PINNED_OK",
+      "épingle au rang 1"
+    ],
+    "epingles_identiques_openssl": true,
+    "criteres": [
+      {
+        "critere": "3 épingles calculées par le parseur DER pur Python",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "critere": "chaîne fichiers YE2 ← Root YE ← ISRG Root X2 : PINNED_OK",
+        "ok": true,
+        "detail": "épingle au rang 0"
+      },
+      {
+        "critere": "chaîne dont un maillon manque : refusée",
+        "ok": true,
+        "detail": "('PINNED_FAIL', 'chaine_non_liee')"
+      },
+      {
+        "critere": "certificat DER tronqué : refusé",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "critere": "chaîne d'interception (feuille ré-émise par une autorité étrangère) : PINNED_FAIL",
+        "ok": true,
+        "detail": "('PINNED_FAIL', 'aucune_epingle')"
+      }
+    ]
+  },
+  "limites": [
+    "Empreintes et chaînage des noms seulement : ni signatures, ni dates, ni révocation.",
+    "Le contrôle live est une observation (champ live), pas un critère : il dépend du réseau. Le blueprint attendait PINNED_FAIL derrière un proxy interceptant ; quand le live a pu être joué ici, le proxy laissait passer la vraie chaîne Let's Encrypt et le verdict était PINNED_OK. La détection est prouvée sur une chaîne d'interception fabriquée.",
+    "Les trois épingles ont été recoupées avec openssl (SHA-256 de la SPKI, base64) : identiques."
+  ],
+  "execution": {
+    "genere_le": "2026-11-11T19:15:46Z",
+    "commande": "python3 /home/user/automatic-system/rag_wiki/pinning.py --eval",
+    "python": "3.13.18",
+    "plateforme": "Linux-6.18.44-fc-v378-x86_64-with-glibc2.39",
+    "commit": "a8a2e952ef58f602d687f937efc165db8fae05ad",
+    "arbre_modifie": true
+  }
+}

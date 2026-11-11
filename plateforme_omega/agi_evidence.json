@@ -17,7 +17,7 @@
       "ACCEPTER": 46
     },
     "raisonnement": {
-      "rag_indisponible": 14
+      "rag_cite": 14
     },
     "ajustements": [
       {
@@ -68,7 +68,7 @@
       {
         "critere": "raisonnement : source citée ou indisponibilité déclarée, jamais inventée",
         "ok": true,
-        "detail": "{'rag_indisponible': 14}"
+        "detail": "{'rag_cite': 14}"
       },
       {
         "critere": "le seuil est réellement ajusté et chaque ajustement est tracé",
@@ -87,11 +87,11 @@
     "Le compte de FLOPs est une estimation analytique ; la référence exaflopique est déclarée."
   ],
   "execution": {
-    "genere_le": "2026-11-11T12:11:29Z",
+    "genere_le": "2026-11-11T19:15:53Z",
     "commande": "python3 /home/user/automatic-system/plateforme_omega/agi.py",
     "python": "3.13.18",
     "plateforme": "Linux-6.18.44-fc-v378-x86_64-with-glibc2.39",
-    "commit": "9f0b7d5bc4a231a7c81e742368bb06757f022ad4",
+    "commit": "a8a2e952ef58f602d687f937efc165db8fae05ad",
     "arbre_modifie": true
   }
 }

@@ -13,16 +13,25 @@
     "http_en_clair_refuse": true,
     "poignee_muette": {
       "ok": true,
-      "ms": 7.939654999972845
+      "ms": 2.338296000061746
     },
     "corps_trop_gros": true,
+    "rafale_corps_trop_gros": {
+      "codes": [
+        413,
+        413,
+        413,
+        413
+      ],
+      "ruptures": []
+    },
     "json_invalide": true,
     "saturation": {
       "code": 503,
       "corps": {
         "refus": "refus_saturation"
       },
-      "ms": 3.4150729998145835
+      "ms": 2.338729000030071
     },
     "reprise_apres_saturation": true,
     "journal": {
@@ -54,12 +63,17 @@
       {
         "critere": "3 clients TCP muets (sans ClientHello) n'immobilisent pas le serveur",
         "ok": true,
-        "detail": "8 ms"
+        "detail": "2 ms"
       },
       {
         "critere": "corps > 16 Kio : 413",
         "ok": true,
         "detail": ""
+      },
+      {
+        "critere": "4 corps trop gros simultanés : 4 réponses 413, aucune connexion rompue",
+        "ok": true,
+        "detail": "{'codes': [413, 413, 413, 413], 'ruptures': []}"
       },
       {
         "critere": "JSON invalide : 400",
@@ -69,7 +83,7 @@
       {
         "critere": "saturation : 503 refus_saturation immédiat",
         "ok": true,
-        "detail": "3 ms"
+        "detail": "2 ms"
       },
       {
         "critere": "le service reprend une fois les connexions lentes coupées",
@@ -93,11 +107,11 @@
     "Pas d'authentification du client : le serveur journalise ce qu'on lui envoie, il ne l'atteste pas."
   ],
   "execution": {
-    "genere_le": "2026-11-11T12:11:29Z",
+    "genere_le": "2026-11-11T19:15:52Z",
     "commande": "python3 /home/user/automatic-system/plateforme_omega/tls.py",
     "python": "3.13.18",
     "plateforme": "Linux-6.18.44-fc-v378-x86_64-with-glibc2.39",
-    "commit": "9f0b7d5bc4a231a7c81e742368bb06757f022ad4",
+    "commit": "a8a2e952ef58f602d687f937efc165db8fae05ad",
     "arbre_modifie": true
   }
 }

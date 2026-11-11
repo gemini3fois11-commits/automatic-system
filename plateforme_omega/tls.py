@@ -21,6 +21,7 @@ import time
 
 from plateforme_omega.commun import conclure, sortir
 from socle_preuve.gamma import Chaine, verifier_chaine
+from socle_preuve.porte_http import fermeture_differee
 
 CORPS_MAX = 16 * 1024
 CONNEXIONS_MAX = 4
@@ -59,7 +60,7 @@ class Gestion(http.server.BaseHTTPRequestHandler):
         finally:
             self.server.places.release()
 
-    def repondre(self, code, objet):
+    def repondre(self, code, objet, corps_lu=True):
         corps = json.dumps(objet).encode()
         self.send_response(code)
         self.send_header("Content-Type", "application/json")
@@ -67,17 +68,22 @@ class Gestion(http.server.BaseHTTPRequestHandler):
         self.send_header("Connection", "close")
         self.end_headers()
         self.wfile.write(corps)
+        if not corps_lu:
+            # Erreur renvoyée sans lire le corps : fermeture différée, sinon le client qui envoie
+            # encore son second enregistrement TLS reçoit un RST à la place de la réponse.
+            self.wfile.flush()
+            fermeture_differee(self.connection)
 
     def do_POST(self):
         self.close_connection = True
         if self.path != "/journal":
-            return self.repondre(404, {"erreur": "introuvable"})
+            return self.repondre(404, {"erreur": "introuvable"}, corps_lu=False)
         try:
             n = int(self.headers.get("Content-Length", "-1"))
         except ValueError:
             n = -1
         if n < 0 or n > CORPS_MAX:
-            return self.repondre(413, {"refus": "corps_trop_gros"})
+            return self.repondre(413, {"refus": "corps_trop_gros"}, corps_lu=False)
         try:
             entree = json.loads(self.rfile.read(n))
             if not isinstance(entree, dict):
@@ -97,6 +103,7 @@ class Gestion(http.server.BaseHTTPRequestHandler):
 
 class ServeurTLS(socketserver.ThreadingMixIn, http.server.HTTPServer):
     daemon_threads = True
+    request_queue_size = 128     # voir socle_preuve.porte_http.Serveur
 
     def __init__(self, cle, cert, journal):
         super().__init__(("127.0.0.1", 0), Gestion)
@@ -160,6 +167,20 @@ def mesurer() -> dict:
             for m in muettes:
                 m.close()
             res["corps_trop_gros"] = requete(port, client(cert), "POST", "/journal", b"x" * (CORPS_MAX + 1))[0] == 413
+            codes, ruptures = [], []
+
+            def gros_corps():
+                try:
+                    codes.append(requete(port, client(cert), "POST", "/journal", b"x" * (4 * CORPS_MAX))[0])
+                except OSError as e:
+                    ruptures.append(type(e).__name__)
+
+            fils = [threading.Thread(target=gros_corps) for _ in range(CONNEXIONS_MAX)]
+            for f in fils:
+                f.start()
+            for f in fils:
+                f.join()
+            res["rafale_corps_trop_gros"] = {"codes": sorted(codes), "ruptures": ruptures}
             res["json_invalide"] = requete(port, client(cert), "POST", "/journal", b"[1, 2")[0] == 400
             # Saturation : 4 connexions TLS ouvertes qui ne disent rien occupent toutes les places.
             lentes = []
@@ -197,6 +218,9 @@ def main() -> int:
         ("3 clients TCP muets (sans ClientHello) n'immobilisent pas le serveur",
          m["poignee_muette"]["ok"] and m["poignee_muette"]["ms"] < 1000, f"{m['poignee_muette']['ms']:.0f} ms"),
         ("corps > 16 Kio : 413", m["corps_trop_gros"], ""),
+        ("4 corps trop gros simultanés : 4 réponses 413, aucune connexion rompue",
+         m["rafale_corps_trop_gros"] == {"codes": [413] * CONNEXIONS_MAX, "ruptures": []},
+         str(m["rafale_corps_trop_gros"])),
         ("JSON invalide : 400", m["json_invalide"], ""),
         ("saturation : 503 refus_saturation immédiat", sat["code"] == 503 and sat["corps"] == {"refus": "refus_saturation"}
          and sat["ms"] < 1000, f"{sat['ms']:.0f} ms"),
