@@ -1,0 +1,97 @@
+{
+  "format": 1,
+  "module": "agi",
+  "phase": 5,
+  "etiquette": "SIMULÉ",
+  "verdict": "OK",
+  "graine": 7,
+  "config": {},
+  "mesures": {
+    "etiquettes": [
+      "SIMULATION",
+      "SPÉCIFIÉ"
+    ],
+    "pas": 60,
+    "actions": {
+      "QUARANTAINE": 14,
+      "ACCEPTER": 46
+    },
+    "raisonnement": {
+      "rag_indisponible": 14
+    },
+    "ajustements": [
+      {
+        "pas": 20,
+        "avant": 56.03220517592696,
+        "apres": 56.03220517592696,
+        "connus_rejetes": 0,
+        "anomalies_acceptees": 0
+      },
+      {
+        "pas": 40,
+        "avant": 56.03220517592696,
+        "apres": 56.03220517592696,
+        "connus_rejetes": 0,
+        "anomalies_acceptees": 0
+      },
+      {
+        "pas": 60,
+        "avant": 56.03220517592696,
+        "apres": 56.03220517592696,
+        "connus_rejetes": 1,
+        "anomalies_acceptees": 0
+      }
+    ],
+    "actions_executees": 0,
+    "flops_par_decision": 67863.0,
+    "echelle": {
+      "agents": 1000000000.0,
+      "decisions_par_s_et_agent": 1000.0
+    },
+    "flops_par_s_requis": 6.7863e+16,
+    "reference_flops_par_s": 1e+18,
+    "rapport_au_mur": 0.067863,
+    "flops_raisonnement_grand_modele": 2000000000000000.0,
+    "flops_par_s_grand_modele": 2e+27,
+    "machines_exaflopiques_grand_modele": 2000000000.0,
+    "criteres": [
+      {
+        "critere": "étiquetée [SIMULATION] [SPÉCIFIÉ]",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "critere": "aucune action réelle exécutée",
+        "ok": true,
+        "detail": "{'QUARANTAINE': 14, 'ACCEPTER': 46}"
+      },
+      {
+        "critere": "raisonnement : source citée ou indisponibilité déclarée, jamais inventée",
+        "ok": true,
+        "detail": "{'rag_indisponible': 14}"
+      },
+      {
+        "critere": "le seuil est réellement ajusté et chaque ajustement est tracé",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "critere": "le mur est calculé : décision HERMÈS sous la référence, raisonnement de grand modèle au-delà",
+        "ok": true,
+        "detail": "HERMÈS 6.8e-02 × une machine exaflopique ; grand modèle 2.0e+09 machines exaflopiques"
+      }
+    ]
+  },
+  "limites": [
+    "Ce n'est pas une AGI : une boucle de 4 étapes sur un jumeau synthétique.",
+    "Le compte de FLOPs est une estimation analytique ; la référence exaflopique est déclarée."
+  ],
+  "execution": {
+    "genere_le": "2026-11-11T12:11:29Z",
+    "commande": "python3 /home/user/automatic-system/plateforme_omega/agi.py",
+    "python": "3.13.18",
+    "plateforme": "Linux-6.18.44-fc-v378-x86_64-with-glibc2.39",
+    "commit": "9f0b7d5bc4a231a7c81e742368bb06757f022ad4",
+    "arbre_modifie": true
+  }
+}

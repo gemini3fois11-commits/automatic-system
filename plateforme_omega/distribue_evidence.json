@@ -1,0 +1,80 @@
+{
+  "format": 1,
+  "module": "distribue",
+  "phase": 5,
+  "etiquette": "VÉRIFIÉ",
+  "verdict": "OK",
+  "graine": 7,
+  "config": {},
+  "mesures": {
+    "taches": 16,
+    "justes": true,
+    "identiques_au_sequentiel": true,
+    "fautes_injectees": [
+      "T2",
+      "T4"
+    ],
+    "fautes_detectees": [
+      {
+        "tache": 2,
+        "travailleur": "T2",
+        "faute": "code_3"
+      },
+      {
+        "tache": 2,
+        "travailleur": "T4",
+        "faute": "silence"
+      },
+      {
+        "tache": 8,
+        "travailleur": "T4",
+        "faute": "silence"
+      }
+    ],
+    "reprise": 1.0,
+    "ecartes": [
+      "T2",
+      "T4"
+    ],
+    "duree_sequentielle_s": 2.9797146659993814,
+    "duree_parallele_s": 1.3090927059993192,
+    "gain": 2.2761678010609367,
+    "paralleles": 4,
+    "delai_silence_s": 0.7449286664998453,
+    "criteres": [
+      {
+        "critere": "toutes les tâches aboutissent, résultats justes",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "critere": "2/2 fautes injectées détectées et reprises",
+        "ok": true,
+        "detail": "T2:code_3, T4:silence, T4:silence"
+      },
+      {
+        "critere": "seuls les travailleurs fautifs sont écartés",
+        "ok": true,
+        "detail": "['T2', 'T4']"
+      },
+      {
+        "critere": "gain parallèle mesuré > 1 malgré les fautes",
+        "ok": true,
+        "detail": "×2.28 sur 4 voies"
+      }
+    ]
+  },
+  "limites": [
+    "Un seul hôte : processus locaux, pas de réseau, pas de consensus distribué.",
+    "Le silence est détecté par délai (4 × la durée médiane d'une tâche) : un travailleur lent est traité comme muet.",
+    "Avant détection, un travailleur muet peut recevoir plusieurs tâches en parallèle : chacune coûte un délai complet."
+  ],
+  "execution": {
+    "genere_le": "2026-11-11T12:11:45Z",
+    "commande": "python3 /home/user/automatic-system/plateforme_omega/distribue.py",
+    "python": "3.13.18",
+    "plateforme": "Linux-6.18.44-fc-v378-x86_64-with-glibc2.39",
+    "commit": "9f0b7d5bc4a231a7c81e742368bb06757f022ad4",
+    "arbre_modifie": true
+  }
+}

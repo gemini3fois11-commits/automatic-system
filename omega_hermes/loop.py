@@ -21,7 +21,7 @@ import time
 import numpy as np
 
 from omega_hermes import decouplage
-from omega_hermes.alice import COVERT, UNKNOWN, Alice
+from omega_hermes.alice import UNKNOWN, Alice
 from omega_hermes.bob import Bob
 from omega_hermes.eyes import Standardiseur, traits
 from omega_hermes.hermes import mesurer
@@ -54,15 +54,16 @@ def _latences_ms(bob, std, X) -> tuple[list[float], float]:
     return latences, plancher_ms
 
 
-def boucle(graine=GRAINE, iterations=5, scenarios=200, entrainement=150, journal=None) -> dict:
+def boucle(graine=GRAINE, iterations=5, scenarios=200, entrainement=150, journal=None,
+           facteur_lache=100.0) -> dict:
     twin = Twin(graine)
     alice = Alice(twin, graine)
     classes = [CLASSES[i % len(CLASSES)] for i in range(entrainement * len(CLASSES))]
     X_train = twin.lot(classes)
     std = Standardiseur().ajuster(traits(X_train))
     Z_train = std.transformer(traits(X_train))
-    bob = Bob().entrainer(Z_train, classes)
-    historique = Bob(regle="seuil_unique").entrainer(Z_train, classes)
+    bob = Bob(facteur_lache=facteur_lache).entrainer(Z_train, classes)
+    historique = Bob(regle="seuil_unique", facteur_lache=facteur_lache).entrainer(Z_train, classes)
     strict_appris = bob.seuil_strict
 
     tous_labels, toutes_decisions, toutes_latences = [], [], []
@@ -159,6 +160,7 @@ def main(argv=None) -> int:
     ap.add_argument("--iterations", type=int, default=5)
     ap.add_argument("--scenarios", type=int, default=200)
     ap.add_argument("--entrainement", type=int, default=150, help="échantillons par classe")
+    ap.add_argument("--facteur-lache", type=float, default=100.0, help="seuil lâche = facteur × seuil strict")
     ap.add_argument("--journal", help="chaîne Γ des ajustements (défaut : dossier temporaire)")
     ap.add_argument("--evidence", default=os.path.join(os.path.dirname(__file__),
                                                        "hermes_evidence.json"))
@@ -166,7 +168,8 @@ def main(argv=None) -> int:
 
     with tempfile.TemporaryDirectory() as tmp:
         chemin_journal = a.journal or os.path.join(tmp, "loop_audit.jsonl")
-        res = boucle(a.graine, a.iterations, a.scenarios, a.entrainement, Chaine(chemin_journal))
+        res = boucle(a.graine, a.iterations, a.scenarios, a.entrainement, Chaine(chemin_journal),
+                     a.facteur_lache)
         rapport_journal = verifier_chaine(chemin_journal)
     viol = decouplage.violations()
     g = res["global"]
@@ -199,7 +202,7 @@ def main(argv=None) -> int:
     print(f"\n{reussis}/{len(liste)} critères — {'TOUT EST OK' if verdict == 'OK' else 'ÉCHEC'}")
     ecrire(a.evidence, module="omega_hermes", phase=2, etiquette="SIMULÉ", verdict=verdict,
            graine=a.graine,
-           config={"iterations": a.iterations, "scenarios": a.scenarios,
+           config={"iterations": a.iterations, "scenarios": a.scenarios, "facteur_lache": a.facteur_lache,
                    "entrainement_par_classe": a.entrainement, "cible_fnr": CIBLE_FNR,
                    "pas": {"resserrer": PAS_RESSERRER, "relacher": PAS_RELACHER},
                    "bornes_seuil_strict": BORNES_STRICT},

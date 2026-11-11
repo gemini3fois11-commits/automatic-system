@@ -10,7 +10,7 @@ import shutil
 import tempfile
 
 from cryoloop.banc import construire, ecrire_manifeste, lire_manifeste, signer
-from cryoloop.validateur import GRAVITE, MANIFESTE, SIGNATURE, Perimetre, candidat, valider
+from cryoloop.validateur import SIGNATURE, Perimetre, candidat, valider
 from socle_preuve import ed25519
 from socle_preuve.gamma import Chaine
 

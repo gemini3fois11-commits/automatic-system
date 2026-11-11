@@ -19,15 +19,14 @@ import random
 import subprocess
 import sys
 import tempfile
-import time
 
 from outils.evidence import GRAINE, ecrire
 from rinv.frame import FrameError, decode, encode
 from rinv.gate import Event, InvariantGate, Ledger, sign
 from rinv.suture import Supervisor
 from rinv.void_monitor import ChannelState, VoidMonitor
-from socle_preuve.gamma import Chaine, calculer_hash, lire_blocs
-from socle_preuve.temoin import ScelleurHMAC, Temoin, verifier_temoin
+from socle_preuve.gamma import Chaine, calculer_hash
+from socle_preuve.temoin import ScelleurHMAC, Temoin
 
 RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 S = 1_000_000_000

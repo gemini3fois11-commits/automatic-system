@@ -11,17 +11,17 @@
   "mesures": {
     "nominal": {
       "rejet": 0.01,
-      "xcorr_mediane": 0.0002742533826761115
+      "xcorr_mediane": -0.002957349730213961
     },
     "DRAFT": {
       "rejet": 1.0,
-      "xcorr_mediane": -0.00485890373933488
+      "xcorr_mediane": -0.0023845554221992383
     },
     "COVERT": {
       "rejet": 1.0,
-      "xcorr_mediane": 0.19192764370477133
+      "xcorr_mediane": 0.18491156831134242
     },
-    "discrimination_draft_vs_covert": 0.8999999999999999,
+    "discrimination_draft_vs_covert": 0.905,
     "seuil_xcorr": 0.1,
     "criteres": [
       {
@@ -43,11 +43,11 @@
     "La discrimination DRAFT / COVERT est une règle sur le trait 31, pas un classifieur."
   ],
   "execution": {
-    "genere_le": "2026-11-11T11:57:05Z",
-    "commande": "python3 /home/user/automatic-system/omega_hermes/phase4.py",
+    "genere_le": "2026-11-11T12:11:33Z",
+    "commande": "python3 /home/user/automatic-system/omega_hermes/phase4.py --module brouillons",
     "python": "3.13.18",
     "plateforme": "Linux-6.18.44-fc-v378-x86_64-with-glibc2.39",
-    "commit": "3818595c1b85ea968d9399e0334d074e7afd6855",
+    "commit": "9f0b7d5bc4a231a7c81e742368bb06757f022ad4",
     "arbre_modifie": true
   }
 }

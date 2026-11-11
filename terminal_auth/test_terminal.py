@@ -9,7 +9,7 @@ from unittest import mock
 
 from socle_preuve.gamma import lire_blocs
 from terminal_auth import server
-from terminal_auth.server import DOSSIER, construire
+from terminal_auth.server import construire
 
 MDP = "phrase de passe du terminal"
 

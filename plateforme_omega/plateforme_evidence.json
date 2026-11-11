@@ -1,0 +1,856 @@
+{
+  "format": 1,
+  "module": "plateforme",
+  "phase": 5,
+  "etiquette": "VÉRIFIÉ",
+  "verdict": "ECHEC",
+  "graine": 7,
+  "config": {
+    "suites_blueprint": [
+      "passerelle",
+      "validateur",
+      "rag",
+      "pinning",
+      "fusion",
+      "hermes",
+      "ai_mode",
+      "scaling",
+      "reverie",
+      "tls",
+      "omega_q",
+      "mtd",
+      "watcher",
+      "agi",
+      "evasion",
+      "guardian",
+      "prng",
+      "codage",
+      "brouillons",
+      "attrape",
+      "hyper"
+    ],
+    "suites_ajoutees": [
+      "socle_preuve",
+      "systeme_rinv",
+      "gardien",
+      "terminal",
+      "runtime",
+      "swarm",
+      "rubik",
+      "distribue",
+      "etoile"
+    ],
+    "balayage_hermes": [
+      [
+        50,
+        90
+      ],
+      [
+        50,
+        150
+      ],
+      [
+        100,
+        90
+      ],
+      [
+        100,
+        150
+      ],
+      [
+        200,
+        90
+      ],
+      [
+        200,
+        150
+      ]
+    ]
+  },
+  "mesures": {
+    "suites": [
+      {
+        "suite": "passerelle",
+        "statut": "OK",
+        "code": 0,
+        "duree_s": 13.982189758999994,
+        "fin": "OK"
+      },
+      {
+        "suite": "validateur",
+        "statut": "OK",
+        "code": 0,
+        "duree_s": 4.159456415999557,
+        "fin": "18/18 scénarios — TOUT EST OK — commit Γ : INTERDIT EN L'ÉTAT ACTUEL"
+      },
+      {
+        "suite": "rag",
+        "statut": "ABSENTE",
+        "code": null,
+        "duree_s": 0.0,
+        "fin": "module non construit"
+      },
+      {
+        "suite": "pinning",
+        "statut": "ABSENTE",
+        "code": null,
+        "duree_s": 0.0,
+        "fin": "module non construit"
+      },
+      {
+        "suite": "fusion",
+        "statut": "ABSENTE",
+        "code": null,
+        "duree_s": 0.0,
+        "fin": "module non construit"
+      },
+      {
+        "suite": "hermes",
+        "statut": "OK",
+        "code": 0,
+        "duree_s": 1.5988250829996105,
+        "fin": "9/9 critères — TOUT EST OK"
+      },
+      {
+        "suite": "ai_mode",
+        "statut": "OK",
+        "code": 0,
+        "duree_s": 0.838963261000572,
+        "fin": "3/3 critères sur 1 module(s) — TOUT EST OK"
+      },
+      {
+        "suite": "scaling",
+        "statut": "OK",
+        "code": 0,
+        "duree_s": 8.014546895000422,
+        "fin": "scaling : 3/3 critères — TOUT EST OK"
+      },
+      {
+        "suite": "reverie",
+        "statut": "OK",
+        "code": 0,
+        "duree_s": 1.3400888020005368,
+        "fin": "4/4 critères sur 1 module(s) — TOUT EST OK"
+      },
+      {
+        "suite": "tls",
+        "statut": "OK",
+        "code": 0,
+        "duree_s": 3.488056573999529,
+        "fin": "tls : 11/11 critères — TOUT EST OK"
+      },
+      {
+        "suite": "omega_q",
+        "statut": "OK",
+        "code": 0,
+        "duree_s": 0.04240096299963625,
+        "fin": "omega_q : 4/4 critères — TOUT EST OK"
+      },
+      {
+        "suite": "mtd",
+        "statut": "OK",
+        "code": 0,
+        "duree_s": 6.760028431999672,
+        "fin": "mtd : 5/5 critères — TOUT EST OK"
+      },
+      {
+        "suite": "watcher",
+        "statut": "OK",
+        "code": 0,
+        "duree_s": 0.08555386299940437,
+        "fin": "watcher : 4/4 critères — TOUT EST OK"
+      },
+      {
+        "suite": "agi",
+        "statut": "OK",
+        "code": 0,
+        "duree_s": 0.590474562000054,
+        "fin": "agi : 5/5 critères — TOUT EST OK"
+      },
+      {
+        "suite": "evasion",
+        "statut": "OK",
+        "code": 0,
+        "duree_s": 0.889840395999272,
+        "fin": "3/3 critères sur 1 module(s) — TOUT EST OK"
+      },
+      {
+        "suite": "guardian",
+        "statut": "OK",
+        "code": 0,
+        "duree_s": 0.5468444930002079,
+        "fin": "4/4 critères sur 1 module(s) — TOUT EST OK"
+      },
+      {
+        "suite": "prng",
+        "statut": "OK",
+        "code": 0,
+        "duree_s": 0.5354717949994665,
+        "fin": "prng : 8/8 critères — TOUT EST OK"
+      },
+      {
+        "suite": "codage",
+        "statut": "OK",
+        "code": 0,
+        "duree_s": 0.8058461840000746,
+        "fin": "codage : 3/3 critères — TOUT EST OK"
+      },
+      {
+        "suite": "brouillons",
+        "statut": "OK",
+        "code": 0,
+        "duree_s": 0.6852944890006256,
+        "fin": "3/3 critères sur 1 module(s) — TOUT EST OK"
+      },
+      {
+        "suite": "attrape",
+        "statut": "OK",
+        "code": 0,
+        "duree_s": 0.774665842000104,
+        "fin": "3/3 critères sur 1 module(s) — TOUT EST OK"
+      },
+      {
+        "suite": "hyper",
+        "statut": "OK",
+        "code": 0,
+        "duree_s": 4.2046205390006435,
+        "fin": "hyper : 4/4 critères — TOUT EST OK"
+      },
+      {
+        "suite": "socle_preuve",
+        "statut": "OK",
+        "code": 0,
+        "duree_s": 2.3290078590007397,
+        "fin": "10/10 scénarios — TOUT EST OK"
+      },
+      {
+        "suite": "systeme_rinv",
+        "statut": "OK",
+        "code": 0,
+        "duree_s": 0.5600061410004855,
+        "fin": "18/18 contrôles — TOUT EST OK"
+      },
+      {
+        "suite": "gardien",
+        "statut": "OK",
+        "code": 0,
+        "duree_s": 1.6738448739997693,
+        "fin": "21/21 cas — TOUT EST OK"
+      },
+      {
+        "suite": "terminal",
+        "statut": "OK",
+        "code": 0,
+        "duree_s": 13.500019666000298,
+        "fin": "OK"
+      },
+      {
+        "suite": "runtime",
+        "statut": "OK",
+        "code": 0,
+        "duree_s": 6.249549462999312,
+        "fin": "OK"
+      },
+      {
+        "suite": "swarm",
+        "statut": "OK",
+        "code": 0,
+        "duree_s": 1.1461524440001085,
+        "fin": "5/5 critères sur 1 module(s) — TOUT EST OK"
+      },
+      {
+        "suite": "rubik",
+        "statut": "OK",
+        "code": 0,
+        "duree_s": 0.21318772800077568,
+        "fin": "rubik : 4/4 critères — TOUT EST OK"
+      },
+      {
+        "suite": "distribue",
+        "statut": "OK",
+        "code": 0,
+        "duree_s": 5.950926556000013,
+        "fin": "distribue : 4/4 critères — TOUT EST OK"
+      },
+      {
+        "suite": "etoile",
+        "statut": "OK",
+        "code": 0,
+        "duree_s": 0.1990007220001644,
+        "fin": "etoile : 6/6 critères — TOUT EST OK"
+      }
+    ],
+    "suites_total": 30,
+    "suites_ok": 27,
+    "blueprint": {
+      "total": 21,
+      "ok": 18,
+      "absentes": [
+        "rag",
+        "pinning",
+        "fusion"
+      ],
+      "echecs": []
+    },
+    "duree_murale_s": 26.267354904000058,
+    "duree_sequentielle_estimee_s": 90.66057179000109,
+    "gain_parallele": 3.451454176537397,
+    "paralleles": 4,
+    "balayage_hermes": [
+      {
+        "facteur_lache": 50,
+        "entrainement": 90,
+        "score": 0.996,
+        "rejet_inconnu": 1.0,
+        "fpr": 0.0
+      },
+      {
+        "facteur_lache": 50,
+        "entrainement": 150,
+        "score": 0.9954,
+        "rejet_inconnu": 1.0,
+        "fpr": 0.0
+      },
+      {
+        "facteur_lache": 100,
+        "entrainement": 90,
+        "score": 0.9926,
+        "rejet_inconnu": 1.0,
+        "fpr": 0.0
+      },
+      {
+        "facteur_lache": 100,
+        "entrainement": 150,
+        "score": 0.9914,
+        "rejet_inconnu": 1.0,
+        "fpr": 0.0
+      },
+      {
+        "facteur_lache": 200,
+        "entrainement": 90,
+        "score": 0.9663,
+        "rejet_inconnu": 1.0,
+        "fpr": 0.0
+      },
+      {
+        "facteur_lache": 200,
+        "entrainement": 150,
+        "score": 0.9663,
+        "rejet_inconnu": 1.0,
+        "fpr": 0.0
+      }
+    ],
+    "meilleur_balayage": {
+      "facteur_lache": 50,
+      "entrainement": 90,
+      "score": 0.996,
+      "rejet_inconnu": 1.0,
+      "fpr": 0.0
+    },
+    "balayage_essaim": [
+      {
+        "noeuds": 8,
+        "battements": 40,
+        "depart": 10,
+        "compromis": {},
+        "latence_battements": {},
+        "tous_detectes": true,
+        "latence_max_battements": null,
+        "latence_max_s": null,
+        "messages_caches": 0,
+        "ampleur": 0.0,
+        "fausses_alarmes": 0.021875,
+        "observations_saines": 320,
+        "niveau": "0 COVERT + 0 DRAFT"
+      },
+      {
+        "noeuds": 8,
+        "battements": 40,
+        "depart": 10,
+        "compromis": {
+          "N5": "COVERT"
+        },
+        "latence_battements": {
+          "N5": 0
+        },
+        "tous_detectes": true,
+        "latence_max_battements": 0,
+        "latence_max_s": 0,
+        "messages_caches": 240,
+        "ampleur": 0.125,
+        "fausses_alarmes": 0.020689655172413793,
+        "observations_saines": 290,
+        "niveau": "1 COVERT + 0 DRAFT"
+      },
+      {
+        "noeuds": 8,
+        "battements": 40,
+        "depart": 10,
+        "compromis": {
+          "N4": "COVERT",
+          "N6": "COVERT",
+          "N7": "DRAFT"
+        },
+        "latence_battements": {
+          "N6": 0,
+          "N4": 0,
+          "N7": 0
+        },
+        "tous_detectes": true,
+        "latence_max_battements": 0,
+        "latence_max_s": 0,
+        "messages_caches": 720,
+        "ampleur": 0.375,
+        "fausses_alarmes": 0.008695652173913044,
+        "observations_saines": 230,
+        "niveau": "2 COVERT + 1 DRAFT"
+      },
+      {
+        "noeuds": 8,
+        "battements": 40,
+        "depart": 10,
+        "compromis": {
+          "N2": "DRAFT",
+          "N3": "COVERT",
+          "N4": "DRAFT",
+          "N6": "COVERT",
+          "N7": "COVERT"
+        },
+        "latence_battements": {
+          "N7": 0,
+          "N6": 0,
+          "N3": 0,
+          "N2": 0,
+          "N4": 0
+        },
+        "tous_detectes": true,
+        "latence_max_battements": 0,
+        "latence_max_s": 0,
+        "messages_caches": 1200,
+        "ampleur": 0.625,
+        "fausses_alarmes": 0.01764705882352941,
+        "observations_saines": 170,
+        "niveau": "3 COVERT + 2 DRAFT"
+      }
+    ],
+    "omega_q": [
+      {
+        "module": "passerelle",
+        "loc": 170,
+        "runtime_s": 13.98,
+        "S": 1.0,
+        "P": 0.0,
+        "R": 0.0,
+        "C": 0.20151824799166662,
+        "Q": 0.798482,
+        "decision": "ACCEPTER",
+        "drapeaux": [
+          "gain_non_mesure",
+          "reprise_non_mesuree"
+        ]
+      },
+      {
+        "module": "validateur",
+        "loc": 393,
+        "runtime_s": 4.16,
+        "S": 1.0,
+        "P": 0.0,
+        "R": 0.0,
+        "C": 0.2311621367999963,
+        "Q": 0.768838,
+        "decision": "ACCEPTER",
+        "drapeaux": [
+          "gain_non_mesure",
+          "reprise_non_mesuree"
+        ]
+      },
+      {
+        "module": "hermes",
+        "loc": 530,
+        "runtime_s": 1.6,
+        "S": 1.0,
+        "P": 0.0,
+        "R": 0.0,
+        "C": 0.2783235423583301,
+        "Q": 0.721676,
+        "decision": "ACCEPTER",
+        "drapeaux": [
+          "gain_non_mesure",
+          "reprise_non_mesuree"
+        ]
+      },
+      {
+        "module": "ai_mode",
+        "loc": 46,
+        "runtime_s": 0.84,
+        "S": 1.0,
+        "P": 0.0,
+        "R": 0.0,
+        "C": 0.0299913605083381,
+        "Q": 0.970009,
+        "decision": "ACCEPTER",
+        "drapeaux": [
+          "gain_non_mesure",
+          "reprise_non_mesuree"
+        ]
+      },
+      {
+        "module": "scaling",
+        "loc": 63,
+        "runtime_s": 8.01,
+        "S": 1.0,
+        "P": 0.0,
+        "R": 0.0,
+        "C": 0.09828789079167018,
+        "Q": 0.901712,
+        "decision": "ACCEPTER",
+        "drapeaux": [
+          "gain_non_mesure",
+          "reprise_non_mesuree"
+        ]
+      },
+      {
+        "module": "reverie",
+        "loc": 66,
+        "runtime_s": 1.34,
+        "S": 1.0,
+        "P": 0.0,
+        "R": 0.0,
+        "C": 0.04416740668333781,
+        "Q": 0.955833,
+        "decision": "ACCEPTER",
+        "drapeaux": [
+          "gain_non_mesure",
+          "reprise_non_mesuree"
+        ]
+      },
+      {
+        "module": "tls",
+        "loc": 180,
+        "runtime_s": 3.49,
+        "S": 1.0,
+        "P": 0.0,
+        "R": 0.0,
+        "C": 0.11906713811666274,
+        "Q": 0.880933,
+        "decision": "ACCEPTER",
+        "drapeaux": [
+          "gain_non_mesure",
+          "reprise_non_mesuree"
+        ]
+      },
+      {
+        "module": "omega_q",
+        "loc": 52,
+        "runtime_s": 0.04,
+        "S": 1.0,
+        "P": 0.0,
+        "R": 0.0,
+        "C": 0.026353341358330302,
+        "Q": 0.973647,
+        "decision": "ACCEPTER",
+        "drapeaux": [
+          "gain_non_mesure",
+          "reprise_non_mesuree"
+        ]
+      },
+      {
+        "module": "mtd",
+        "loc": 81,
+        "runtime_s": 6.76,
+        "S": 1.0,
+        "P": 0.0,
+        "R": 0.0,
+        "C": 0.09683357026666393,
+        "Q": 0.903166,
+        "decision": "ACCEPTER",
+        "drapeaux": [
+          "gain_non_mesure",
+          "reprise_non_mesuree"
+        ]
+      },
+      {
+        "module": "watcher",
+        "loc": 81,
+        "runtime_s": 0.09,
+        "S": 1.0,
+        "P": 0.0,
+        "R": 0.0,
+        "C": 0.04121294885832837,
+        "Q": 0.958787,
+        "decision": "ACCEPTER",
+        "drapeaux": [
+          "gain_non_mesure",
+          "reprise_non_mesuree"
+        ]
+      },
+      {
+        "module": "agi",
+        "loc": 80,
+        "runtime_s": 0.59,
+        "S": 1.0,
+        "P": 0.0,
+        "R": 0.0,
+        "C": 0.04492062135000045,
+        "Q": 0.955079,
+        "decision": "ACCEPTER",
+        "drapeaux": [
+          "gain_non_mesure",
+          "reprise_non_mesuree"
+        ]
+      },
+      {
+        "module": "evasion",
+        "loc": 36,
+        "runtime_s": 0.89,
+        "S": 1.0,
+        "P": 0.0,
+        "R": 0.0,
+        "C": 0.025415336633327266,
+        "Q": 0.974585,
+        "decision": "ACCEPTER",
+        "drapeaux": [
+          "gain_non_mesure",
+          "reprise_non_mesuree"
+        ]
+      },
+      {
+        "module": "guardian",
+        "loc": 71,
+        "runtime_s": 0.55,
+        "S": 1.0,
+        "P": 0.0,
+        "R": 0.0,
+        "C": 0.04005703744166839,
+        "Q": 0.959943,
+        "decision": "ACCEPTER",
+        "drapeaux": [
+          "gain_non_mesure",
+          "reprise_non_mesuree"
+        ]
+      },
+      {
+        "module": "prng",
+        "loc": 131,
+        "runtime_s": 0.54,
+        "S": 1.0,
+        "P": 0.0,
+        "R": 0.0,
+        "C": 0.06996226495832888,
+        "Q": 0.930038,
+        "decision": "ACCEPTER",
+        "drapeaux": [
+          "gain_non_mesure",
+          "reprise_non_mesuree"
+        ]
+      },
+      {
+        "module": "codage",
+        "loc": 66,
+        "runtime_s": 0.81,
+        "S": 1.0,
+        "P": 0.0,
+        "R": 0.0,
+        "C": 0.039715384866667286,
+        "Q": 0.960285,
+        "decision": "ACCEPTER",
+        "drapeaux": [
+          "gain_non_mesure",
+          "reprise_non_mesuree"
+        ]
+      },
+      {
+        "module": "brouillons",
+        "loc": 29,
+        "runtime_s": 0.69,
+        "S": 1.0,
+        "P": 0.0,
+        "R": 0.0,
+        "C": 0.020210787408338548,
+        "Q": 0.979789,
+        "decision": "ACCEPTER",
+        "drapeaux": [
+          "gain_non_mesure",
+          "reprise_non_mesuree"
+        ]
+      },
+      {
+        "module": "attrape",
+        "loc": 19,
+        "runtime_s": 0.77,
+        "S": 1.0,
+        "P": 0.0,
+        "R": 0.0,
+        "C": 0.0159555486833342,
+        "Q": 0.984044,
+        "decision": "ACCEPTER",
+        "drapeaux": [
+          "gain_non_mesure",
+          "reprise_non_mesuree"
+        ]
+      },
+      {
+        "module": "hyper",
+        "loc": 62,
+        "runtime_s": 4.2,
+        "S": 1.0,
+        "P": 0.999808,
+        "R": 0.0,
+        "C": 0.06603850449167203,
+        "Q": 1.933769,
+        "decision": "ACCEPTER",
+        "drapeaux": [
+          "reprise_non_mesuree"
+        ]
+      },
+      {
+        "module": "socle_preuve",
+        "loc": 351,
+        "runtime_s": 2.33,
+        "S": 1.0,
+        "P": 0.0,
+        "R": 0.0,
+        "C": 0.19490839882500616,
+        "Q": 0.805092,
+        "decision": "ACCEPTER",
+        "drapeaux": [
+          "gain_non_mesure",
+          "reprise_non_mesuree"
+        ]
+      },
+      {
+        "module": "systeme_rinv",
+        "loc": 446,
+        "runtime_s": 0.56,
+        "S": 1.0,
+        "P": 0.0,
+        "R": 0.0,
+        "C": 0.22766671784167072,
+        "Q": 0.772333,
+        "decision": "ACCEPTER",
+        "drapeaux": [
+          "gain_non_mesure",
+          "reprise_non_mesuree"
+        ]
+      },
+      {
+        "module": "gardien",
+        "loc": 218,
+        "runtime_s": 1.67,
+        "S": 1.0,
+        "P": 0.0,
+        "R": 0.0,
+        "C": 0.1229487072833314,
+        "Q": 0.877051,
+        "decision": "ACCEPTER",
+        "drapeaux": [
+          "gain_non_mesure",
+          "reprise_non_mesuree"
+        ]
+      },
+      {
+        "module": "terminal",
+        "loc": 195,
+        "runtime_s": 13.5,
+        "S": 1.0,
+        "P": 0.0,
+        "R": 0.0,
+        "C": 0.2100001638833358,
+        "Q": 0.79,
+        "decision": "ACCEPTER",
+        "drapeaux": [
+          "gain_non_mesure",
+          "reprise_non_mesuree"
+        ]
+      },
+      {
+        "module": "runtime",
+        "loc": 141,
+        "runtime_s": 6.25,
+        "S": 1.0,
+        "P": 0.0,
+        "R": 0.0,
+        "C": 0.1225795788583276,
+        "Q": 0.87742,
+        "decision": "ACCEPTER",
+        "drapeaux": [
+          "gain_non_mesure",
+          "reprise_non_mesuree"
+        ]
+      },
+      {
+        "module": "swarm",
+        "loc": 55,
+        "runtime_s": 1.15,
+        "S": 1.0,
+        "P": 0.0,
+        "R": 0.0,
+        "C": 0.03705127036666757,
+        "Q": 0.962949,
+        "decision": "ACCEPTER",
+        "drapeaux": [
+          "gain_non_mesure",
+          "reprise_non_mesuree"
+        ]
+      },
+      {
+        "module": "rubik",
+        "loc": 80,
+        "runtime_s": 0.21,
+        "S": 1.0,
+        "P": 0.0,
+        "R": 1.0,
+        "C": 0.04177656440000647,
+        "Q": 1.958223,
+        "decision": "ACCEPTER",
+        "drapeaux": [
+          "gain_non_mesure"
+        ]
+      },
+      {
+        "module": "distribue",
+        "loc": 99,
+        "runtime_s": 5.95,
+        "S": 1.0,
+        "P": 0.5481070068296403,
+        "R": 1.0,
+        "C": 0.09909105463333345,
+        "Q": 2.449016,
+        "decision": "ACCEPTER",
+        "drapeaux": []
+      },
+      {
+        "module": "etoile",
+        "loc": 60,
+        "runtime_s": 0.2,
+        "S": 1.0,
+        "P": 0.0,
+        "R": 0.0,
+        "C": 0.03165833935000137,
+        "Q": 0.968342,
+        "decision": "ACCEPTER",
+        "drapeaux": [
+          "gain_non_mesure",
+          "reprise_non_mesuree"
+        ]
+      }
+    ],
+    "omega_q_decisions": {
+      "ACCEPTER": 27,
+      "REVOIR": 0,
+      "REJETER": 0
+    }
+  },
+  "limites": [
+    "Gain parallèle = somme des durées / durée murale, sur la machine indiquée ; c'est un rapport mesuré, pas une promesse.",
+    "Ω Q : S est la part de critères réussis de chaque évidence ; P et R ne valent que si l'évidence mesure un gain ou une reprise, sinon 0 avec drapeau."
+  ],
+  "execution": {
+    "genere_le": "2026-11-11T12:09:24Z",
+    "commande": "python3 /home/user/automatic-system/plateforme_omega/orchestrator.py",
+    "python": "3.13.18",
+    "plateforme": "Linux-6.18.44-fc-v378-x86_64-with-glibc2.39",
+    "commit": "9f0b7d5bc4a231a7c81e742368bb06757f022ad4",
+    "arbre_modifie": true
+  }
+}

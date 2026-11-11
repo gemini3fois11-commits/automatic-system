@@ -1,0 +1,259 @@
+{
+  "format": 1,
+  "module": "mtd",
+  "phase": 5,
+  "etiquette": "SIMULÉ",
+  "verdict": "OK",
+  "graine": 7,
+  "config": {},
+  "mesures": {
+    "fenetre_attaquant": 3,
+    "attaques_par_config": 300,
+    "configurations": [
+      {
+        "niveau": "0",
+        "periode": 1,
+        "succes_attaquant": 1.0,
+        "cout": 0.0,
+        "S": 0.0,
+        "P": 0.0,
+        "R": 0.0,
+        "C": 0.0,
+        "Q": 0.0,
+        "decision": "REJETER",
+        "drapeaux": [
+          "veto_attaquant"
+        ]
+      },
+      {
+        "niveau": "0",
+        "periode": 5,
+        "succes_attaquant": 1.0,
+        "cout": 0.0,
+        "S": 0.0,
+        "P": 0.0,
+        "R": 0.0,
+        "C": 0.0,
+        "Q": 0.0,
+        "decision": "REJETER",
+        "drapeaux": [
+          "veto_attaquant"
+        ]
+      },
+      {
+        "niveau": "1",
+        "periode": 1,
+        "succes_attaquant": 0.8466666666666667,
+        "cout": 0.05,
+        "S": 0.15333333333333332,
+        "P": 0.1533333333333332,
+        "R": 0.2,
+        "C": 0.05,
+        "Q": 0.456667,
+        "decision": "REJETER",
+        "drapeaux": [
+          "veto_attaquant"
+        ]
+      },
+      {
+        "niveau": "1",
+        "periode": 5,
+        "succes_attaquant": 0.92,
+        "cout": 0.01,
+        "S": 0.07999999999999996,
+        "P": 0.07999999999999996,
+        "R": 0.2,
+        "C": 0.01,
+        "Q": 0.35,
+        "decision": "REJETER",
+        "drapeaux": [
+          "veto_attaquant"
+        ]
+      },
+      {
+        "niveau": "2",
+        "periode": 1,
+        "succes_attaquant": 0.5733333333333334,
+        "cout": 0.15000000000000002,
+        "S": 0.42666666666666664,
+        "P": 0.42666666666666664,
+        "R": 0.4,
+        "C": 0.15000000000000002,
+        "Q": 1.103333,
+        "decision": "REJETER",
+        "drapeaux": [
+          "veto_attaquant"
+        ]
+      },
+      {
+        "niveau": "2",
+        "periode": 5,
+        "succes_attaquant": 0.75,
+        "cout": 0.030000000000000006,
+        "S": 0.25,
+        "P": 0.25,
+        "R": 0.4,
+        "C": 0.030000000000000006,
+        "Q": 0.87,
+        "decision": "REJETER",
+        "drapeaux": [
+          "veto_attaquant"
+        ]
+      },
+      {
+        "niveau": "3",
+        "periode": 1,
+        "succes_attaquant": 0.36,
+        "cout": 0.17,
+        "S": 0.64,
+        "P": 0.64,
+        "R": 0.6,
+        "C": 0.17,
+        "Q": 1.71,
+        "decision": "REJETER",
+        "drapeaux": [
+          "veto_attaquant"
+        ]
+      },
+      {
+        "niveau": "3",
+        "periode": 5,
+        "succes_attaquant": 0.6766666666666666,
+        "cout": 0.034,
+        "S": 0.32333333333333336,
+        "P": 0.32333333333333336,
+        "R": 0.6,
+        "C": 0.034,
+        "Q": 1.212667,
+        "decision": "REJETER",
+        "drapeaux": [
+          "veto_attaquant"
+        ]
+      },
+      {
+        "niveau": "4",
+        "periode": 1,
+        "succes_attaquant": 0.19333333333333333,
+        "cout": 0.22,
+        "S": 0.8066666666666666,
+        "P": 0.8066666666666666,
+        "R": 0.8,
+        "C": 0.22,
+        "Q": 2.193333,
+        "decision": "REJETER",
+        "drapeaux": [
+          "veto_attaquant"
+        ]
+      },
+      {
+        "niveau": "4",
+        "periode": 5,
+        "succes_attaquant": 0.49333333333333335,
+        "cout": 0.044,
+        "S": 0.5066666666666666,
+        "P": 0.5066666666666667,
+        "R": 0.8,
+        "C": 0.044,
+        "Q": 1.769333,
+        "decision": "REJETER",
+        "drapeaux": [
+          "veto_attaquant"
+        ]
+      },
+      {
+        "niveau": "5",
+        "periode": 1,
+        "succes_attaquant": 0.0,
+        "cout": 0.42000000000000004,
+        "S": 1.0,
+        "P": 0.999,
+        "R": 1.0,
+        "C": 0.42000000000000004,
+        "Q": 2.579,
+        "decision": "ACCEPTER",
+        "drapeaux": []
+      },
+      {
+        "niveau": "5",
+        "periode": 5,
+        "succes_attaquant": 0.36333333333333334,
+        "cout": 0.084,
+        "S": 0.6366666666666667,
+        "P": 0.6366666666666667,
+        "R": 1.0,
+        "C": 0.084,
+        "Q": 2.189333,
+        "decision": "REJETER",
+        "drapeaux": [
+          "veto_attaquant"
+        ]
+      },
+      {
+        "niveau": "Ω",
+        "periode": 1,
+        "succes_attaquant": 0.0,
+        "cout": 0.6300000000000001,
+        "S": 1.0,
+        "P": 0.999,
+        "R": 1.0,
+        "C": 0.6300000000000001,
+        "Q": 2.369,
+        "decision": "ACCEPTER",
+        "drapeaux": []
+      }
+    ],
+    "meilleur_Q": {
+      "niveau": "5",
+      "periode": 1,
+      "succes_attaquant": 0.0,
+      "cout": 0.42000000000000004,
+      "S": 1.0,
+      "P": 0.999,
+      "R": 1.0,
+      "C": 0.42000000000000004,
+      "Q": 2.579,
+      "decision": "ACCEPTER",
+      "drapeaux": []
+    },
+    "criteres": [
+      {
+        "critere": "niveau 0 : l'attaquant réussit toujours, veto REJETER",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "critere": "rotation complète, période 1 ≤ fenêtre : l'attaquant échoue",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "critere": "période 5 > fenêtre 3 : l'attaquant réussit, veto",
+        "ok": true,
+        "detail": "succès 0.36"
+      },
+      {
+        "critere": "rotation partielle contournée : l'attaquant vise une surface fixe",
+        "ok": true,
+        "detail": "niveau 1 : 0.85, niveau 2 : 0.57, niveau 3 : 0.36, niveau 4 : 0.19"
+      },
+      {
+        "critere": "Ω le plus sûr et le plus cher",
+        "ok": true,
+        "detail": "coût 0.63"
+      }
+    ]
+  },
+  "limites": [
+    "Attaquant modélisé : il capture un secret et a besoin de 3 périodes ; pas d'attaque adaptative.",
+    "Le blueprint annonce le niveau 1 comme meilleur Q ; ici, toute rotation partielle est contournée par un attaquant qui vise une surface fixe. Les deux modèles d'attaquant diffèrent.",
+    "Coûts de rotation déclarés à la main."
+  ],
+  "execution": {
+    "genere_le": "2026-11-11T12:11:35Z",
+    "commande": "python3 /home/user/automatic-system/plateforme_omega/mtd.py",
+    "python": "3.13.18",
+    "plateforme": "Linux-6.18.44-fc-v378-x86_64-with-glibc2.39",
+    "commit": "9f0b7d5bc4a231a7c81e742368bb06757f022ad4",
+    "arbre_modifie": true
+  }
+}

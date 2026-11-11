@@ -1,0 +1,76 @@
+{
+  "format": 1,
+  "module": "prng",
+  "phase": 5,
+  "etiquette": "VÉRIFIÉ",
+  "verdict": "OK",
+  "graine": 7,
+  "config": {},
+  "mesures": {
+    "compilation": "g++ -std=c++17 -O2 -Wall -Wextra -Werror -pedantic",
+    "avertissements": "",
+    "n": 200000,
+    "splitmix_reference": true,
+    "accord_python_bits": true,
+    "deterministe": true,
+    "graines_distinctes": true,
+    "moyenne": 0.4998836635740715,
+    "variance": 0.08333155982993921,
+    "chi2_100_classes": 101.84300000000002,
+    "R_autocorrelation_rang_1": 0.005312449585744567,
+    "criteres": [
+      {
+        "critere": "compile sans aucun avertissement (-Wall -Wextra -Werror -pedantic)",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "critere": "SplitMix64 : vecteur de référence publié (graine 0)",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "critere": "xoshiro256** : accord au bit près avec l'implémentation Python (2000 tirages)",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "critere": "déterministe, et deux graines donnent deux suites",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "critere": "moyenne à 4 σ de 1/2",
+        "ok": true,
+        "detail": "0.49988"
+      },
+      {
+        "critere": "variance proche de 1/12",
+        "ok": true,
+        "detail": "0.08333"
+      },
+      {
+        "critere": "χ² à 99 degrés de liberté sous le seuil 0,001 (148,2)",
+        "ok": true,
+        "detail": "101.8"
+      },
+      {
+        "critere": "autocorrélation de rang 1 à 4 σ de 0",
+        "ok": true,
+        "detail": "R = 0.00531"
+      }
+    ]
+  },
+  "limites": [
+    "Non cryptographique : ne jamais l'utiliser pour une clé, un jeton ou un sel.",
+    "Batterie statistique élémentaire, pas TestU01 ni PractRand."
+  ],
+  "execution": {
+    "genere_le": "2026-11-11T12:11:32Z",
+    "commande": "python3 /home/user/automatic-system/plateforme_omega/prng.py",
+    "python": "3.13.18",
+    "plateforme": "Linux-6.18.44-fc-v378-x86_64-with-glibc2.39",
+    "commit": "9f0b7d5bc4a231a7c81e742368bb06757f022ad4",
+    "arbre_modifie": true
+  }
+}

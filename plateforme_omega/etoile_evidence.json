@@ -1,0 +1,67 @@
+{
+  "format": 1,
+  "module": "etoile",
+  "phase": 5,
+  "etiquette": "DÉMONTRÉ",
+  "verdict": "OK",
+  "graine": 7,
+  "config": {},
+  "mesures": {
+    "erreurs_axiomes": {
+      "involutive": 0.0,
+      "antimultiplicative": 0.0,
+      "antilineaire": 0.0,
+      "additive": 0.0,
+      "identite_C*": 7.57779415801657e-16
+    },
+    "dft8_unitaire": 7.062098392711005e-16,
+    "parseval": 0.0,
+    "projection": 2.7755575615628914e-16,
+    "spectre_conserve": 5.329070518200751e-15,
+    "commutateur_verdict_sceau": 1.7388815902832042,
+    "criteres": [
+      {
+        "critere": "axiomes de *-algèbre (involutive, antimultiplicative, antilinéaire, additive)",
+        "ok": true,
+        "detail": "erreur max 7.58e-16"
+      },
+      {
+        "critere": "identité C* : ‖A*A‖ = ‖A‖²",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "critere": "DFT-8 unitaire et Parseval",
+        "ok": true,
+        "detail": "7.06e-16 / 0.00e+00"
+      },
+      {
+        "critere": "verdict = projection (P² = P = P*)",
+        "ok": true,
+        "detail": "2.78e-16"
+      },
+      {
+        "critere": "sceau = conjugaison unitaire, spectre conservé",
+        "ok": true,
+        "detail": "5.33e-15"
+      },
+      {
+        "critere": "sceller puis vérifier ≠ vérifier puis sceller",
+        "ok": true,
+        "detail": "‖PU − UP‖ = 1.739"
+      }
+    ]
+  },
+  "limites": [
+    "Algèbre vérifiée numériquement en double précision, pas prouvée formellement.",
+    "Application à HERMÈS [SPÉCIFIÉE] : aucune décision réelle n'en dépend."
+  ],
+  "execution": {
+    "genere_le": "2026-11-11T12:11:40Z",
+    "commande": "python3 /home/user/automatic-system/plateforme_omega/etoile.py",
+    "python": "3.13.18",
+    "plateforme": "Linux-6.18.44-fc-v378-x86_64-with-glibc2.39",
+    "commit": "9f0b7d5bc4a231a7c81e742368bb06757f022ad4",
+    "arbre_modifie": true
+  }
+}

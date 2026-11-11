@@ -78,6 +78,13 @@ def executer_borne(argv, cwd) -> tuple[int, bytes, bool]:
             if total > SORTIE_MAX:
                 tronque = True
                 break
+    if not (tronque or delai):
+        # Fin de fichier atteinte : le processus se termine. Sous charge, il peut avoir fermé sa
+        # sortie sans être encore sorti ; on l'attend dans le délai restant au lieu de le tuer.
+        try:
+            p.wait(timeout=max(0.0, fin - time.monotonic()))
+        except subprocess.TimeoutExpired:
+            delai = True
     if p.poll() is None:
         os.killpg(p.pid, signal.SIGKILL)
     p.wait()

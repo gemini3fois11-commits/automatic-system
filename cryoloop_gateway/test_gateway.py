@@ -8,7 +8,7 @@ import threading
 import unittest
 
 from cryoloop_gateway import keygen
-from cryoloop_gateway.gateway import DOSSIER, construire, signer_ticket
+from cryoloop_gateway.gateway import DOSSIER, construire
 from cryoloop_gateway.ticket import fabriquer
 from socle_preuve import ed25519
 from socle_preuve.gamma import ChaineRompue, lire_blocs

@@ -1,0 +1,54 @@
+{
+  "format": 1,
+  "module": "rubik",
+  "phase": 5,
+  "etiquette": "VÉRIFIÉ",
+  "verdict": "OK",
+  "graine": 7,
+  "config": {},
+  "mesures": {
+    "coups": 200,
+    "facettes_deplacees": 48,
+    "resolu_par_inversion": true,
+    "ordres": {
+      "R": 4,
+      "R U R' U'": 6,
+      "R U": 105
+    },
+    "centres_fixes": true,
+    "reprise": 1.0,
+    "criteres": [
+      {
+        "critere": "chaque quart de tour est d'ordre 4",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "critere": "R U R' U' d'ordre 6 et R U d'ordre 105 (valeurs connues du cube)",
+        "ok": true,
+        "detail": "{'R': 4, \"R U R' U'\": 6, 'R U': 105}"
+      },
+      {
+        "critere": "les centres ne bougent jamais",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "critere": "mélange de 200 coups résolu par inversion",
+        "ok": true,
+        "detail": "48 facettes déplacées par le mélange"
+      }
+    ]
+  },
+  "limites": [
+    "Démontre la reprise par inversion d'une séquence connue, pas la résolution d'un état inconnu."
+  ],
+  "execution": {
+    "genere_le": "2026-11-11T12:11:39Z",
+    "commande": "python3 /home/user/automatic-system/plateforme_omega/rubik.py",
+    "python": "3.13.18",
+    "plateforme": "Linux-6.18.44-fc-v378-x86_64-with-glibc2.39",
+    "commit": "9f0b7d5bc4a231a7c81e742368bb06757f022ad4",
+    "arbre_modifie": true
+  }
+}

@@ -6,7 +6,7 @@ import unittest
 import numpy as np
 
 from omega_hermes import decouplage
-from omega_hermes.alice import COVERT, DRAFT, LABELS, MIX_200, UNKNOWN, Alice
+from omega_hermes.alice import LABELS, MIX_200, Alice
 from omega_hermes.twin import CLASSES, MODALITES, N, Twin
 
 
