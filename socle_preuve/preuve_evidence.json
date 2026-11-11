@@ -21,14 +21,14 @@
         "scenario": "chaîne intacte, vérification locale",
         "exit_attendu": 0,
         "exit_obtenu": 0,
-        "sortie": "INTÈGRE — 12 bloc(s), tête 6c5ef45b88b6e93c…",
+        "sortie": "INTÈGRE — 12 bloc(s), tête db8de1b088e1a25d…",
         "ok": true
       },
       {
         "scenario": "chaîne intacte, témoin HMAC",
         "exit_attendu": 0,
         "exit_obtenu": 0,
-        "sortie": "INTÈGRE — 12 bloc(s), tête 6c5ef45b88b6e93c… — témoin en accord sur 12 bloc(s)",
+        "sortie": "INTÈGRE — 12 bloc(s), tête db8de1b088e1a25d… — témoin en accord sur 12 bloc(s)",
         "ok": true
       },
       {
@@ -42,7 +42,7 @@
         "scenario": "réécriture du bloc 4 avec recalcul, vérification locale seule",
         "exit_attendu": 0,
         "exit_obtenu": 0,
-        "sortie": "INTÈGRE — 12 bloc(s), tête deaea1acbc469ec7…",
+        "sortie": "INTÈGRE — 12 bloc(s), tête 19075dbb1c8a2947…",
         "ok": true
       },
       {
@@ -70,7 +70,7 @@
         "scenario": "chaîne intacte, témoin Ed25519 (clé publique épinglée)",
         "exit_attendu": 0,
         "exit_obtenu": 0,
-        "sortie": "INTÈGRE — 12 bloc(s), tête e19b807c12d0c59c… — témoin en accord sur 12 bloc(s)",
+        "sortie": "INTÈGRE — 12 bloc(s), tête fff69b6358ecd3d7… — témoin en accord sur 12 bloc(s)",
         "ok": true
       },
       {
@@ -84,7 +84,7 @@
         "scenario": "secret HMAC en mode 644",
         "exit_attendu": 2,
         "exit_obtenu": 2,
-        "sortie": "erreur : secret_permissions : /tmp/tmp6tn2sh09/temoin.secret doit être en mode 600 (actuel 644)",
+        "sortie": "erreur : secret_permissions : /tmp/tmpsja_a7u7/temoin.secret doit être en mode 600 (actuel 644)",
         "ok": true
       }
     ],
@@ -102,8 +102,8 @@
     "ed25519_ms": {
       "iterations": 200,
       "plancher_ms": 7.2e-05,
-      "signer_mediane": 3.0656895,
-      "verifier_mediane": 3.2155720000000003
+      "signer_mediane": 3.108285,
+      "verifier_mediane": 3.2271255
     }
   },
   "limites": [
@@ -114,10 +114,11 @@
     "Durées mesurées sur la machine indiquée dans execution.plateforme."
   ],
   "execution": {
-    "genere_le": "2026-11-11T11:08:47Z",
+    "genere_le": "2026-11-11T11:09:15Z",
     "commande": "python3 /home/user/automatic-system/socle_preuve/__main__.py demo",
     "python": "3.13.18",
     "plateforme": "Linux-6.18.44-fc-v378-x86_64-with-glibc2.39",
-    "commit": "70950490c158b2a3ea90fef19814a3d1a0af0c63"
+    "commit": "9c97ba75ec0882945ba65ff4741e515f1af73d08",
+    "arbre_modifie": false
   }
 }
