@@ -295,3 +295,63 @@ fraction : il ajuste le point de polarisation du transistor, aligne ses structur
 les lignes de cache de 64 octets, réduit la latence d'interruption et borne ses récursions.
 C'est à cette frontière que le logiciel cesse d'être une fiction mathématique pour devenir
 une mécanique physique déterministe.
+
+## V. Les sept formules limites et l'Auto-Suture
+
+Formules transmises telles quelles ; les remarques qui suivent chacune disent ce qu'elle
+vaut une fois lue littéralement.
+
+### 1. Stabilités par pilier
+
+$$S_{\mathcal{A}} = \oint_{\partial \mathcal{A}} \frac{\mathcal{I}_{\text{asm}}(t)}{\nabla \cdot \vec{E}} \, dt
+\qquad
+S_{\mathcal{M}} = \iint_{\Sigma} \left( \mathbf{Ptr}_{\text{base}} + \sigma \right) \cdot e^{-\Delta t} \, d\Sigma
+\qquad
+S_{\mathcal{D}} = \lim_{\Delta t \to 0} \frac{\Delta \text{IRQ}}{\mathcal{L}_{\text{res}}} = 0$$
+
+- $S_{\mathcal{A}}$ : $\nabla\cdot\vec{E} = \rho/\varepsilon_0$ s'annule hors des charges ;
+  l'intégrande n'est donc pas défini partout. À lire comme une image (instructions
+  rapportées à la densité de charge commutée), pas comme une quantité calculable.
+- $S_{\mathcal{M}}$ : une adresse pondérée par une décroissance temporelle — l'idée
+  mesurable sous-jacente est la **localité temporelle** des accès (un cache).
+- $S_{\mathcal{D}}$ : dit qu'aucune interruption n'arrive dans un intervalle nul. Vrai, mais
+  la grandeur utile est la latence d'interruption *bornée*, qui ne tend pas vers zéro.
+
+### 2. Efficacité limite et projection totale
+
+$$S_{\Omega} = \lim_{\Omega \to 0} \left( \frac{\Phi}{\alpha \mathcal{A} + \beta \mathcal{M} + \gamma \mathcal{D}} \right)
+\qquad
+\mathcal{I}_{\text{total}} : \Phi \longrightarrow \Omega^{-1}$$
+
+Si $\Omega$ désigne le dénominateur $\alpha\mathcal{A}+\beta\mathcal{M}+\gamma\mathcal{D}$,
+la limite **diverge** pour $\Phi \neq 0$ : c'est l'énoncé « efficacité infinie à coût
+matériel nul », un horizon et non un état atteignable (Landauer, section I, l'interdit).
+La forme finie est $S = \Phi/\Omega_{\text{infra}}$ → `rinv.efficiency`.
+
+### 3. Fonction de partition
+
+$$\mathcal{Z}_{\Omega} = \sum_{n=0}^{\infty} \frac{1}{n!} \left( -\frac{\partial \mathcal{H}}{\partial \Delta} \right)^n = 1.0000$$
+
+La série est celle de l'exponentielle : $\mathcal{Z}_{\Omega} = \exp(-\partial\mathcal{H}/\partial\Delta)$.
+Elle vaut 1 **si et seulement si** $\partial\mathcal{H}/\partial\Delta = 0$ : l'égalité est
+donc une *condition de stationnarité* du substrat vis-à-vis de $\Delta$, pas une identité.
+
+### 4. L'Auto-Suture
+
+Un superviseur (SUP) et $N$ processus $P_1 \dots P_N$ échangent un signal de vie en mémoire
+volatile. La cohésion est la fraction de nœuds vivants ($7/8 = 87{,}5\,\%$ quand un nœud
+tombe) ; l'opérateur d'Auto-Suture élimine le nœud muet, purge son battement et relance un
+remplaçant.
+
+→ `rinv.Supervisor`, `rinv.beat`.
+
+### 5. Ce que ce dépôt démontre, et ce qu'il ne démontre pas
+
+Suivant le principe de la spécification S-CPU — *Revendication ≠ Spécification ≠
+Implémentation ≠ Test ≠ Validation* :
+
+| Élément | Niveau atteint ici |
+|---|---|
+| Invariant Gate I₁–I₅, registre Γ, quarantaine d'agents, Void Monitor, trame CRC, S_g⁻¹, TCTC, Auto-Suture | **Implémenté et testé** (`python3 -m unittest`) |
+| Preuve Lean 4 de la machine OCC, signatures ECDSA P-256, DTN BPv7, pont audio Dessa, enclave `mlockall` | Spécifié ailleurs ; **absent de ce dépôt** |
+| Espace de phase 8D, noyau de Seeley-DeWitt, BRST, formules V.1–V.3 | **Revendication** : aucun artefact vérifiable ici |

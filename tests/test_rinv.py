@@ -2,10 +2,11 @@ import math
 import os
 import sys
 import tempfile
+import time
 import unittest
 
 from rinv import (ChannelState, Event, FrameError, Invariant, InvariantGate, Ledger,
-                  VoidMonitor, decode, diagnose, efficiency, encode, infra_load,
+                  Supervisor, VoidMonitor, beat, decode, diagnose, efficiency, encode, infra_load,
                   inverse_sum, sign, torus)
 
 
@@ -155,6 +156,16 @@ class GateTest(unittest.TestCase):
         self.assertRejected(self.event(ledger_id="Γ'"), Invariant.I1_IDENTITY)
         self.assertRejected(self.event(agent_id="mallory"), Invariant.I1_IDENTITY)
 
+    def test_unauthorized_actor_is_quarantined(self):
+        self.assertRejected(self.event(agent_id="mallory"), Invariant.I1_IDENTITY)
+        self.assertIn("mallory", self.gate.quarantined)
+
+    def test_quarantined_agent_is_refused_until_released(self):
+        self.gate.quarantine("alpha")
+        self.assertRejected(self.event(), Invariant.I1_IDENTITY)
+        self.gate.release("alpha")
+        self.assertTrue(self.gate.admit(self.event()).committed)
+
     def test_i2_tampered_payload(self):
         self.assertRejected(self.event(signature_hash=sign(b"autre")), Invariant.I2_PROVENANCE)
 
@@ -302,6 +313,104 @@ class VoidMonitorTest(unittest.TestCase):
         gate.admit(Event("e", "alpha", "Γ", b"x", "bad", ledger.state_hash))
         self.assertIs(self.mon.state(p), ChannelState.SOFT_QUARANTINE)
         self.assertEqual(len(ledger), 0)
+
+
+class FakeHandle:
+    def __init__(self):
+        self.code, self.killed = None, False
+
+    def poll(self):
+        return self.code
+
+    def kill(self):
+        self.killed, self.code = True, -9
+
+    def wait(self, timeout=None):
+        return self.code
+
+
+class SutureTest(unittest.TestCase):
+    MS = 1_000_000
+
+    def setUp(self):
+        self.now = 0
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.spawned = []
+
+        def spawn(name, hb):
+            self.spawned.append(name)
+            return FakeHandle()
+
+        self.names = [f"P{k}" for k in range(1, 9)]
+        self.sup = Supervisor(self.names, spawn, directory=self.tmp.name,
+                              timeout_ns=100 * self.MS, clock=lambda: self.now)
+
+    def beat_all(self, skip=()):
+        for n in self.names:
+            if n not in skip:
+                beat(self.sup.heartbeat_path(n), self.now)
+
+    def test_full_cohesion(self):
+        self.now = 50 * self.MS
+        self.beat_all()
+        self.assertEqual(self.sup.cohesion(), 1.0)
+        self.assertEqual(self.sup.suture(), [])
+
+    def test_silent_node_drops_cohesion_then_is_sutured(self):
+        self.now = 50 * self.MS
+        self.beat_all()
+        self.now = 120 * self.MS
+        self.beat_all(skip={"P4"})
+        self.now = 150 * self.MS  # dernier battement de P4 : il y a 100 ms
+        self.assertEqual(self.sup.cohesion(), 0.875)
+        old = self.sup._nodes["P4"].handle
+        self.assertEqual(self.sup.suture(), ["P4"])
+        self.assertTrue(old.killed)
+        self.assertEqual(self.sup.generation("P4"), 1)
+        self.assertEqual(self.sup.generation("P3"), 0)
+        self.assertFalse(os.path.exists(self.sup.heartbeat_path("P4")))
+        self.assertEqual(self.sup.cohesion(), 1.0)  # délai de grâce du remplaçant
+        self.assertEqual(self.spawned.count("P4"), 2)
+
+    def test_exited_node_detected_without_waiting_for_timeout(self):
+        self.beat_all()
+        self.sup._nodes["P7"].handle.code = 1
+        self.assertEqual(self.sup.cohesion(), 0.875)
+        self.assertEqual(self.sup.suture(), ["P7"])
+
+    def test_replacement_that_never_beats_is_sutured_again(self):
+        self.sup._nodes["P1"].handle.code = 1
+        self.sup.suture()
+        self.now = 100 * self.MS
+        self.beat_all(skip={"P1"})
+        self.assertEqual(self.sup.suture(), ["P1"])
+        self.assertEqual(self.sup.generation("P1"), 2)
+
+    def test_stale_heartbeat_file_does_not_predate_birth(self):
+        beat(self.sup.heartbeat_path("P2"), -10**12)
+        self.assertTrue(self.sup.alive("P2"))
+
+    def test_real_processes(self):
+        import subprocess
+        worker = ("import sys,time;sys.path.insert(0,%r);from rinv import beat\n"
+                  "while True: beat(sys.argv[1]); time.sleep(0.02)" % os.getcwd())
+        spawn = lambda name, hb: subprocess.Popen([sys.executable, "-c", worker, hb])
+        sup = Supervisor(["A", "B", "C", "D"], spawn, directory=self.tmp.name,
+                         timeout_ns=5_000 * self.MS)
+        self.addCleanup(sup.shutdown)
+        self.assertEqual(sup.cohesion(), 1.0)
+        victim = sup._nodes["C"].handle
+        victim.kill()
+        victim.wait()
+        self.assertEqual(sup.cohesion(), 0.75)
+        self.assertEqual(sup.suture(), ["C"])
+        self.assertEqual(sup.cohesion(), 1.0)
+        self.assertNotEqual(sup._nodes["C"].handle.pid, victim.pid)
+        deadline = time.monotonic() + 10
+        while not os.path.exists(sup.heartbeat_path("C")):
+            self.assertLess(time.monotonic(), deadline, "le remplaçant n'a jamais battu")
+            time.sleep(0.01)
 
 
 if __name__ == "__main__":

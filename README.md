@@ -8,10 +8,11 @@
 
 | Module | Rôle |
 |---|---|
-| `rinv.gate` | Invariant Gate I₁–I₅ et registre canonique Γ append-only |
+| `rinv.gate` | Invariant Gate I₁–I₅, quarantaine d'agents et registre canonique Γ append-only |
 | `rinv.void_monitor` | Quarantaine douce et purge à 15 s des tubes volatils |
 | `rinv.frame` | Trame `FLAG \| LEN \| PAYLOAD \| CRC-16` |
 | `rinv.stability` | Ω_infra, S = Φ/Ω_infra, somme des inverses S_g⁻¹ |
+| `rinv.suture` | Auto-Suture : superviseur, battements, cohésion, relance |
 | `rinv.tctc` | Repli torique 888 des récursions terminales |
 
 ```sh

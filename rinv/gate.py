@@ -142,11 +142,21 @@ class InvariantGate:
         self.substrate = substrate or Substrate()
         self.on_reject = on_reject
         self._last_ns: int | None = None
+        self.quarantined: set[str] = set()
+
+    def quarantine(self, agent_id: str) -> None:
+        self.quarantined.add(agent_id)
+
+    def release(self, agent_id: str) -> None:
+        self.quarantined.discard(agent_id)
 
     def _check(self, e: Event) -> Verdict:
         if e.ledger_id != self.ledger.ledger_id:
             return Verdict(False, False, Invariant.I1_IDENTITY, "identité de registre étrangère")
+        if e.agent_id in self.quarantined:
+            return Verdict(False, False, Invariant.I1_IDENTITY, f"agent en quarantaine : {e.agent_id}")
         if e.agent_id not in self.authorized:
+            self.quarantined.add(e.agent_id)
             return Verdict(False, False, Invariant.I1_IDENTITY, f"agent non autorisé : {e.agent_id}")
 
         if not hmac.compare_digest(sign(e.payload, self.key), e.signature_hash):
