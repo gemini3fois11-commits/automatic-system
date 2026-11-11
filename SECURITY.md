@@ -12,6 +12,8 @@ pas l'état visé par le blueprint.
 | `socle_preuve/` — témoin HMAC / Ed25519 | Une réécriture *avec* recalcul de la chaîne est détectée bloc par bloc, tant que l'attaquant n'a pas le secret du témoin | idem |
 | `socle_preuve/ed25519.py` | Conforme aux vecteurs RFC 8032 testés | idem |
 | `rinv/` — Invariant Gate | Chaque verdict, refus compris, est inscrit dans une chaîne Γ témoignée ; l'OCC est tranché sous le verrou d'écriture | voir `rinv/systeme_evidence.json` |
+| `cryoloop/` — validateur | Lecture seule : ne committe jamais Γ, gèle l'archive et détecte toute modification pendant le cycle ; provenance par manifeste signé Ed25519 | voir `cryoloop/cryoloop_evidence.json` |
+| `omega_hermes/` | Banc HERMÈS sur données synthétiques ; découplage du réel vérifié statiquement | voir `omega_hermes/hermes_evidence.json` |
 | `rinv/` — trame | CRC-16/X-25 : détecte toute erreur d'un bit et toute rafale ≤ 16 bits ; **aucune** authentification | tests `tests/` |
 
 ## Ce que le dépôt ne protège pas

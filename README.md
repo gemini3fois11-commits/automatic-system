@@ -45,6 +45,8 @@ Version : voir [`VERSION`](VERSION). Ce qui a été livré, phase par phase : [`
 python3 -m unittest                      # toutes les suites
 python3 -m socle_preuve demo             # démonstration du témoin, écrit l'évidence
 python3 -m rinv.systeme                  # tout le système de bout en bout, écrit l'évidence
+python3 -m omega_hermes.loop             # phase 2 : boucle HERMÈS 200 × 5, écrit l'évidence
+python3 -m cryoloop banc                 # validateur CRYOLOOP Ω∞ : banc + LOOP 001, écrit l'évidence
 python3 -m outils.verifier_phase0        # contrôle du squelette
 python3 -m outils.changelog              # régénère CHANGELOG.md
 ```
@@ -56,4 +58,6 @@ python3 -m outils.changelog              # régénère CHANGELOG.md
 | 0 | Squelette et conventions | voir `outils/phase0_evidence.json` |
 | 1 | Socle de preuve : chaîne Γ, témoin, Ed25519 | voir `socle_preuve/preuve_evidence.json` |
 | 1+ | `rinv` branché sur le socle : refus prouvés de bout en bout | voir `rinv/systeme_evidence.json` |
-| 2 à 7 | HERMÈS, portes, essaim, plateforme, connaissance, présentation | `[SPÉCIFIÉ]` |
+| 2 | HERMÈS cœur : twin, alice, eyes, bob, hermes, loop | voir `omega_hermes/hermes_evidence.json` |
+| 5 (avancé) | Validateur CRYOLOOP Ω∞ ([spécification](cryoloop/SPEC.md)) | voir `cryoloop/cryoloop_evidence.json` |
+| 3 à 7 | Portes, essaim, plateforme, connaissance, présentation | `[SPÉCIFIÉ]` |

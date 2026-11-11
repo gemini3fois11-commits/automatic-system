@@ -1,0 +1,440 @@
+{
+  "format": 1,
+  "module": "cryoloop",
+  "phase": 5,
+  "etiquette": "SIMULÉ",
+  "verdict": "OK",
+  "graine": 7,
+  "config": {
+    "format": "cryoloop-archive-v0",
+    "perimetre": "DON-DC01",
+    "epoques": [
+      18,
+      100
+    ],
+    "evenements": 21,
+    "dimension_ekf": 64,
+    "gravite": "QUARANTINE > REJECT > PENDING > ACCEPT"
+  },
+  "mesures": {
+    "scenarios": [
+      {
+        "scenario": "nominal",
+        "decision_attendue": "ACCEPT",
+        "decision": "ACCEPT",
+        "code_attendu": null,
+        "codes": [],
+        "isolees": {},
+        "resolutions": [],
+        "evenements_chaines": 21,
+        "candidat": true,
+        "invariants": {
+          "CL-I1": true,
+          "CL-I2": true,
+          "CL-I3": true,
+          "CL-I4": true,
+          "CL-I5": true
+        },
+        "ok": true
+      },
+      {
+        "scenario": "archive absente",
+        "decision_attendue": "PENDING",
+        "decision": "PENDING",
+        "code_attendu": "entrees_absentes",
+        "codes": [
+          "entrees_absentes"
+        ],
+        "isolees": {},
+        "resolutions": [],
+        "evenements_chaines": 0,
+        "candidat": false,
+        "invariants": {
+          "CL-I1": true,
+          "CL-I2": true,
+          "CL-I3": true,
+          "CL-I4": true,
+          "CL-I5": true
+        },
+        "ok": true
+      },
+      {
+        "scenario": "manifeste non signé",
+        "decision_attendue": "PENDING",
+        "decision": "PENDING",
+        "code_attendu": "provenance_non_authentifiee",
+        "codes": [
+          "provenance_non_authentifiee"
+        ],
+        "isolees": {},
+        "resolutions": [],
+        "evenements_chaines": 21,
+        "candidat": false,
+        "invariants": {
+          "CL-I1": true,
+          "CL-I2": true,
+          "CL-I3": true,
+          "CL-I4": true,
+          "CL-I5": true
+        },
+        "ok": true
+      },
+      {
+        "scenario": "manifeste signé par une autre clé",
+        "decision_attendue": "QUARANTINE",
+        "decision": "QUARANTINE",
+        "code_attendu": "signature_manifeste_invalide",
+        "codes": [
+          "signature_manifeste_invalide"
+        ],
+        "isolees": {},
+        "resolutions": [],
+        "evenements_chaines": 21,
+        "candidat": false,
+        "invariants": {
+          "CL-I1": true,
+          "CL-I2": true,
+          "CL-I3": true,
+          "CL-I4": true,
+          "CL-I5": true
+        },
+        "ok": true
+      },
+      {
+        "scenario": "fichier altéré après scellement (P2)",
+        "decision_attendue": "QUARANTINE",
+        "decision": "QUARANTINE",
+        "code_attendu": "hash_divergent",
+        "codes": [
+          "hash_divergent"
+        ],
+        "isolees": {
+          "mesures/E05.json": "hash_divergent"
+        },
+        "resolutions": [],
+        "evenements_chaines": 21,
+        "candidat": false,
+        "invariants": {
+          "CL-I1": true,
+          "CL-I2": true,
+          "CL-I3": true,
+          "CL-I4": true,
+          "CL-I5": true
+        },
+        "ok": true
+      },
+      {
+        "scenario": "maillon rompu, pourtant déclaré (P3)",
+        "decision_attendue": "QUARANTINE",
+        "decision": "QUARANTINE",
+        "code_attendu": "chaine_rompue",
+        "codes": [
+          "chaine_rompue",
+          "continuite_incomplete",
+          "nombre_evenements"
+        ],
+        "isolees": {},
+        "resolutions": [],
+        "evenements_chaines": 9,
+        "candidat": false,
+        "invariants": {
+          "CL-I1": true,
+          "CL-I2": true,
+          "CL-I3": true,
+          "CL-I4": true,
+          "CL-I5": true
+        },
+        "ok": true
+      },
+      {
+        "scenario": "contradiction S50 résolue par provenance (P0)",
+        "decision_attendue": "ACCEPT",
+        "decision": "ACCEPT",
+        "code_attendu": null,
+        "codes": [],
+        "isolees": {
+          "evenements/E09b.json": "branche_non_declaree"
+        },
+        "resolutions": [
+          "contradiction S50 résolue par provenance : evenements/E09.json retenu"
+        ],
+        "evenements_chaines": 21,
+        "candidat": true,
+        "invariants": {
+          "CL-I1": true,
+          "CL-I2": true,
+          "CL-I3": true,
+          "CL-I4": true,
+          "CL-I5": true
+        },
+        "ok": true
+      },
+      {
+        "scenario": "contradiction S50 déclarée deux fois (P0)",
+        "decision_attendue": "PENDING",
+        "decision": "PENDING",
+        "code_attendu": "contradiction_non_resolue",
+        "codes": [
+          "contradiction_non_resolue"
+        ],
+        "isolees": {},
+        "resolutions": [],
+        "evenements_chaines": 8,
+        "candidat": false,
+        "invariants": {
+          "CL-I1": true,
+          "CL-I2": true,
+          "CL-I3": true,
+          "CL-I4": true,
+          "CL-I5": true
+        },
+        "ok": true
+      },
+      {
+        "scenario": "20 événements au lieu de 21 (P1)",
+        "decision_attendue": "PENDING",
+        "decision": "PENDING",
+        "code_attendu": "nombre_evenements",
+        "codes": [
+          "continuite_incomplete",
+          "nombre_evenements"
+        ],
+        "isolees": {},
+        "resolutions": [],
+        "evenements_chaines": 20,
+        "candidat": false,
+        "invariants": {
+          "CL-I1": true,
+          "CL-I2": true,
+          "CL-I3": true,
+          "CL-I4": true,
+          "CL-I5": true
+        },
+        "ok": true
+      },
+      {
+        "scenario": "EKF : P_post non positive (P4)",
+        "decision_attendue": "REJECT",
+        "decision": "REJECT",
+        "code_attendu": "ekf_invalide",
+        "codes": [
+          "ekf_invalide"
+        ],
+        "isolees": {},
+        "resolutions": [],
+        "evenements_chaines": 21,
+        "candidat": false,
+        "invariants": {
+          "CL-I1": true,
+          "CL-I2": true,
+          "CL-I3": true,
+          "CL-I4": true,
+          "CL-I5": true
+        },
+        "ok": true
+      },
+      {
+        "scenario": "EKF : recalcul divergent (P4)",
+        "decision_attendue": "REJECT",
+        "decision": "REJECT",
+        "code_attendu": "ekf_recalcul_divergent",
+        "codes": [
+          "ekf_recalcul_divergent"
+        ],
+        "isolees": {},
+        "resolutions": [],
+        "evenements_chaines": 21,
+        "candidat": false,
+        "invariants": {
+          "CL-I1": true,
+          "CL-I2": true,
+          "CL-I3": true,
+          "CL-I4": true,
+          "CL-I5": true
+        },
+        "ok": true
+      },
+      {
+        "scenario": "EKF : mise à jour absente (P4)",
+        "decision_attendue": "PENDING",
+        "decision": "PENDING",
+        "code_attendu": "ekf_non_recalculable",
+        "codes": [
+          "ekf_non_recalculable"
+        ],
+        "isolees": {},
+        "resolutions": [],
+        "evenements_chaines": 21,
+        "candidat": false,
+        "invariants": {
+          "CL-I1": true,
+          "CL-I2": true,
+          "CL-I3": true,
+          "CL-I4": true,
+          "CL-I5": true
+        },
+        "ok": true
+      },
+      {
+        "scenario": "mesures mémoire / thermique absentes (P5)",
+        "decision_attendue": "PENDING",
+        "decision": "PENDING",
+        "code_attendu": "mesures_absentes",
+        "codes": [
+          "mesures_absentes"
+        ],
+        "isolees": {},
+        "resolutions": [],
+        "evenements_chaines": 21,
+        "candidat": false,
+        "invariants": {
+          "CL-I1": true,
+          "CL-I2": true,
+          "CL-I3": true,
+          "CL-I4": true,
+          "CL-I5": true
+        },
+        "ok": true
+      },
+      {
+        "scenario": "expected_state_hash périmé (CL-I4)",
+        "decision_attendue": "REJECT",
+        "decision": "REJECT",
+        "code_attendu": "etat_perime",
+        "codes": [
+          "etat_perime"
+        ],
+        "isolees": {},
+        "resolutions": [],
+        "evenements_chaines": 21,
+        "candidat": false,
+        "invariants": {
+          "CL-I1": true,
+          "CL-I2": true,
+          "CL-I3": true,
+          "CL-I4": true,
+          "CL-I5": true
+        },
+        "ok": true
+      },
+      {
+        "scenario": "périmètre DON-DC02 au lieu de DON-DC01",
+        "decision_attendue": "REJECT",
+        "decision": "REJECT",
+        "code_attendu": "perimetre_different",
+        "codes": [
+          "perimetre_different"
+        ],
+        "isolees": {},
+        "resolutions": [],
+        "evenements_chaines": 21,
+        "candidat": false,
+        "invariants": {
+          "CL-I1": true,
+          "CL-I2": true,
+          "CL-I3": true,
+          "CL-I4": true,
+          "CL-I5": true
+        },
+        "ok": true
+      },
+      {
+        "scenario": "cumul : altération + état périmé",
+        "decision_attendue": "QUARANTINE",
+        "decision": "QUARANTINE",
+        "code_attendu": "hash_divergent",
+        "codes": [
+          "etat_perime",
+          "hash_divergent"
+        ],
+        "isolees": {
+          "mesures/E05.json": "hash_divergent"
+        },
+        "resolutions": [],
+        "evenements_chaines": 21,
+        "candidat": false,
+        "invariants": {
+          "CL-I1": true,
+          "CL-I2": true,
+          "CL-I3": true,
+          "CL-I4": true,
+          "CL-I5": true
+        },
+        "ok": true
+      },
+      {
+        "scenario": "lien symbolique dans l'archive",
+        "decision_attendue": "QUARANTINE",
+        "decision": "QUARANTINE",
+        "code_attendu": "lien_symbolique",
+        "codes": [
+          "lien_symbolique"
+        ],
+        "isolees": {
+          "mesures/lien": "lien_symbolique"
+        },
+        "resolutions": [],
+        "evenements_chaines": 21,
+        "candidat": false,
+        "invariants": {
+          "CL-I1": true,
+          "CL-I2": true,
+          "CL-I3": true,
+          "CL-I4": true,
+          "CL-I5": true
+        },
+        "ok": true
+      },
+      {
+        "scenario": "archive modifiée pendant le cycle",
+        "decision_attendue": "QUARANTINE",
+        "decision": "QUARANTINE",
+        "code_attendu": "entrees_modifiees",
+        "codes": [
+          "entrees_modifiees"
+        ],
+        "isolees": {},
+        "resolutions": [],
+        "evenements_chaines": 21,
+        "candidat": false,
+        "invariants": {
+          "CL-I1": true,
+          "CL-I2": true,
+          "CL-I3": true,
+          "CL-I4": true,
+          "CL-I5": true
+        },
+        "ok": true
+      }
+    ],
+    "reussis": 18,
+    "loop_001_reel": {
+      "archive": "cryoloop/archives/DON-DC01",
+      "decision": "PENDING",
+      "code": "entrees_absentes",
+      "commit_gamma": "interdit",
+      "statuts_declares": {
+        "Continuité S18–S100": "ACCEPT",
+        "Contradiction S50": "PENDING",
+        "Preuves cryptographiques": "PENDING",
+        "Validation EKF": "PENDING"
+      },
+      "statuts_mesures": "non établis : archives non fournies"
+    }
+  },
+  "limites": [
+    "Les archives du banc sont synthétiques ; elles exercent le validateur, elles ne disent rien des archives DON-DC01 réelles, qui n'ont pas été fournies.",
+    "Le format cryoloop-archive-v0 est une proposition : il devra être confronté aux vrais EKF_Matrix_State.json et journaux S50–S51.",
+    "La provenance repose sur un manifeste signé Ed25519 par une clé épinglée ; la clé du banc est publique par construction.",
+    "Les mesures mémoire / thermique sont contrôlées en présence et en forme, jamais interprétées : aucun seuil n'a été inventé.",
+    "P6 (OCC / SQLite WAL) n'est pas couvert ici : Γ est une chaîne JSONL du socle de preuve, dont l'OCC est testé dans socle_preuve et rinv."
+  ],
+  "execution": {
+    "genere_le": "2026-11-11T11:38:09Z",
+    "commande": "python3 /home/user/automatic-system/cryoloop/__main__.py banc",
+    "python": "3.13.18",
+    "plateforme": "Linux-6.18.44-fc-v378-x86_64-with-glibc2.39",
+    "commit": "6a1c2e86b7f1ea1a2f8e30d9ccaa53a8819a5bd1",
+    "arbre_modifie": true
+  }
+}
