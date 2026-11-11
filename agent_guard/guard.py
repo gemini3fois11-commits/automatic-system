@@ -215,8 +215,9 @@ def construire(port=PORT, *, allowlist=None, journal=None, temoin_secret=None,
     if temoin_secret:
         with open(temoin_secret, "rb") as fh:
             temoin = Temoin(chemin + ".temoin", ScelleurHMAC(fh.read()))
+    gardien = Gardien(hotes, Chaine(chemin, temoin=temoin), connecter)  # avant le socket
     serveur = Serveur(port, Gestion)
-    serveur.gardien = Gardien(hotes, Chaine(chemin, temoin=temoin), connecter)
+    serveur.gardien = gardien
     return serveur
 
 

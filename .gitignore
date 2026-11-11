@@ -4,3 +4,8 @@ __pycache__/
 *.secret
 *.cle
 *.jsonl.tmp
+agent_guard/guard_audit.jsonl*
+cryoloop_gateway/etat/
+terminal_auth/etat/
+terminal_auth/sandbox/
+runtime/etat/
