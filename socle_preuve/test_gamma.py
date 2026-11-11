@@ -6,8 +6,8 @@ import tempfile
 import threading
 import unittest
 
-from socle_preuve.gamma import (GENESE, Chaine, ChaineRompue, calculer_hash, lire_blocs,
-                                verifier_chaine)
+from socle_preuve.gamma import (GENESE, Chaine, ChaineRompue, TeteObsolete, calculer_hash,
+                                lire_blocs, verifier_chaine)
 
 
 class Base(unittest.TestCase):
@@ -166,6 +166,42 @@ class Falsifications(Base):
             prev = b["hash"]
         self.ecrire_lignes([json.dumps(b) for b in blocs])
         self.assertTrue(verifier_chaine(self.j).integre)
+
+
+class OCC(Base):
+    def test_si_tete_courante_ecrit(self):
+        ch = self.remplir(2)
+        tete = verifier_chaine(self.j).tete
+        self.assertEqual(ch.inscrire("evenement", "ACCEPTE", "invariants_ok", si_tete=tete)["seq"], 2)
+
+    def test_si_tete_perimee_refuse_sans_ecrire(self):
+        ch = self.remplir(2)
+        tete = verifier_chaine(self.j).tete
+        Chaine(self.j).inscrire("evenement", "ACCEPTE", "invariants_ok")  # un autre écrivain passe
+        with self.assertRaises(TeteObsolete) as ctx:
+            ch.inscrire("evenement", "ACCEPTE", "invariants_ok", si_tete=tete)
+        self.assertEqual(ctx.exception.attendue, tete)
+        self.assertEqual(verifier_chaine(self.j).blocs, 3)
+
+    def test_deux_ecrivains_meme_tete_un_seul_gagne(self):
+        self.remplir(1)
+        tete = verifier_chaine(self.j).tete
+        a, b = Chaine(self.j), Chaine(self.j)
+        resultats = []
+
+        def tenter(ch):
+            try:
+                ch.inscrire("evenement", "ACCEPTE", "invariants_ok", si_tete=tete)
+                resultats.append("ecrit")
+            except TeteObsolete:
+                resultats.append("refuse")
+
+        threads = [threading.Thread(target=tenter, args=(c,)) for c in (a, b)]
+        for t in threads:
+            t.start()
+        for t in threads:
+            t.join()
+        self.assertEqual(sorted(resultats), ["ecrit", "refuse"])
 
 
 class Concurrence(Base):

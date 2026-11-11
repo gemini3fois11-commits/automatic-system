@@ -11,7 +11,8 @@ pas l'état visé par le blueprint.
 | `socle_preuve/` — chaîne Γ | Toute modification d'un bloc sans recalcul est détectée et le `seq` fautif est nommé | voir `socle_preuve/preuve_evidence.json` |
 | `socle_preuve/` — témoin HMAC / Ed25519 | Une réécriture *avec* recalcul de la chaîne est détectée bloc par bloc, tant que l'attaquant n'a pas le secret du témoin | idem |
 | `socle_preuve/ed25519.py` | Conforme aux vecteurs RFC 8032 testés | idem |
-| `rinv/` | Implémentation de référence de l'algèbre R⁻¹ (antérieure au blueprint) | tests `tests/` |
+| `rinv/` — Invariant Gate | Chaque verdict, refus compris, est inscrit dans une chaîne Γ témoignée ; l'OCC est tranché sous le verrou d'écriture | voir `rinv/systeme_evidence.json` |
+| `rinv/` — trame | CRC-16/X-25 : détecte toute erreur d'un bit et toute rafale ≤ 16 bits ; **aucune** authentification | tests `tests/` |
 
 ## Ce que le dépôt ne protège pas
 
@@ -21,6 +22,10 @@ pas l'état visé par le blueprint.
   tête externe, un retour en arrière cohérent des deux n'est pas détectable.
 - Une signature atteste les octets signés, pas la légitimité de leur contenu (P-SIG-29).
 - Aucun service réseau n'est livré à ce stade : GARDIEN, passerelle et terminal sont `[SPÉCIFIÉ]`.
+- La quarantaine d'agent de la porte vit en mémoire : elle est journalisée, mais perdue au
+  redémarrage.
+- I₂ avec clé repose sur un secret partagé par les agents autorisés : l'un peut signer au
+  nom d'un autre.
 
 ## Lignes rouges
 

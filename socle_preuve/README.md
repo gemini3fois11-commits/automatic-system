@@ -15,6 +15,8 @@ from socle_preuve.temoin import ScelleurHMAC, Temoin
 
 chaine = Chaine("audit.jsonl", temoin=Temoin("audit.temoin.jsonl", ScelleurHMAC(secret)))
 chaine.inscrire("requete", "REFUS", "hote_non_autorise", {"hote": "example.org"})
+# OCC atomique : n'écrit que si la tête n'a pas bougé, sinon lève TeteObsolete
+chaine.inscrire("evenement", "ACCEPTE", "invariants_ok", si_tete=tete_lue)
 ```
 
 ```bash

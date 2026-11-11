@@ -28,9 +28,27 @@ class FrameTest(unittest.TestCase):
             self.assertEqual(decode(encode(payload)), payload)
 
     def test_known_crc(self):
-        # CRC-16/CCITT-FALSE("123456789") = 0x29B1
+        # CRC-16/X-25("123456789") = 0x906E, valeur de contrôle du catalogue
         from rinv.frame import _crc
-        self.assertEqual(_crc(b"123456789"), 0x29B1)
+        self.assertEqual(_crc(b"123456789"), 0x906E)
+
+    def test_fcs_emitted_low_byte_first(self):
+        from rinv.frame import _crc
+        frame = encode(b"abc")
+        self.assertEqual(frame[-2:], _crc(frame[1:-2]).to_bytes(2, "little"))
+
+    def test_error_codes_are_stable(self):
+        frame = encode(b"abc")
+        cases = {"trame_tronquee": frame[:4], "fanion_absent": b"\x00" + frame[1:],
+                 "longueur_incoherente": frame + b"\0",
+                 "crc_invalide": frame[:-1] + bytes([frame[-1] ^ 1])}
+        for code, bad in cases.items():
+            with self.assertRaises(FrameError) as ctx:
+                decode(bad)
+            self.assertEqual(ctx.exception.code, code)
+        with self.assertRaises(FrameError) as ctx:
+            encode(bytes(0x10000))
+        self.assertEqual(ctx.exception.code, "payload_trop_long")
 
     def test_every_single_bit_flip_is_rejected(self):
         frame = encode(b"HULTIMUGO")
@@ -122,7 +140,9 @@ class TctcTest(unittest.TestCase):
 
 class GateTest(unittest.TestCase):
     def setUp(self):
-        self.ledger = Ledger("Γ")
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.ledger = Ledger("Γ", os.path.join(self.tmp.name, "registre.jsonl"))
         self.sub = FakeSubstrate()
         self.rejects = []
         self.gate = InvariantGate(self.ledger, {"alpha"}, substrate=self.sub,
@@ -147,7 +167,7 @@ class GateTest(unittest.TestCase):
     def test_valid_event_commits(self):
         h0 = self.ledger.state_hash
         v = self.gate.admit(self.event())
-        self.assertEqual(v, (True, True, None, ""))
+        self.assertEqual(v, (True, True, None, "invariants_ok", ""))
         self.assertEqual(len(self.ledger), 1)
         self.assertNotEqual(self.ledger.state_hash, h0)
         self.assertEqual(self.rejects, [])
@@ -227,6 +247,69 @@ class GateTest(unittest.TestCase):
             with self.assertRaises(ValueError):
                 Ledger("Γ", path)
 
+    def test_verdict_codes_are_stable(self):
+        self.assertEqual(self.gate.admit(self.event(ledger_id="Γ'")).code, "registre_etranger")
+        self.assertEqual(self.gate.admit(self.event(agent_id="m")).code, "agent_non_autorise")
+        self.assertEqual(self.gate.admit(self.event(agent_id="m")).code, "agent_en_quarantaine")
+        self.assertEqual(self.gate.admit(self.event(signature_hash="x")).code, "signature_invalide")
+        stale = self.event("b")
+        self.assertEqual(self.gate.admit(self.event("a")).code, "invariants_ok")
+        self.assertEqual(self.gate.admit(self.event("a")).code, "rejeu_idempotent")
+        self.assertEqual(self.gate.admit(self.event("a", payload=b"y")).code, "event_id_reutilise")
+        self.assertEqual(self.gate.admit(stale).code, "etat_perime")
+        self.sub.entropy = 0
+        self.assertEqual(self.gate.admit(self.event("c")).code, "entropie_nulle")
+        self.sub.entropy, self.sub.step = 1, 0
+        self.assertEqual(self.gate.admit(self.event("d")).code, "horloge_figee")
+
+    def test_ledger_is_a_socle_preuve_chain_with_identity_genesis(self):
+        from socle_preuve.gamma import lire_blocs, verifier_chaine
+        self.gate.admit(self.event())
+        blocs, rapport = lire_blocs(self.ledger.path)
+        self.assertTrue(rapport.integre)
+        self.assertEqual([b["type"] for b in blocs], ["genese", "evenement"])
+        self.assertEqual(blocs[0]["donnees"], {"ledger_id": "Γ"})
+        self.assertEqual(self.ledger.state_hash, verifier_chaine(self.ledger.path).tete)
+        self.assertEqual(oct(os.stat(self.ledger.path).st_mode & 0o777), "0o600")
+
+    def test_foreign_ledger_file_is_refused(self):
+        with self.assertRaisesRegex(ValueError, "registre_etranger"):
+            Ledger("Δ", self.ledger.path)
+
+    def test_occ_race_is_decided_under_the_write_lock(self):
+        """Un autre écrivain passe entre le contrôle I₄ et l'écriture : refus, pas de fourche."""
+        rival = Ledger("Γ", self.ledger.path)
+        rival_event = self.event("rival")
+        sub = self.sub
+
+        class Race(FakeSubstrate):
+            def monotonic_ns(inner):  # appelé après I₄, avant le commit
+                rival.commit(rival_event)
+                return sub.monotonic_ns()
+
+        gate = InvariantGate(self.ledger, {"alpha"}, substrate=Race())
+        v = gate.admit(self.event("mien"))
+        self.assertEqual((v.failed, v.code), (Invariant.I4_OCC, "etat_perime"))
+        self.assertEqual([b["donnees"]["event_id"] for b in self.ledger.entries], ["rival"])
+
+    def test_decisions_journal_records_refusals_and_acceptances(self):
+        from socle_preuve.gamma import Chaine, lire_blocs
+        journal = Chaine(os.path.join(self.tmp.name, "decisions.jsonl"))
+        gate = InvariantGate(self.ledger, {"alpha"}, substrate=self.sub, journal=journal)
+        secret_payload = b"contenu-sensible"
+        gate.admit(self.event("a"))
+        gate.admit(self.event("a"))
+        gate.admit(self.event("b", agent_id="mallory", payload=secret_payload,
+                              signature_hash=sign(secret_payload)))
+        blocs, rapport = lire_blocs(journal.chemin)
+        self.assertTrue(rapport.integre)
+        self.assertEqual([(b["decision"], b["raison"]) for b in blocs],
+                         [("ACCEPTE", "invariants_ok"), ("REJEU", "rejeu_idempotent"),
+                          ("REJETE", "agent_non_autorise")])
+        self.assertEqual(blocs[2]["donnees"]["invariant"], "I1")
+        with open(journal.chemin, "rb") as fh:
+            self.assertNotIn(secret_payload, fh.read())  # l'empreinte, jamais le contenu
+
 
 class VoidMonitorTest(unittest.TestCase):
     S = 1_000_000_000
@@ -305,9 +388,24 @@ class VoidMonitorTest(unittest.TestCase):
         self.now = 15 * self.S
         self.assertEqual(self.mon.sweep(), [p])
 
+    def test_quarantine_and_purge_are_journaled(self):
+        from socle_preuve.gamma import Chaine, lire_blocs
+        journal = Chaine(os.path.join(self.tmp.name, "decisions.jsonl"))
+        self.mon = VoidMonitor(clock=lambda: self.now, journal=journal)
+        p = self.pipe("mallory")
+        self.mon.quarantine(p, "agent_non_autorise")
+        self.now = 15 * self.S
+        self.mon.sweep()
+        blocs, rapport = lire_blocs(journal.chemin)
+        self.assertTrue(rapport.integre)
+        self.assertEqual([(b["decision"], b["raison"]) for b in blocs],
+                         [("QUARANTAINE", "quarantaine_douce"), ("PURGE", "silence_depasse")])
+        self.assertEqual(blocs[1]["donnees"], {"canal": p, "motif": "agent_non_autorise",
+                                               "silence_ns": 15 * self.S})
+
     def test_gate_rejection_feeds_quarantine(self):
         p = self.pipe("shm-frame")
-        ledger = Ledger("Γ")
+        ledger = Ledger("Γ", os.path.join(self.tmp.name, "registre.jsonl"))
         gate = InvariantGate(ledger, {"alpha"}, substrate=FakeSubstrate(),
                              on_reject=lambda e, v: self.mon.quarantine(p, v.reason))
         gate.admit(Event("e", "alpha", "Γ", b"x", "bad", ledger.state_hash))
@@ -372,6 +470,19 @@ class SutureTest(unittest.TestCase):
         self.assertFalse(os.path.exists(self.sup.heartbeat_path("P4")))
         self.assertEqual(self.sup.cohesion(), 1.0)  # délai de grâce du remplaçant
         self.assertEqual(self.spawned.count("P4"), 2)
+
+    def test_suture_is_journaled_with_its_cause(self):
+        from socle_preuve.gamma import Chaine, lire_blocs
+        journal = Chaine(os.path.join(self.tmp.name, "decisions.jsonl"))
+        self.sup.journal = journal
+        self.beat_all()
+        self.sup._nodes["P2"].handle.code = 1          # mort
+        self.now = 150 * self.MS
+        self.beat_all(skip={"P2", "P5"})               # P5 vivant mais muet
+        self.sup.suture()
+        blocs, _ = lire_blocs(journal.chemin)
+        self.assertEqual(sorted((b["donnees"]["noeud"], b["raison"]) for b in blocs),
+                         [("P2", "processus_mort"), ("P5", "battement_muet")])
 
     def test_exited_node_detected_without_waiting_for_timeout(self):
         self.beat_all()

@@ -1,4 +1,8 @@
-"""Void Monitor : quarantaine douce puis purge des tubes volatils (/dev/shm)."""
+"""Void Monitor : quarantaine douce puis purge des tubes volatils (/dev/shm).
+
+Avec un journal (chaîne Γ du socle de preuve), chaque mise en quarantaine et
+chaque purge y est inscrite : le canal disparaît, la preuve de son refus reste.
+"""
 
 import enum
 import os
@@ -34,9 +38,11 @@ class VoidMonitor:
         self,
         purge_after_ns: int = PURGE_AFTER_NS,
         clock: Callable[[], int] = time.monotonic_ns,
+        journal=None,
     ):
         self.purge_after_ns = purge_after_ns
         self._clock = clock
+        self.journal = journal
         self._channels: dict[str, _Channel] = {}
 
     def watch(self, path: str | os.PathLike) -> None:
@@ -62,6 +68,9 @@ class VoidMonitor:
     def quarantine(self, path: str | os.PathLike, reason: str) -> None:
         ch = self._live(path)
         ch.state, ch.reason = ChannelState.SOFT_QUARANTINE, reason
+        if self.journal is not None:
+            self.journal.inscrire("canal", "QUARANTAINE", "quarantaine_douce",
+                                  {"canal": os.fspath(path), "motif": reason})
 
     def sweep(self) -> list[str]:
         """Purge les canaux dont le silence dépasse le seuil. Retourne leurs chemins."""
@@ -74,6 +83,10 @@ class VoidMonitor:
                 ch.state = ChannelState.PURGED
                 ch.reason = ch.reason or "silence"
                 purged.append(path)
+                if self.journal is not None:
+                    self.journal.inscrire("canal", "PURGE", "silence_depasse", {
+                        "canal": path, "motif": ch.reason,
+                        "silence_ns": now - ch.last_valid_ns})
         return purged
 
 

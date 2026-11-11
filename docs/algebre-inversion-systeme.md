@@ -252,7 +252,20 @@ $$S_g^{-1} = \sum_{k=1}^{N} \frac{1}{n_k}, \qquad n_k \in\ ]0, 1] \qquad \text{�
 | $I_4$ | Concurrence optimiste (OCC) | $\text{expected\_state\_hash} = \text{current\_state\_hash}$ | Séquence strictement croissante, sans embranchement. |
 | $I_5$ | Ancrage substrat | $\text{Entropy}_{\text{kernel}} > 0 \land \frac{d(\text{monotonic\_ns})}{dt} > 0$ | Lie la validation à l'état réel de la machine. |
 
-→ `rinv.InvariantGate`, `rinv.Ledger`. Deux choix d'implémentation à connaître :
+→ `rinv.InvariantGate`, `rinv.Ledger`. Le registre $\Gamma$ est une chaîne du socle de
+preuve (`socle_preuve.gamma`) : un seul format dans tout le dépôt, scellable par le témoin.
+Choix d'implémentation à connaître :
+
+- **Chaque verdict porte un code stable** (`invariants_ok`, `rejeu_idempotent`,
+  `registre_etranger`, `agent_non_autorise`, `agent_en_quarantaine`, `signature_invalide`,
+  `event_id_reutilise`, `etat_perime`, `entropie_nulle`, `horloge_figee`). Avec un journal
+  des décisions, la porte inscrit **tous** ses verdicts, refus compris, avec l'empreinte du
+  payload et jamais son contenu. C'est ce qui lui permet de *prouver* un refus.
+- **$I_1$ a une racine** : le bloc 0 du registre est une genèse qui porte l'identité du
+  registre. Rouvrir le fichier sous une autre identité est refusé (`registre_etranger`).
+- **$I_4$ est tranché sous le verrou d'écriture** de la chaîne, pas seulement au-dessus :
+  si un autre écrivain passe entre le contrôle et l'écriture, la transition est refusée
+  (`etat_perime`) au lieu de créer une fourche (P-BYP-27).
 
 - $I_3$ est évalué **avant** $I_4$ : un rejeu exact est accepté comme no-op (sinon son
   `expected_state_hash`, forcément périmé, le ferait rejeter par $I_4$). Un `event_id`
@@ -269,7 +282,8 @@ $$S_g^{-1} = \sum_{k=1}^{N} \frac{1}{n_k}, \qquad n_k \in\ ]0, 1] \qquad \text{�
 - **Purge** : au-delà de 15 s sans activité valide, le contenu est écrasé, le fichier
   tronqué puis supprimé.
 
-→ `rinv.VoidMonitor`.
+→ `rinv.VoidMonitor`. Avec un journal, chaque quarantaine et chaque purge y est inscrite :
+le canal disparaît, la preuve de son refus reste.
 
 ### 3. La règle d'or : vivacité contre validité
 
@@ -277,9 +291,11 @@ $$S_g^{-1} = \sum_{k=1}^{N} \frac{1}{n_k}, \qquad n_k \in\ ]0, 1] \qquad \text{�
   à 1200 Hz confirment seulement que le câble est branché et que l'étage fonctionne.
 - La **validité** (*correctness*) est mathématique : seule une trame au format
 
-$$\big[\ \text{FLAG}\ \texttt{0x7E}\ \big|\ \text{LEN}_{16}\ \big|\ \text{PAYLOAD}\ \big|\ \text{CRC-16/CCITT}\ \big] \qquad \text{⟨R⟩}$$
+$$\big[\ \text{FLAG}\ \texttt{0x7E}\ \big|\ \text{LEN}_{16}\ \big|\ \text{PAYLOAD}\ \big|\ \text{FCS}_{\text{CRC-16/X-25}}\ \big] \qquad \text{⟨R⟩}$$
 
-  validée par son CRC autorise le commit de la transition d'état.
+  validée par son CRC autorise le commit de la transition d'état. Le CRC est celui
+  qu'impose le blueprint au télégraphe (CRC-16/X-25, émis octet faible d'abord) ; ce
+  n'est pas une trame HDLC complète (ni fanion de fin, ni bourrage de bits).
 
 → `rinv.encode`, `rinv.decode`.
 
@@ -343,7 +359,8 @@ volatile. La cohésion est la fraction de nœuds vivants ($7/8 = 87{,}5\,\%$ qua
 tombe) ; l'opérateur d'Auto-Suture élimine le nœud muet, purge son battement et relance un
 remplaçant.
 
-→ `rinv.Supervisor`, `rinv.beat`.
+→ `rinv.Supervisor`, `rinv.beat`. Avec un journal, chaque suture y est inscrite avec sa cause
+(`processus_mort` ou `battement_muet`).
 
 ### 5. Ce que ce dépôt démontre, et ce qu'il ne démontre pas
 
@@ -352,6 +369,7 @@ Implémentation ≠ Test ≠ Validation* :
 
 | Élément | Niveau atteint ici |
 |---|---|
-| Invariant Gate I₁–I₅, registre Γ, quarantaine d'agents, Void Monitor, trame CRC, S_g⁻¹, TCTC, Auto-Suture | **Implémenté et testé** (`python3 -m unittest`) |
+| Invariant Gate I₁–I₅, registre Γ et journal des décisions sur le socle de preuve, témoin HMAC / Ed25519, quarantaine d'agents, Void Monitor, trame CRC-16/X-25, S_g⁻¹, TCTC, Auto-Suture | **Implémenté et testé** (`python3 -m unittest`) |
+| Le tout assemblé : refus prouvés au témoin, effacement et injection détectés | **Vérifié** par `python3 -m rinv.systeme` → `rinv/systeme_evidence.json` |
 | Preuve Lean 4 de la machine OCC, signatures ECDSA P-256, DTN BPv7, pont audio Dessa, enclave `mlockall` | Spécifié ailleurs ; **absent de ce dépôt** |
 | Espace de phase 8D, noyau de Seeley-DeWitt, BRST, formules V.1–V.3 | **Revendication** : aucun artefact vérifiable ici |

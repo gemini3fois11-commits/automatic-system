@@ -83,10 +83,18 @@ def verifier_chaine(chemin) -> Rapport:
     return lire_blocs(chemin)[1]
 
 
-class ChaineRompue(Exception):
+class ChaineRompue(ValueError):
     def __init__(self, rapport: Rapport):
         super().__init__(str(rapport))
         self.rapport = rapport
+
+
+class TeteObsolete(Exception):
+    """La tête a avancé entre la lecture de l'écrivain et son écriture (OCC)."""
+
+    def __init__(self, attendue: str, actuelle: str):
+        super().__init__(f"tête attendue {attendue[:16]}…, actuelle {actuelle[:16]}…")
+        self.attendue, self.actuelle = attendue, actuelle
 
 
 def ouvrir_600(chemin) -> int:
@@ -111,7 +119,9 @@ class Chaine:
             raise ChaineRompue(rapport)
 
     def inscrire(self, type: str, decision: str, raison: str,
-                 donnees: dict | None = None) -> dict:
+                 donnees: dict | None = None, *, si_tete: str | None = None) -> dict:
+        """Ajoute un bloc. Avec `si_tete`, n'écrit que si la tête vaut encore cette
+        valeur : le contrôle OCC se fait sous le verrou d'écriture, pas au-dessus."""
         for nom, val in (("type", type), ("decision", decision), ("raison", raison)):
             if not isinstance(val, str) or not val:
                 raise ValueError(f"{nom} doit être une chaîne non vide")
@@ -122,6 +132,8 @@ class Chaine:
                 blocs, rapport = lire_blocs(self.chemin)
                 if not rapport.integre:
                     raise ChaineRompue(rapport)
+                if si_tete is not None and si_tete != rapport.tete:
+                    raise TeteObsolete(si_tete, rapport.tete)
                 bloc = {"seq": len(blocs), "ts": self._horloge(), "type": type,
                         "decision": decision, "raison": raison, "prev_hash": rapport.tete}
                 if donnees is not None:

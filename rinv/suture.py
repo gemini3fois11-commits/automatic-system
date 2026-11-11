@@ -47,9 +47,12 @@ class Supervisor:
         directory: str | os.PathLike = "/dev/shm",
         timeout_ns: int = HEARTBEAT_TIMEOUT_NS,
         clock: Callable[[], int] = time.monotonic_ns,
+        journal=None,
     ):
-        """`spawn(name, heartbeat_path)` lance un nœud et retourne son handle."""
+        """`spawn(name, heartbeat_path)` lance un nœud et retourne son handle.
+        `journal` : chaîne Γ où inscrire chaque suture."""
         self._spawn = spawn
+        self.journal = journal
         self._dir = os.fspath(directory)
         self.timeout_ns = timeout_ns
         self._clock = clock
@@ -89,7 +92,8 @@ class Supervisor:
         for name, node in self._nodes.items():
             if self.alive(name):
                 continue
-            if node.handle.poll() is None:  # muet mais encore là : on l'achève
+            mort = node.handle.poll() is not None
+            if not mort:  # muet mais encore là : on l'achève
                 node.handle.kill()
             node.handle.wait()
             try:
@@ -100,6 +104,10 @@ class Supervisor:
             node.born_ns = self._clock()
             node.generation += 1
             sutured.append(name)
+            if self.journal is not None:
+                self.journal.inscrire("noeud", "SUTURE",
+                                      "processus_mort" if mort else "battement_muet",
+                                      {"noeud": name, "generation": node.generation})
         return sutured
 
     def shutdown(self) -> None:

@@ -1,0 +1,261 @@
+{
+  "format": 1,
+  "module": "systeme_rinv",
+  "phase": 1,
+  "etiquette": "VÉRIFIÉ",
+  "verdict": "OK",
+  "graine": 7,
+  "config": {
+    "ledger_id": "Γ-demo",
+    "agents_autorises": [
+      "alpha",
+      "beta"
+    ],
+    "purge_apres_s": 15,
+    "noeuds_suture": 3,
+    "crc": "CRC-16/X-25"
+  },
+  "mesures": {
+    "controles": [
+      {
+        "controle": "t= 1 s  canal alpha   e1  → invariants_ok",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "controle": "t= 2 s  canal alpha   e1  → rejeu_idempotent",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "controle": "t= 3 s  canal beta    e2  → etat_perime",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "controle": "t= 4 s  canal alpha   e3  → signature_invalide",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "controle": "t= 5 s  canal beta    e4  → crc_invalide",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "controle": "t= 6 s  canal mallory m1  → agent_non_autorise",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "controle": "t= 7 s  canal mallory m2  → agent_en_quarantaine",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "controle": "t= 8 s  canal beta    e5  → invariants_ok",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "controle": "t= 9 s  canal gamma   g1  → registre_etranger",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "controle": "t=14 s  canal alpha   e6  → invariants_ok",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "controle": "canaux purgés : ceux restés sans trame valide 15 s",
+        "ok": true,
+        "detail": "canal-gamma, canal-mallory"
+      },
+      {
+        "controle": "canaux actifs conservés",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "controle": "cohésion 2/3 puis suture de N2, cohésion 3/3",
+        "ok": true,
+        "detail": "0.667 → ['N2'] → 1.000"
+      },
+      {
+        "controle": "registre : intègre et témoin en accord",
+        "ok": true,
+        "detail": "INTÈGRE — 4 bloc(s), tête 398d5050a4f9b007… — témoin en accord sur 4 bloc(s)"
+      },
+      {
+        "controle": "decisions : intègre et témoin en accord",
+        "ok": true,
+        "detail": "INTÈGRE — 19 bloc(s), tête 29de62e0a2b8b5d2… — témoin en accord sur 19 bloc(s)"
+      },
+      {
+        "controle": "registre : seules les transitions acceptées (e1, e5, e6)",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "controle": "effacer le refus de mallory : audit local trompé (exit 0), témoin exit 4",
+        "ok": true,
+        "detail": "TÉMOIN EN DÉSACCORD — seq 8 : desaccord_temoin (blocs 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18)"
+      },
+      {
+        "controle": "injecter une transition de mallory : audit local trompé (exit 0), témoin exit 4",
+        "ok": true,
+        "detail": "TÉMOIN EN DÉSACCORD — seq 4 : bloc_non_temoigne"
+      }
+    ],
+    "reussis": 18,
+    "receptions": [
+      {
+        "t_s": 1,
+        "canal": "alpha",
+        "event_id": "e1",
+        "attendu": "invariants_ok",
+        "obtenu": "invariants_ok"
+      },
+      {
+        "t_s": 2,
+        "canal": "alpha",
+        "event_id": "e1",
+        "attendu": "rejeu_idempotent",
+        "obtenu": "rejeu_idempotent"
+      },
+      {
+        "t_s": 3,
+        "canal": "beta",
+        "event_id": "e2",
+        "attendu": "etat_perime",
+        "obtenu": "etat_perime"
+      },
+      {
+        "t_s": 4,
+        "canal": "alpha",
+        "event_id": "e3",
+        "attendu": "signature_invalide",
+        "obtenu": "signature_invalide"
+      },
+      {
+        "t_s": 5,
+        "canal": "beta",
+        "event_id": "e4",
+        "attendu": "crc_invalide",
+        "obtenu": "crc_invalide"
+      },
+      {
+        "t_s": 6,
+        "canal": "mallory",
+        "event_id": "m1",
+        "attendu": "agent_non_autorise",
+        "obtenu": "agent_non_autorise"
+      },
+      {
+        "t_s": 7,
+        "canal": "mallory",
+        "event_id": "m2",
+        "attendu": "agent_en_quarantaine",
+        "obtenu": "agent_en_quarantaine"
+      },
+      {
+        "t_s": 8,
+        "canal": "beta",
+        "event_id": "e5",
+        "attendu": "invariants_ok",
+        "obtenu": "invariants_ok"
+      },
+      {
+        "t_s": 9,
+        "canal": "gamma",
+        "event_id": "g1",
+        "attendu": "registre_etranger",
+        "obtenu": "registre_etranger"
+      },
+      {
+        "t_s": 14,
+        "canal": "alpha",
+        "event_id": "e6",
+        "attendu": "invariants_ok",
+        "obtenu": "invariants_ok"
+      }
+    ],
+    "journal": {
+      "decisions": 19,
+      "refus_prouves": 14,
+      "par_decision": {
+        "ACCEPTE": 3,
+        "PURGE": 2,
+        "QUARANTAINE": 6,
+        "REJETE": 6,
+        "REJEU": 1,
+        "SUTURE": 1
+      },
+      "par_raison": {
+        "agent_en_quarantaine": 1,
+        "agent_non_autorise": 1,
+        "crc_invalide": 1,
+        "etat_perime": 1,
+        "invariants_ok": 3,
+        "processus_mort": 1,
+        "quarantaine_douce": 6,
+        "registre_etranger": 1,
+        "rejeu_idempotent": 1,
+        "signature_invalide": 1,
+        "silence_depasse": 2
+      }
+    },
+    "registre_acceptes": 3,
+    "canaux_purges": [
+      "canal-gamma",
+      "canal-mallory"
+    ],
+    "suture": {
+      "cohesion_avant": 0.6666666666666666,
+      "recousus": [
+        "N2"
+      ],
+      "cohesion_apres": 1.0
+    },
+    "verification_temoin": {
+      "registre": {
+        "exit": 0,
+        "sortie": "INTÈGRE — 4 bloc(s), tête 398d5050a4f9b007… — témoin en accord sur 4 bloc(s)"
+      },
+      "decisions": {
+        "exit": 0,
+        "sortie": "INTÈGRE — 19 bloc(s), tête 29de62e0a2b8b5d2… — témoin en accord sur 19 bloc(s)"
+      }
+    },
+    "attaques": [
+      {
+        "attaque": "effacer le refus de mallory (bloc 8) avec recalcul",
+        "exit_local": 0,
+        "exit_temoin": 4,
+        "sortie": "TÉMOIN EN DÉSACCORD — seq 8 : desaccord_temoin (blocs 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18)"
+      },
+      {
+        "attaque": "injecter une transition de mallory dans le registre",
+        "exit_local": 0,
+        "exit_temoin": 4,
+        "sortie": "TÉMOIN EN DÉSACCORD — seq 4 : bloc_non_temoigne"
+      }
+    ]
+  },
+  "limites": [
+    "Données synthétiques ; les canaux sont des fichiers locaux de /dev/shm, aucune liaison radio ou AFSK réelle.",
+    "Les 15 s du Void Monitor sont simulées par une horloge injectée ; l'Auto-Suture, elle, tue et relance de vrais processus.",
+    "Témoin local : le secret vit sur la même machine que les chaînes (§3.2).",
+    "I₂ repose sur un secret HMAC partagé par les agents autorisés : un agent autorisé peut signer au nom d'un autre.",
+    "La quarantaine d'agent est en mémoire ; elle est journalisée mais perdue au redémarrage de la porte."
+  ],
+  "execution": {
+    "genere_le": "2026-11-11T11:14:50Z",
+    "commande": "python3 /home/user/automatic-system/rinv/systeme.py",
+    "python": "3.13.18",
+    "plateforme": "Linux-6.18.44-fc-v378-x86_64-with-glibc2.39",
+    "commit": "6db5395ebf49b85f4a0750ab3aabca271a0e491b",
+    "arbre_modifie": true
+  }
+}
