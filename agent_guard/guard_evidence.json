@@ -1,0 +1,174 @@
+{
+  "format": 1,
+  "module": "agent_guard",
+  "phase": 3,
+  "etiquette": "VÉRIFIÉ",
+  "verdict": "OK",
+  "graine": 7,
+  "config": {
+    "allowlist": [
+      "example.com",
+      "neverssl.com",
+      "info.cern.ch"
+    ],
+    "corps_max": 1048576,
+    "origine": "serveur HTTP local se faisant passer pour les hôtes autorisés"
+  },
+  "mesures": {
+    "cas": [
+      {
+        "cas": "example.com autorisé : 200 relayé",
+        "ok": true,
+        "detail": "200 b'origine:example.com:/index.html'"
+      },
+      {
+        "cas": "Proxy-Authorization du client non transmis à l'origine",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "cas": "en-tête saut par saut Connection: keep-alive non relayé",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "cas": "info.cern.ch autorisé : 200 relayé",
+        "ok": true,
+        "detail": "200"
+      },
+      {
+        "cas": "example.org : 403 hote_non_autorise, rien transmis",
+        "ok": true,
+        "detail": "403 {'refus': 'hote_non_autorise'}"
+      },
+      {
+        "cas": "CONNECT https : 403 tls_non_inspecte",
+        "ok": true,
+        "detail": "403 {'refus': 'tls_non_inspecte'}"
+      },
+      {
+        "cas": "https:// sans CONNECT : 403 schema_non_http",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "cas": "ftp:// : 403 schema_non_http",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "cas": "port 8080 : 403 port_non_autorise",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "cas": "corps de 1 Mio + 1 : 413 corps_trop_gros",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "cas": "chunked : 411 encodage_non_supporte",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "cas": "amont en panne : 502 amont_injoignable",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "cas": "POST base64 vers hôte autorisé : transmis (200), donc signalé seulement",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "cas": "exfiltration dans le chemin, dans l'hôte, URL avec identifiants",
+        "ok": true,
+        "detail": "200 403 200"
+      },
+      {
+        "cas": "/api/status avec un Host étranger : 421 (anti DNS-rebinding)",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "cas": "/api/status : décisions, refus et signaux comptés depuis Γ",
+        "ok": true,
+        "detail": "{\"hote_non_autorise\": 2, \"tls_non_inspecte\": 1, \"schema_non_http\": 2, \"port_non_autorise\": 1, \"corps_trop_gros\": 1, \"encodage_non_supporte\": 1, \"amont_injoignable\": 1}"
+      },
+      {
+        "cas": "proxy amont : forme absolue + Proxy-Authorization envoyés à l'amont",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "cas": "identifiants amont absents du journal",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "cas": "journal en mode 600, sans corps ni chemin en clair",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "cas": "--verify : exit 0 sur chaîne intègre, exit 3 et seq 1 après falsification",
+        "ok": true,
+        "detail": "0 / 3 ROMPUE — seq 1 : hash_invalide"
+      },
+      {
+        "cas": "le témoin refuse aussi le journal falsifié",
+        "ok": true,
+        "detail": ""
+      }
+    ],
+    "reussis": 21,
+    "statut_api": {
+      "decisions": {
+        "AUTORISE": 5,
+        "REFUS": 9
+      },
+      "refus_par_raison": {
+        "hote_non_autorise": 2,
+        "tls_non_inspecte": 1,
+        "schema_non_http": 2,
+        "port_non_autorise": 1,
+        "corps_trop_gros": 1,
+        "encodage_non_supporte": 1,
+        "amont_injoignable": 1
+      },
+      "signaux_par_code": {
+        "haute_entropie": 1,
+        "base64_suspect": 1,
+        "exfiltration_chemin": 1,
+        "exfiltration_hote": 1,
+        "url_anormale": 1
+      },
+      "allowlist": [
+        "example.com",
+        "info.cern.ch",
+        "neverssl.com"
+      ],
+      "chaine": {
+        "integre": true,
+        "blocs": 14,
+        "seq_fautif": null,
+        "raison": null
+      }
+    }
+  },
+  "limites": [
+    "Trafic HTTP vers les trois hôtes publics NON joué : le proxy sortant de l'environnement ne relaie que le HTTPS. L'origine est locale ; le code de décision, de relais et de journalisation est celui de production.",
+    "Mono-machine, pas de consensus ; les réponses ne sont pas inspectées : une destination autorisée compromise reste un risque.",
+    "Couverture limitée au trafic qui passe effectivement par le GARDIEN.",
+    "Heuristiques de canaux cachés : signaux, jamais preuves."
+  ],
+  "execution": {
+    "genere_le": "2026-11-11T11:45:03Z",
+    "commande": "python3 /home/user/automatic-system/agent_guard/banc.py",
+    "python": "3.13.18",
+    "plateforme": "Linux-6.18.44-fc-v378-x86_64-with-glibc2.39",
+    "commit": "2bd8e2b56ce9189b4f350442943113aa53cd8ebb",
+    "arbre_modifie": true
+  }
+}
