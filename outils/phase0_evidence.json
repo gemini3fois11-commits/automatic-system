@@ -36,11 +36,11 @@
     "Les dossiers des phases 2 à 7 ne contiennent qu'un README [SPÉCIFIÉ]."
   ],
   "execution": {
-    "genere_le": "2026-11-11T11:09:15Z",
+    "genere_le": "2026-11-11T11:16:01Z",
     "commande": "python3 /home/user/automatic-system/outils/verifier_phase0.py",
     "python": "3.13.18",
     "plateforme": "Linux-6.18.44-fc-v378-x86_64-with-glibc2.39",
-    "commit": "9c97ba75ec0882945ba65ff4741e515f1af73d08",
+    "commit": "506e932f81159df5df0d18f2b6cb8fdab63fdb0a",
     "arbre_modifie": false
   }
 }
