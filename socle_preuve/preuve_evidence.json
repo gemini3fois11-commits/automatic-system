@@ -21,14 +21,14 @@
         "scenario": "chaîne intacte, vérification locale",
         "exit_attendu": 0,
         "exit_obtenu": 0,
-        "sortie": "INTÈGRE — 12 bloc(s), tête 6b15ae3bf6b1bd82…",
+        "sortie": "INTÈGRE — 12 bloc(s), tête b97c1d723dc9c4e4…",
         "ok": true
       },
       {
         "scenario": "chaîne intacte, témoin HMAC",
         "exit_attendu": 0,
         "exit_obtenu": 0,
-        "sortie": "INTÈGRE — 12 bloc(s), tête 6b15ae3bf6b1bd82… — témoin en accord sur 12 bloc(s)",
+        "sortie": "INTÈGRE — 12 bloc(s), tête b97c1d723dc9c4e4… — témoin en accord sur 12 bloc(s)",
         "ok": true
       },
       {
@@ -42,7 +42,7 @@
         "scenario": "réécriture du bloc 4 avec recalcul, vérification locale seule",
         "exit_attendu": 0,
         "exit_obtenu": 0,
-        "sortie": "INTÈGRE — 12 bloc(s), tête e1926b805e031352…",
+        "sortie": "INTÈGRE — 12 bloc(s), tête 0426f9762e9aea41…",
         "ok": true
       },
       {
@@ -70,7 +70,7 @@
         "scenario": "chaîne intacte, témoin Ed25519 (clé publique épinglée)",
         "exit_attendu": 0,
         "exit_obtenu": 0,
-        "sortie": "INTÈGRE — 12 bloc(s), tête b68e3656ba5e1eca… — témoin en accord sur 12 bloc(s)",
+        "sortie": "INTÈGRE — 12 bloc(s), tête d6bc627a7ab5678b… — témoin en accord sur 12 bloc(s)",
         "ok": true
       },
       {
@@ -84,7 +84,7 @@
         "scenario": "secret HMAC en mode 644",
         "exit_attendu": 2,
         "exit_obtenu": 2,
-        "sortie": "erreur : secret_permissions : /tmp/tmp7od1pyph/temoin.secret doit être en mode 600 (actuel 644)",
+        "sortie": "erreur : secret_permissions : /tmp/tmp0b1xne4f/temoin.secret doit être en mode 600 (actuel 644)",
         "ok": true
       }
     ],
@@ -101,9 +101,9 @@
     },
     "ed25519_ms": {
       "iterations": 200,
-      "plancher_ms": 7.2e-05,
-      "signer_mediane": 3.099892,
-      "verifier_mediane": 2.7429995000000003
+      "plancher_ms": 9.8e-05,
+      "signer_mediane": 3.9693245,
+      "verifier_mediane": 3.9484
     }
   },
   "limites": [
@@ -114,11 +114,11 @@
     "Durées mesurées sur la machine indiquée dans execution.plateforme."
   ],
   "execution": {
-    "genere_le": "2026-11-11T11:16:01Z",
+    "genere_le": "2026-11-11T11:39:44Z",
     "commande": "python3 /home/user/automatic-system/socle_preuve/__main__.py demo",
     "python": "3.13.18",
     "plateforme": "Linux-6.18.44-fc-v378-x86_64-with-glibc2.39",
-    "commit": "506e932f81159df5df0d18f2b6cb8fdab63fdb0a",
+    "commit": "16a5fb346ea1442242aeb3c9af5713c62ebc3837",
     "arbre_modifie": false
   }
 }

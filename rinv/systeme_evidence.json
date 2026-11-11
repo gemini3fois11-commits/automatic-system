@@ -85,12 +85,12 @@
       {
         "controle": "registre : intègre et témoin en accord",
         "ok": true,
-        "detail": "INTÈGRE — 4 bloc(s), tête a9888ba7e19911a7… — témoin en accord sur 4 bloc(s)"
+        "detail": "INTÈGRE — 4 bloc(s), tête 5f7543aa095be5c1… — témoin en accord sur 4 bloc(s)"
       },
       {
         "controle": "decisions : intègre et témoin en accord",
         "ok": true,
-        "detail": "INTÈGRE — 19 bloc(s), tête b29c8fc145befad8… — témoin en accord sur 19 bloc(s)"
+        "detail": "INTÈGRE — 19 bloc(s), tête 428242a573b171cd… — témoin en accord sur 19 bloc(s)"
       },
       {
         "controle": "registre : seules les transitions acceptées (e1, e5, e6)",
@@ -221,11 +221,11 @@
     "verification_temoin": {
       "registre": {
         "exit": 0,
-        "sortie": "INTÈGRE — 4 bloc(s), tête a9888ba7e19911a7… — témoin en accord sur 4 bloc(s)"
+        "sortie": "INTÈGRE — 4 bloc(s), tête 5f7543aa095be5c1… — témoin en accord sur 4 bloc(s)"
       },
       "decisions": {
         "exit": 0,
-        "sortie": "INTÈGRE — 19 bloc(s), tête b29c8fc145befad8… — témoin en accord sur 19 bloc(s)"
+        "sortie": "INTÈGRE — 19 bloc(s), tête 428242a573b171cd… — témoin en accord sur 19 bloc(s)"
       }
     },
     "attaques": [
@@ -251,11 +251,11 @@
     "La quarantaine d'agent est en mémoire ; elle est journalisée mais perdue au redémarrage de la porte."
   ],
   "execution": {
-    "genere_le": "2026-11-11T11:15:59Z",
+    "genere_le": "2026-11-11T11:39:45Z",
     "commande": "python3 /home/user/automatic-system/rinv/systeme.py",
     "python": "3.13.18",
     "plateforme": "Linux-6.18.44-fc-v378-x86_64-with-glibc2.39",
-    "commit": "506e932f81159df5df0d18f2b6cb8fdab63fdb0a",
+    "commit": "16a5fb346ea1442242aeb3c9af5713c62ebc3837",
     "arbre_modifie": false
   }
 }
