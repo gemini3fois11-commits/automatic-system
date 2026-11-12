@@ -21,14 +21,14 @@
         "scenario": "chaîne intacte, vérification locale",
         "exit_attendu": 0,
         "exit_obtenu": 0,
-        "sortie": "INTÈGRE — 12 bloc(s), tête f231cf111e320129…",
+        "sortie": "INTÈGRE — 12 bloc(s), tête 71c014969cb767c2…",
         "ok": true
       },
       {
         "scenario": "chaîne intacte, témoin HMAC",
         "exit_attendu": 0,
         "exit_obtenu": 0,
-        "sortie": "INTÈGRE — 12 bloc(s), tête f231cf111e320129… — témoin en accord sur 12 bloc(s)",
+        "sortie": "INTÈGRE — 12 bloc(s), tête 71c014969cb767c2… — témoin en accord sur 12 bloc(s)",
         "ok": true
       },
       {
@@ -42,7 +42,7 @@
         "scenario": "réécriture du bloc 4 avec recalcul, vérification locale seule",
         "exit_attendu": 0,
         "exit_obtenu": 0,
-        "sortie": "INTÈGRE — 12 bloc(s), tête fd40aa7de69b782d…",
+        "sortie": "INTÈGRE — 12 bloc(s), tête c2ced4f147b6f6ec…",
         "ok": true
       },
       {
@@ -70,7 +70,7 @@
         "scenario": "chaîne intacte, témoin Ed25519 (clé publique épinglée)",
         "exit_attendu": 0,
         "exit_obtenu": 0,
-        "sortie": "INTÈGRE — 12 bloc(s), tête 34253eef14370e49… — témoin en accord sur 12 bloc(s)",
+        "sortie": "INTÈGRE — 12 bloc(s), tête ee1690c8ed2ad6df… — témoin en accord sur 12 bloc(s)",
         "ok": true
       },
       {
@@ -84,7 +84,7 @@
         "scenario": "secret HMAC en mode 644",
         "exit_attendu": 2,
         "exit_obtenu": 2,
-        "sortie": "erreur : secret_permissions : /tmp/tmpkabl0tgk/temoin.secret doit être en mode 600 (actuel 644)",
+        "sortie": "erreur : secret_permissions : /tmp/tmp_9ek2rmm/temoin.secret doit être en mode 600 (actuel 644)",
         "ok": true
       }
     ],
@@ -101,9 +101,9 @@
     },
     "ed25519_ms": {
       "iterations": 200,
-      "plancher_ms": 9.2e-05,
-      "signer_mediane": 2.571661,
-      "verifier_mediane": 2.681815
+      "plancher_ms": 7.1e-05,
+      "signer_mediane": 3.048327,
+      "verifier_mediane": 3.2570544999999997
     }
   },
   "limites": [
@@ -114,11 +114,11 @@
     "Durées mesurées sur la machine indiquée dans execution.plateforme."
   ],
   "execution": {
-    "genere_le": "2026-11-11T19:15:57Z",
+    "genere_le": "2026-11-12T20:02:11Z",
     "commande": "python3 /home/user/automatic-system/socle_preuve/__main__.py demo",
     "python": "3.13.18",
     "plateforme": "Linux-6.18.44-fc-v378-x86_64-with-glibc2.39",
-    "commit": "a8a2e952ef58f602d687f937efc165db8fae05ad",
+    "commit": "1162883f90c464e35a6853b7a5aa9cbd0cac8ac4",
     "arbre_modifie": true
   }
 }

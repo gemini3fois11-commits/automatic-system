@@ -1,0 +1,878 @@
+{
+  "genere_le": "2026-11-12T20:01:33+00:00",
+  "commit": "1162883f90c464e35a6853b7a5aa9cbd0cac8ac4",
+  "exigences": [
+    {
+      "code": "E-1.1",
+      "source": "§1.1 Mission",
+      "resume": "Un refus produit une preuve vérifiable par un témoin indépendant.",
+      "fichiers": [
+        {
+          "chemin": "socle_preuve/gamma.py",
+          "existe": true,
+          "sha256": "4262faa9594521eb"
+        },
+        {
+          "chemin": "socle_preuve/temoin.py",
+          "existe": true,
+          "sha256": "67edd781c7d28990"
+        },
+        {
+          "chemin": "rinv/systeme.py",
+          "existe": true,
+          "sha256": "5763e57ad269b5b2"
+        }
+      ],
+      "tests": [
+        "socle_preuve.test_gamma",
+        "socle_preuve.test_temoin",
+        "tests.test_systeme"
+      ],
+      "evidences": [
+        "socle_preuve/preuve_evidence.json",
+        "rinv/systeme_evidence.json"
+      ]
+    },
+    {
+      "code": "E-1.2",
+      "source": "§1.2 Refuser avant de croire",
+      "resume": "Allowlist exacte ; le classifieur rejette plutôt que de forcer une classe.",
+      "fichiers": [
+        {
+          "chemin": "agent_guard/guard.py",
+          "existe": true,
+          "sha256": "a2a6e3b567bbceca"
+        },
+        {
+          "chemin": "omega_hermes/bob.py",
+          "existe": true,
+          "sha256": "d390efee684448f3"
+        }
+      ],
+      "tests": [
+        "agent_guard.test_guard",
+        "omega_hermes.test_bob",
+        "omega_hermes.test_hermes"
+      ],
+      "evidences": [
+        "agent_guard/guard_evidence.json",
+        "omega_hermes/hermes_evidence.json"
+      ]
+    },
+    {
+      "code": "E-1.3",
+      "source": "§1.3 Étiquettes d'honnêteté",
+      "resume": "Chaque évidence porte une étiquette (VÉRIFIÉ/SIMULÉ/DÉMONTRÉ/SPÉCIFIÉ/…).",
+      "fichiers": [
+        {
+          "chemin": "outils/evidence.py",
+          "existe": true,
+          "sha256": "61f92c81adca651b"
+        }
+      ],
+      "tests": [],
+      "evidences": [
+        "(toutes les évidences)"
+      ]
+    },
+    {
+      "code": "E-1.5",
+      "source": "§1.5 Découplage synthétique",
+      "resume": "Les modules du banc n'importent que la liste blanche (pas de socket, pas d'open).",
+      "fichiers": [
+        {
+          "chemin": "omega_hermes/decouplage.py",
+          "existe": true,
+          "sha256": "c2ce815857215764"
+        },
+        {
+          "chemin": "omega_hermes/twin.py",
+          "existe": true,
+          "sha256": "f9724e2052819f6b"
+        },
+        {
+          "chemin": "omega_hermes/alice.py",
+          "existe": true,
+          "sha256": "21e915e917e2f732"
+        },
+        {
+          "chemin": "omega_hermes/eyes.py",
+          "existe": true,
+          "sha256": "5783ffb95b0ca380"
+        },
+        {
+          "chemin": "omega_hermes/bob.py",
+          "existe": true,
+          "sha256": "d390efee684448f3"
+        }
+      ],
+      "tests": [
+        "omega_hermes.test_twin"
+      ],
+      "evidences": [
+        "omega_hermes/hermes_evidence.json"
+      ]
+    },
+    {
+      "code": "E-2.1",
+      "source": "§2.1 Écoute 127.0.0.1 seulement",
+      "resume": "Toutes les portes refusent une autre interface.",
+      "fichiers": [
+        {
+          "chemin": "socle_preuve/porte_http.py",
+          "existe": true,
+          "sha256": "3f33c93875fce3ed"
+        },
+        {
+          "chemin": "agent_guard/guard.py",
+          "existe": true,
+          "sha256": "a2a6e3b567bbceca"
+        },
+        {
+          "chemin": "cryoloop_gateway/gateway.py",
+          "existe": true,
+          "sha256": "c8eae664fa6d493a"
+        },
+        {
+          "chemin": "terminal_auth/server.py",
+          "existe": true,
+          "sha256": "1a00480d8df8e380"
+        }
+      ],
+      "tests": [
+        "socle_preuve.test_auth",
+        "socle_preuve.test_porte_http"
+      ],
+      "evidences": [
+        "outils/phase3_evidence.json"
+      ]
+    },
+    {
+      "code": "E-3.1",
+      "source": "§3.1 Chaîne Γ append-only SHA-256",
+      "resume": "hash = SHA-256(prev_hash || canon(bloc)) ; vérificateur nomme le seq fautif.",
+      "fichiers": [
+        {
+          "chemin": "socle_preuve/gamma.py",
+          "existe": true,
+          "sha256": "4262faa9594521eb"
+        }
+      ],
+      "tests": [
+        "socle_preuve.test_gamma"
+      ],
+      "evidences": [
+        "socle_preuve/preuve_evidence.json"
+      ]
+    },
+    {
+      "code": "E-3.2",
+      "source": "§3.2 Témoin indépendant",
+      "resume": "Scelle (seq, hash) hors du journal ; détecte toute réécriture.",
+      "fichiers": [
+        {
+          "chemin": "socle_preuve/temoin.py",
+          "existe": true,
+          "sha256": "67edd781c7d28990"
+        },
+        {
+          "chemin": "socle_preuve/ed25519.py",
+          "existe": true,
+          "sha256": "f18dbafb068c2fc6"
+        }
+      ],
+      "tests": [
+        "socle_preuve.test_temoin",
+        "socle_preuve.test_ed25519"
+      ],
+      "evidences": [
+        "socle_preuve/preuve_evidence.json"
+      ]
+    },
+    {
+      "code": "E-3.3",
+      "source": "P-BYP-27 contournement",
+      "resume": "Le contrôle OCC est sous le verrou d'écriture, pas au-dessus.",
+      "fichiers": [
+        {
+          "chemin": "socle_preuve/gamma.py",
+          "existe": true,
+          "sha256": "4262faa9594521eb"
+        },
+        {
+          "chemin": "rinv/gate.py",
+          "existe": true,
+          "sha256": "99ba319df79397f5"
+        }
+      ],
+      "tests": [
+        "socle_preuve.test_gamma (OCC)",
+        "tests.test_rinv (test_occ_race)"
+      ],
+      "evidences": [
+        "rinv/systeme_evidence.json"
+      ]
+    },
+    {
+      "code": "E-4.3",
+      "source": "§4.3 BOB à deux seuils",
+      "resume": "Reproduire le défaut historique (seuil unique → ARTIFACT) puis la correction.",
+      "fichiers": [
+        {
+          "chemin": "omega_hermes/bob.py",
+          "existe": true,
+          "sha256": "d390efee684448f3"
+        }
+      ],
+      "tests": [
+        "omega_hermes.test_bob"
+      ],
+      "evidences": [
+        "omega_hermes/hermes_evidence.json"
+      ]
+    },
+    {
+      "code": "E-4.5",
+      "source": "§4.5 Boucle 200×5 graine 7",
+      "resume": "Score ≥ 0,98, rejet inconnu/COVERT/DRAFT = 1,000, FPR = 0.",
+      "fichiers": [
+        {
+          "chemin": "omega_hermes/loop.py",
+          "existe": true,
+          "sha256": "2bdd82aa414fcc3e"
+        },
+        {
+          "chemin": "omega_hermes/hermes.py",
+          "existe": true,
+          "sha256": "672502b2b41819f8"
+        }
+      ],
+      "tests": [
+        "omega_hermes.test_hermes"
+      ],
+      "evidences": [
+        "omega_hermes/hermes_evidence.json"
+      ]
+    },
+    {
+      "code": "E-5.1",
+      "source": "§5.1 GARDIEN allowlist exacte",
+      "resume": "Allowlist sans joker, refus typés, CONNECT refusé, détection heuristique signalée.",
+      "fichiers": [
+        {
+          "chemin": "agent_guard/guard.py",
+          "existe": true,
+          "sha256": "a2a6e3b567bbceca"
+        }
+      ],
+      "tests": [
+        "agent_guard.test_guard",
+        "agent_guard.test_charge"
+      ],
+      "evidences": [
+        "agent_guard/guard_evidence.json"
+      ]
+    },
+    {
+      "code": "E-5.2",
+      "source": "§5.2 Terminal SETUP_MODE",
+      "resume": "Allowlist commandes et arguments, shell=False, délai 5 s, bac à sable, 64 Kio.",
+      "fichiers": [
+        {
+          "chemin": "terminal_auth/server.py",
+          "existe": true,
+          "sha256": "1a00480d8df8e380"
+        },
+        {
+          "chemin": "socle_preuve/auth.py",
+          "existe": true,
+          "sha256": "cb9fb7519fdc4174"
+        }
+      ],
+      "tests": [
+        "terminal_auth.test_terminal"
+      ],
+      "evidences": [
+        "outils/phase3_evidence.json"
+      ]
+    },
+    {
+      "code": "E-5.3",
+      "source": "§5.3 Runtime supervisé V8.1",
+      "resume": "flock, relances bornées, SIGTERM propre, aucune persistance cachée.",
+      "fichiers": [
+        {
+          "chemin": "runtime/superviseur.py",
+          "existe": true,
+          "sha256": "ad9ce095972b9ec6"
+        }
+      ],
+      "tests": [
+        "runtime.test_superviseur"
+      ],
+      "evidences": [
+        "outils/phase3_evidence.json"
+      ]
+    },
+    {
+      "code": "E-6.1",
+      "source": "§6.1 Orchestrateur",
+      "resume": "21 suites blueprint + balayage HERMÈS + Ω Q + dashboard.",
+      "fichiers": [
+        {
+          "chemin": "plateforme_omega/orchestrator.py",
+          "existe": true,
+          "sha256": "8fa7b050b6c1f788"
+        },
+        {
+          "chemin": "plateforme_omega/omega_q.py",
+          "existe": true,
+          "sha256": "ad2dc60a5587e849"
+        }
+      ],
+      "tests": [
+        "plateforme_omega.test_plateforme"
+      ],
+      "evidences": [
+        "plateforme_omega/plateforme_evidence.json"
+      ]
+    },
+    {
+      "code": "E-6.4",
+      "source": "§6.4 Règle Ω Q",
+      "resume": "Q = S + P + R − C ; veto si l'attaquant réussit.",
+      "fichiers": [
+        {
+          "chemin": "plateforme_omega/omega_q.py",
+          "existe": true,
+          "sha256": "ad2dc60a5587e849"
+        },
+        {
+          "chemin": "plateforme_omega/mtd.py",
+          "existe": true,
+          "sha256": "98d3c10500bbf167"
+        }
+      ],
+      "tests": [
+        "plateforme_omega.test_plateforme"
+      ],
+      "evidences": [
+        "plateforme_omega/omega_q_evidence.json"
+      ]
+    },
+    {
+      "code": "E-7.1",
+      "source": "§7.1 RAG extractif cité",
+      "resume": "Jamais de mémoire inventée : titre, révision, URL, ou aveu.",
+      "fichiers": [
+        {
+          "chemin": "rag_wiki/rag.py",
+          "existe": true,
+          "sha256": "7afe2c756f9c9115"
+        },
+        {
+          "chemin": "rag_wiki/corpus.py",
+          "existe": true,
+          "sha256": "40deff0994aaf784"
+        }
+      ],
+      "tests": [
+        "rag_wiki.test_rag"
+      ],
+      "evidences": [
+        "rag_wiki/rag_evidence.json"
+      ]
+    },
+    {
+      "code": "E-7.3",
+      "source": "§7.3 Épinglage TLS",
+      "resume": "SPKI SHA-256 YE2/Root YE/ISRG Root X2 ; interception fabriquée détectée.",
+      "fichiers": [
+        {
+          "chemin": "rag_wiki/pinning.py",
+          "existe": true,
+          "sha256": "817e12826eb10e97"
+        }
+      ],
+      "tests": [
+        "rag_wiki.test_rag"
+      ],
+      "evidences": [
+        "rag_wiki/pinning_evidence.json"
+      ]
+    },
+    {
+      "code": "E-8.1",
+      "source": "§8.1 Console unifiée statique",
+      "resume": "HTML statique sans CDN, 0 erreur console, pas de débordement mobile, chiffres depuis les évidences.",
+      "fichiers": [
+        {
+          "chemin": "console/generer.py",
+          "existe": true,
+          "sha256": "905432cd13e0c00f"
+        }
+      ],
+      "tests": [
+        "console.test_console"
+      ],
+      "evidences": [
+        "outils/phase7_evidence.json"
+      ]
+    },
+    {
+      "code": "E-8.2",
+      "source": "§8.2 Télégraphe scellé",
+      "resume": "CRC-16/X-25, aller-retour exact, sceau témoin sur chaque trame reçue.",
+      "fichiers": [
+        {
+          "chemin": "telegraphe/afsk.py",
+          "existe": true,
+          "sha256": "e2d02fbba07dcbc6"
+        },
+        {
+          "chemin": "telegraphe/transport.py",
+          "existe": true,
+          "sha256": "9c9c27be72760881"
+        }
+      ],
+      "tests": [
+        "telegraphe.test_afsk",
+        "telegraphe.test_transport"
+      ],
+      "evidences": [
+        "outils/phase7_evidence.json"
+      ]
+    },
+    {
+      "code": "E-10.3",
+      "source": "§10.3 Lignes rouges",
+      "resume": "Pas d'endpoint RCE non authentifié, pas de persistance cachée, pas de keylogger.",
+      "fichiers": [
+        {
+          "chemin": "socle_preuve/porte_http.py",
+          "existe": true,
+          "sha256": "3f33c93875fce3ed"
+        },
+        {
+          "chemin": "agent_guard/guard.py",
+          "existe": true,
+          "sha256": "a2a6e3b567bbceca"
+        },
+        {
+          "chemin": "terminal_auth/server.py",
+          "existe": true,
+          "sha256": "1a00480d8df8e380"
+        },
+        {
+          "chemin": "cryoloop_gateway/gateway.py",
+          "existe": true,
+          "sha256": "c8eae664fa6d493a"
+        },
+        {
+          "chemin": "omega_hermes/guardian.py",
+          "existe": true,
+          "sha256": "379c97c808bfacb1"
+        },
+        {
+          "chemin": "runtime/superviseur.py",
+          "existe": true,
+          "sha256": "ad9ce095972b9ec6"
+        }
+      ],
+      "tests": [
+        "cryoloop_gateway.test_gateway (test_la_passerelle_ne_peut_rien_executer)",
+        "omega_hermes.test_phase4 (test_guardian_refuse_tout_contenu)",
+        "runtime.test_superviseur (test_aucune_persistance_cachee)"
+      ],
+      "evidences": [
+        "(propriété de code vérifiée statiquement)"
+      ]
+    }
+  ],
+  "evidences": [
+    {
+      "chemin": "agent_guard/guard_evidence.json",
+      "module": "agent_guard",
+      "phase": 3,
+      "etiquette": "VÉRIFIÉ",
+      "verdict": "OK"
+    },
+    {
+      "chemin": "cryoloop/cryoloop_evidence.json",
+      "module": "cryoloop",
+      "phase": 5,
+      "etiquette": "SIMULÉ",
+      "verdict": "OK"
+    },
+    {
+      "chemin": "omega_hermes/ai_mode_evidence.json",
+      "module": "ai_mode",
+      "phase": 4,
+      "etiquette": "SIMULÉ",
+      "verdict": "OK"
+    },
+    {
+      "chemin": "omega_hermes/attrape_evidence.json",
+      "module": "attrape",
+      "phase": 4,
+      "etiquette": "SIMULÉ",
+      "verdict": "OK"
+    },
+    {
+      "chemin": "omega_hermes/brouillons_evidence.json",
+      "module": "brouillons",
+      "phase": 4,
+      "etiquette": "SIMULÉ",
+      "verdict": "OK"
+    },
+    {
+      "chemin": "omega_hermes/evasion_evidence.json",
+      "module": "evasion",
+      "phase": 4,
+      "etiquette": "SIMULÉ",
+      "verdict": "OK"
+    },
+    {
+      "chemin": "omega_hermes/guardian_evidence.json",
+      "module": "guardian",
+      "phase": 4,
+      "etiquette": "SIMULÉ",
+      "verdict": "OK"
+    },
+    {
+      "chemin": "omega_hermes/hermes_evidence.json",
+      "module": "omega_hermes",
+      "phase": 2,
+      "etiquette": "SIMULÉ",
+      "verdict": "OK"
+    },
+    {
+      "chemin": "omega_hermes/reverie_evidence.json",
+      "module": "reverie",
+      "phase": 4,
+      "etiquette": "SIMULÉ",
+      "verdict": "OK"
+    },
+    {
+      "chemin": "omega_hermes/scaling_evidence.json",
+      "module": "scaling",
+      "phase": 5,
+      "etiquette": "VÉRIFIÉ",
+      "verdict": "OK"
+    },
+    {
+      "chemin": "omega_hermes/swarm_evidence.json",
+      "module": "swarm",
+      "phase": 4,
+      "etiquette": "SIMULÉ",
+      "verdict": "OK"
+    },
+    {
+      "chemin": "outils/phase0_evidence.json",
+      "module": "squelette",
+      "phase": 0,
+      "etiquette": "VÉRIFIÉ",
+      "verdict": "OK"
+    },
+    {
+      "chemin": "outils/phase3_evidence.json",
+      "module": "portes_terrain",
+      "phase": 3,
+      "etiquette": "VÉRIFIÉ",
+      "verdict": "OK"
+    },
+    {
+      "chemin": "outils/phase7_evidence.json",
+      "module": "presentation",
+      "phase": 7,
+      "etiquette": "VÉRIFIÉ",
+      "verdict": "OK"
+    },
+    {
+      "chemin": "plateforme_omega/agi_evidence.json",
+      "module": "agi",
+      "phase": 5,
+      "etiquette": "SIMULÉ",
+      "verdict": "OK"
+    },
+    {
+      "chemin": "plateforme_omega/codage_evidence.json",
+      "module": "codage",
+      "phase": 5,
+      "etiquette": "SIMULÉ",
+      "verdict": "OK"
+    },
+    {
+      "chemin": "plateforme_omega/distribue_evidence.json",
+      "module": "distribue",
+      "phase": 5,
+      "etiquette": "VÉRIFIÉ",
+      "verdict": "OK"
+    },
+    {
+      "chemin": "plateforme_omega/etoile_evidence.json",
+      "module": "etoile",
+      "phase": 5,
+      "etiquette": "DÉMONTRÉ",
+      "verdict": "OK"
+    },
+    {
+      "chemin": "plateforme_omega/hyper_evidence.json",
+      "module": "hyper",
+      "phase": 5,
+      "etiquette": "VÉRIFIÉ",
+      "verdict": "OK"
+    },
+    {
+      "chemin": "plateforme_omega/mtd_evidence.json",
+      "module": "mtd",
+      "phase": 5,
+      "etiquette": "SIMULÉ",
+      "verdict": "OK"
+    },
+    {
+      "chemin": "plateforme_omega/omega_q_evidence.json",
+      "module": "omega_q",
+      "phase": 5,
+      "etiquette": "DÉMONTRÉ",
+      "verdict": "OK"
+    },
+    {
+      "chemin": "plateforme_omega/plateforme_evidence.json",
+      "module": "plateforme",
+      "phase": 5,
+      "etiquette": "VÉRIFIÉ",
+      "verdict": "OK"
+    },
+    {
+      "chemin": "plateforme_omega/prng_evidence.json",
+      "module": "prng",
+      "phase": 5,
+      "etiquette": "VÉRIFIÉ",
+      "verdict": "OK"
+    },
+    {
+      "chemin": "plateforme_omega/rubik_evidence.json",
+      "module": "rubik",
+      "phase": 5,
+      "etiquette": "VÉRIFIÉ",
+      "verdict": "OK"
+    },
+    {
+      "chemin": "plateforme_omega/tls_evidence.json",
+      "module": "tls",
+      "phase": 5,
+      "etiquette": "VÉRIFIÉ",
+      "verdict": "OK"
+    },
+    {
+      "chemin": "plateforme_omega/watcher_evidence.json",
+      "module": "watcher",
+      "phase": 5,
+      "etiquette": "VÉRIFIÉ",
+      "verdict": "OK"
+    },
+    {
+      "chemin": "rag_wiki/fusion_evidence.json",
+      "module": "fusion",
+      "phase": 6,
+      "etiquette": "VÉRIFIÉ",
+      "verdict": "ECHEC"
+    },
+    {
+      "chemin": "rag_wiki/pinning_evidence.json",
+      "module": "pinning",
+      "phase": 6,
+      "etiquette": "VÉRIFIÉ",
+      "verdict": "OK"
+    },
+    {
+      "chemin": "rag_wiki/rag_evidence.json",
+      "module": "rag",
+      "phase": 6,
+      "etiquette": "VÉRIFIÉ",
+      "verdict": "OK"
+    },
+    {
+      "chemin": "rinv/systeme_evidence.json",
+      "module": "systeme_rinv",
+      "phase": 1,
+      "etiquette": "VÉRIFIÉ",
+      "verdict": "OK"
+    },
+    {
+      "chemin": "socle_preuve/preuve_evidence.json",
+      "module": "socle_preuve",
+      "phase": 1,
+      "etiquette": "VÉRIFIÉ",
+      "verdict": "OK"
+    }
+  ],
+  "plateforme": {
+    "exit": 0,
+    "verdict": "OK",
+    "blueprint": {
+      "total": 21,
+      "ok": 20,
+      "absentes": [],
+      "echecs": [
+        "fusion"
+      ]
+    },
+    "echecs_connus": {
+      "fusion": "MRR de la fusion RRF sous TF-IDF seul sur ce corpus ; critère fixé avant la mesure (voir rag_wiki/fusion_evidence.json)"
+    },
+    "echecs_inattendus": [],
+    "duree_murale_s": 25.3,
+    "gain_parallele": 3.32,
+    "paralleles": 4,
+    "omega_q": {
+      "ACCEPTER": 30,
+      "REVOIR": 0,
+      "REJETER": 0
+    },
+    "balayage_hermes_meilleur": {
+      "facteur_lache": 50,
+      "entrainement": 90,
+      "score": 0.996,
+      "rejet_inconnu": 1.0,
+      "fpr": 0.0
+    }
+  },
+  "tests": {
+    "total": 226,
+    "verdict": "OK",
+    "duree_s": null,
+    "sortie_finale": "OK"
+  },
+  "ruff": {
+    "exit": 0,
+    "sortie": ""
+  },
+  "couverture": {
+    "exit": 0,
+    "pct_total": 71.9,
+    "stmts": 6718,
+    "branches": 1376,
+    "plus_bas_5": [
+      {
+        "fichier": "console/generer.py",
+        "pct": 0.0
+      },
+      {
+        "fichier": "cryoloop/preuve.py",
+        "pct": 0.0
+      },
+      {
+        "fichier": "omega_hermes/scaling.py",
+        "pct": 0.0
+      }
+    ],
+    "cœur_sous_80": [
+      {
+        "fichier": "console/generer.py",
+        "pct": 0.0
+      },
+      {
+        "fichier": "cryoloop/preuve.py",
+        "pct": 0.0
+      },
+      {
+        "fichier": "omega_hermes/scaling.py",
+        "pct": 0.0
+      },
+      {
+        "fichier": "outils/changelog.py",
+        "pct": 0.0
+      },
+      {
+        "fichier": "outils/verifier_phase0.py",
+        "pct": 0.0
+      },
+      {
+        "fichier": "outils/verifier_phase3.py",
+        "pct": 0.0
+      },
+      {
+        "fichier": "outils/verifier_phase7.py",
+        "pct": 0.0
+      },
+      {
+        "fichier": "plateforme_omega/agi.py",
+        "pct": 0.0
+      },
+      {
+        "fichier": "plateforme_omega/codage.py",
+        "pct": 0.0
+      },
+      {
+        "fichier": "plateforme_omega/distribue.py",
+        "pct": 0.0
+      },
+      {
+        "fichier": "plateforme_omega/etoile.py",
+        "pct": 0.0
+      },
+      {
+        "fichier": "plateforme_omega/hyper.py",
+        "pct": 0.0
+      },
+      {
+        "fichier": "plateforme_omega/mtd.py",
+        "pct": 0.0
+      },
+      {
+        "fichier": "plateforme_omega/prng.py",
+        "pct": 0.0
+      },
+      {
+        "fichier": "plateforme_omega/rubik.py",
+        "pct": 0.0
+      },
+      {
+        "fichier": "plateforme_omega/tls.py",
+        "pct": 0.0
+      },
+      {
+        "fichier": "plateforme_omega/watcher.py",
+        "pct": 0.0
+      },
+      {
+        "fichier": "runtime/superviseur.py",
+        "pct": 25.2
+      },
+      {
+        "fichier": "cryoloop_gateway/ticket.py",
+        "pct": 54.5
+      },
+      {
+        "fichier": "rag_wiki/pinning.py",
+        "pct": 55.0
+      },
+      {
+        "fichier": "rag_wiki/corpus.py",
+        "pct": 56.0
+      },
+      {
+        "fichier": "plateforme_omega/commun.py",
+        "pct": 58.3
+      },
+      {
+        "fichier": "cryoloop_gateway/keygen.py",
+        "pct": 63.2
+      },
+      {
+        "fichier": "plateforme_omega/omega_q.py",
+        "pct": 76.7
+      },
+      {
+        "fichier": "cryoloop/validateur.py",
+        "pct": 78.1
+      },
+      {
+        "fichier": "outils/evidence.py",
+        "pct": 78.2
+      }
+    ]
+  }
+}

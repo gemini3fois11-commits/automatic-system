@@ -47,7 +47,8 @@ def mesurer(graine=7) -> dict:
     lots = {}
     for b in (1, 10, 100, 1000):
         Xb = X[:b]
-        lots[b] = mediane_ms(lambda: banc.bob.decider(Xb, banc.std.transformer(traits(Xb))), 20 if b == 1000 else 60) / b
+        lots[b] = mediane_ms(lambda Y=Xb: banc.bob.decider(Y, banc.std.transformer(traits(Y))),
+                             20 if b == 1000 else 60) / b
     pente, ordonnee = np.polyfit([1, 10, 100, 1000],
                                  [lots[b] * b for b in (1, 10, 100, 1000)], 1)
     noeuds_max = int(BUDGET_CPU * BATTEMENT_S * 1000 / lots[1000])

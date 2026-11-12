@@ -13,7 +13,7 @@
     "http_en_clair_refuse": true,
     "poignee_muette": {
       "ok": true,
-      "ms": 2.338296000061746
+      "ms": 2.957766999998057
     },
     "corps_trop_gros": true,
     "rafale_corps_trop_gros": {
@@ -31,7 +31,7 @@
       "corps": {
         "refus": "refus_saturation"
       },
-      "ms": 2.338729000030071
+      "ms": 4.083055000023705
     },
     "reprise_apres_saturation": true,
     "journal": {
@@ -63,7 +63,7 @@
       {
         "critere": "3 clients TCP muets (sans ClientHello) n'immobilisent pas le serveur",
         "ok": true,
-        "detail": "2 ms"
+        "detail": "3 ms"
       },
       {
         "critere": "corps > 16 Kio : 413",
@@ -83,7 +83,7 @@
       {
         "critere": "saturation : 503 refus_saturation immédiat",
         "ok": true,
-        "detail": "2 ms"
+        "detail": "4 ms"
       },
       {
         "critere": "le service reprend une fois les connexions lentes coupées",
@@ -107,11 +107,11 @@
     "Pas d'authentification du client : le serveur journalise ce qu'on lui envoie, il ne l'atteste pas."
   ],
   "execution": {
-    "genere_le": "2026-11-11T19:15:52Z",
+    "genere_le": "2026-11-12T20:02:06Z",
     "commande": "python3 /home/user/automatic-system/plateforme_omega/tls.py",
     "python": "3.13.18",
     "plateforme": "Linux-6.18.44-fc-v378-x86_64-with-glibc2.39",
-    "commit": "a8a2e952ef58f602d687f937efc165db8fae05ad",
+    "commit": "1162883f90c464e35a6853b7a5aa9cbd0cac8ac4",
     "arbre_modifie": true
   }
 }

@@ -18,10 +18,10 @@ def isoler(banc: Banc, n: int = 100) -> dict:
     rng = Flux(banc.graine, FLUX_BROUILLONS).suivant()
     lots = {"nominal": [], "DRAFT": [], "COVERT": []}
     for i in range(n):
-        base = lambda: banc.twin.observer(CLASSES[i % 3])
-        lots["nominal"].append(base())
-        lots["DRAFT"].append(banc.alice.draft(base(), rng))
-        lots["COVERT"].append(banc.alice.covert(base(), rng))
+        classe = CLASSES[i % 3]
+        lots["nominal"].append(banc.twin.observer(classe))
+        lots["DRAFT"].append(banc.alice.draft(banc.twin.observer(classe), rng))
+        lots["COVERT"].append(banc.alice.covert(banc.twin.observer(classe), rng))
     res = {}
     for nom, X in lots.items():
         decisions, _, T, _ = banc.juger(np.stack(X))

@@ -8,25 +8,25 @@
   "config": {},
   "mesures": {
     "etapes_ms": {
-      "standardisation": -0.012387499999999996,
-      "distances de Mahalanobis": 0.0039665,
-      "plateaux": 0.009113,
-      "traits (FFT radix-2 comprise)": 0.3096185
+      "standardisation": -0.008525000000000005,
+      "distances de Mahalanobis": 0.003374,
+      "plateaux": 0.009814,
+      "traits (FFT radix-2 comprise)": 0.353665
     },
     "par_observation_ms_selon_lot": {
-      "1": 0.419905,
-      "10": 0.14237215,
-      "100": 0.17560233,
-      "1000": 0.298773414
+      "1": 0.3984475,
+      "10": 0.16174135,
+      "100": 0.15825301,
+      "1000": 0.196756771
     },
     "modele_lineaire_ms": {
-      "fixe": -4.459350190638085,
-      "par_observation": 0.3024434511814156
+      "fixe": -1.2857028605441763,
+      "par_observation": 0.19778644864282346
     },
     "borne": {
       "battement_s": 5,
       "budget_cpu": 0.5,
-      "noeuds_max_par_battement": 8367,
+      "noeuds_max_par_battement": 12706,
       "machine": "x86_64",
       "coeurs": 4
     },
@@ -39,12 +39,12 @@
       {
         "critere": "le traitement par lot amortit le coût fixe (lot 1000 < lot 1)",
         "ok": true,
-        "detail": "0.420 → 0.2988 ms par observation"
+        "detail": "0.398 → 0.1968 ms par observation"
       },
       {
         "critere": "borne explicite : nœuds par battement de 5 s à 50 % de CPU",
         "ok": true,
-        "detail": "8367 nœuds"
+        "detail": "12706 nœuds"
       }
     ]
   },
@@ -53,11 +53,11 @@
     "Un seul cœur utilisé : la borne est celle d'un processus Python + numpy."
   ],
   "execution": {
-    "genere_le": "2026-11-11T19:15:56Z",
+    "genere_le": "2026-11-12T20:02:07Z",
     "commande": "python3 /home/user/automatic-system/omega_hermes/scaling.py",
     "python": "3.13.18",
     "plateforme": "Linux-6.18.44-fc-v378-x86_64-with-glibc2.39",
-    "commit": "a8a2e952ef58f602d687f937efc165db8fae05ad",
+    "commit": "1162883f90c464e35a6853b7a5aa9cbd0cac8ac4",
     "arbre_modifie": true
   }
 }

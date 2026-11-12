@@ -41,11 +41,11 @@
       "T2",
       "T4"
     ],
-    "duree_sequentielle_s": 2.0539600710001196,
-    "duree_parallele_s": 1.1844385960000636,
-    "gain": 1.7341211928896052,
+    "duree_sequentielle_s": 2.704083781999998,
+    "duree_parallele_s": 1.524992472000008,
+    "gain": 1.773178446221198,
     "paralleles": 4,
-    "delai_silence_s": 0.5134900177500299,
+    "delai_silence_s": 0.6760209454999995,
     "criteres": [
       {
         "critere": "toutes les tâches aboutissent, résultats justes",
@@ -65,7 +65,7 @@
       {
         "critere": "gain parallèle mesuré > 1 malgré les fautes",
         "ok": true,
-        "detail": "×1.73 sur 4 voies"
+        "detail": "×1.77 sur 4 voies"
       }
     ]
   },
@@ -75,11 +75,11 @@
     "Avant détection, un travailleur muet peut recevoir plusieurs tâches en parallèle : chacune coûte un délai complet."
   ],
   "execution": {
-    "genere_le": "2026-11-11T19:16:04Z",
+    "genere_le": "2026-11-12T20:02:19Z",
     "commande": "python3 /home/user/automatic-system/plateforme_omega/distribue.py",
     "python": "3.13.18",
     "plateforme": "Linux-6.18.44-fc-v378-x86_64-with-glibc2.39",
-    "commit": "a8a2e952ef58f602d687f937efc165db8fae05ad",
+    "commit": "1162883f90c464e35a6853b7a5aa9cbd0cac8ac4",
     "arbre_modifie": true
   }
 }

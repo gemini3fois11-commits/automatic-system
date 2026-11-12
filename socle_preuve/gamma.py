@@ -57,8 +57,8 @@ def lire_blocs(chemin) -> tuple[list[dict], Rapport]:
     if lignes and lignes[-1] == b"":
         lignes.pop()
     for attendu, brut in enumerate(lignes):
-        def faute(raison):
-            return blocs, Rapport(False, len(blocs), prev, attendu, raison)
+        def faute(raison, *, _blocs=blocs, _prev=prev, _attendu=attendu):
+            return _blocs, Rapport(False, len(_blocs), _prev, _attendu, raison)
         try:
             bloc = json.loads(brut)
         except (UnicodeDecodeError, json.JSONDecodeError):
