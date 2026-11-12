@@ -1,0 +1,58 @@
+# OMEGA-TAILS package list
+# Base system
+live-boot
+live-config
+live-config-systemd
+systemd
+udev
+dbus
+
+# Networking (minimal — no history tools)
+iproute2
+iptables
+nftables
+tor
+torsocks
+wireguard-tools
+
+# Crypto & privacy
+gnupg2
+cryptsetup
+age
+pass
+
+# Security hardening
+apparmor
+apparmor-utils
+apparmor-profiles
+libpam-apparmor
+auditd
+
+# Utilities
+bash
+coreutils
+util-linux
+procps
+psmisc
+lsof
+pciutils
+usbutils
+hdparm
+
+# Secure erase
+secure-delete
+wipe
+
+# Network analysis (defensive)
+tcpdump
+nmap
+netcat-openbsd
+
+# Terminal & UI
+xterm
+openbox
+tint2
+pcmanfm
+
+# Fonts
+fonts-liberation

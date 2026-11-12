@@ -1,0 +1,62 @@
+#!/bin/bash
+# OMEGA-TAILS status dashboard
+set -euo pipefail
+
+RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'
+CYAN='\033[0;36m'; BOLD='\033[1m'; RESET='\033[0m'
+
+ok()   { echo -e "  ${GREEN}✓${RESET}  $*"; }
+fail() { echo -e "  ${RED}✗${RESET}  $*"; }
+warn() { echo -e "  ${YELLOW}!${RESET}  $*"; }
+
+echo -e "${BOLD}${CYAN}"
+echo "  ╔══════════════════════════════════════╗"
+echo "  ║        OMEGA-TAILS  STATUS           ║"
+echo "  ╚══════════════════════════════════════╝${RESET}"
+echo ""
+
+echo -e "${BOLD}[ Amnestic Volatility ]${RESET}"
+for p in /tmp /var/log /var/tmp /home /root; do
+    fstype=$(stat -f -c '%T' "$p" 2>/dev/null || echo "?")
+    if [[ "$fstype" == "tmpfs" ]]; then
+        ok "$p  → tmpfs (volatile)"
+    else
+        fail "$p  → $fstype  !! PERSISTENCE RISK"
+    fi
+done
+echo ""
+
+echo -e "${BOLD}[ Invariant Gate ]${RESET}"
+if systemctl is-active --quiet omega-invariant-gate 2>/dev/null; then
+    ok "gate service: active"
+else
+    warn "gate service: inactive (check logs)"
+fi
+if [[ $(cat /proc/sys/kernel/dmesg_restrict 2>/dev/null) == "1" ]]; then
+    ok "dmesg_restrict: 1"
+else
+    warn "dmesg_restrict: unrestricted"
+fi
+if [[ $(cat /proc/sys/kernel/yama/ptrace_scope 2>/dev/null) -ge 2 ]]; then
+    ok "ptrace_scope: restricted"
+else
+    warn "ptrace_scope: $(cat /proc/sys/kernel/yama/ptrace_scope 2>/dev/null || echo '?')"
+fi
+echo ""
+
+echo -e "${BOLD}[ Void Monitor ]${RESET}"
+if systemctl is-active --quiet omega-void-monitor 2>/dev/null; then
+    ok "void-monitor: running"
+else
+    warn "void-monitor: not running"
+fi
+if ! awk 'NR>1' /proc/swaps | grep -q . 2>/dev/null; then
+    ok "swap: OFF"
+else
+    fail "swap: ACTIVE — memory may leak to disk"
+fi
+echo ""
+
+echo -e "${BOLD}[ Memory ]${RESET}"
+free -h | awk 'NR==2{printf "  RAM  total=%-6s used=%-6s free=%s\n", $2,$3,$4}'
+echo ""
