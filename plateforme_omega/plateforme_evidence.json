@@ -73,210 +73,210 @@
         "suite": "passerelle",
         "statut": "OK",
         "code": 0,
-        "duree_s": 14.130985219000081,
+        "duree_s": 14.058670742999993,
         "fin": "OK"
       },
       {
         "suite": "validateur",
         "statut": "OK",
         "code": 0,
-        "duree_s": 3.576605291000078,
+        "duree_s": 3.507117641999912,
         "fin": "18/18 scénarios — TOUT EST OK — commit Γ : INTERDIT EN L'ÉTAT ACTUEL"
       },
       {
         "suite": "rag",
         "statut": "OK",
         "code": 0,
-        "duree_s": 0.38653815400004987,
+        "duree_s": 0.39236303799998495,
         "fin": "rag : 5/5 critères — TOUT EST OK"
       },
       {
         "suite": "pinning",
         "statut": "OK",
         "code": 0,
-        "duree_s": 0.6756094500000245,
+        "duree_s": 0.5073030840001138,
         "fin": "pinning : 5/5 critères — TOUT EST OK"
       },
       {
         "suite": "fusion",
         "statut": "ECHEC",
         "code": 1,
-        "duree_s": 1.0850513070000716,
+        "duree_s": 1.0045795949999956,
         "fin": "fusion : 2/3 critères — ÉCHEC"
       },
       {
         "suite": "hermes",
         "statut": "OK",
         "code": 0,
-        "duree_s": 1.2841861279999875,
+        "duree_s": 1.3696581649999189,
         "fin": "9/9 critères — TOUT EST OK"
       },
       {
         "suite": "ai_mode",
         "statut": "OK",
         "code": 0,
-        "duree_s": 0.5897368799999185,
+        "duree_s": 0.706162630000108,
         "fin": "3/3 critères sur 1 module(s) — TOUT EST OK"
       },
       {
         "suite": "scaling",
         "statut": "OK",
         "code": 0,
-        "duree_s": 6.0902858630000765,
+        "duree_s": 6.321353387000045,
         "fin": "scaling : 3/3 critères — TOUT EST OK"
       },
       {
         "suite": "reverie",
         "statut": "OK",
         "code": 0,
-        "duree_s": 0.9839858740000409,
+        "duree_s": 1.0264943829999993,
         "fin": "4/4 critères sur 1 module(s) — TOUT EST OK"
       },
       {
         "suite": "tls",
         "statut": "OK",
         "code": 0,
-        "duree_s": 3.4391533869999193,
+        "duree_s": 3.4626717040000585,
         "fin": "tls : 12/12 critères — TOUT EST OK"
       },
       {
         "suite": "omega_q",
         "statut": "OK",
         "code": 0,
-        "duree_s": 0.04810555300002761,
+        "duree_s": 0.0367499520000365,
         "fin": "omega_q : 4/4 critères — TOUT EST OK"
       },
       {
         "suite": "mtd",
         "statut": "OK",
         "code": 0,
-        "duree_s": 6.403469726000026,
+        "duree_s": 6.472890472000017,
         "fin": "mtd : 5/5 critères — TOUT EST OK"
       },
       {
         "suite": "watcher",
         "statut": "OK",
         "code": 0,
-        "duree_s": 0.062432607999994616,
+        "duree_s": 0.05907659700005752,
         "fin": "watcher : 4/4 critères — TOUT EST OK"
       },
       {
         "suite": "agi",
         "statut": "OK",
         "code": 0,
-        "duree_s": 0.9770971880000161,
+        "duree_s": 1.119014363000133,
         "fin": "agi : 5/5 critères — TOUT EST OK"
       },
       {
         "suite": "evasion",
         "statut": "OK",
         "code": 0,
-        "duree_s": 0.7775663529999974,
+        "duree_s": 0.729484014000036,
         "fin": "3/3 critères sur 1 module(s) — TOUT EST OK"
       },
       {
         "suite": "guardian",
         "statut": "OK",
         "code": 0,
-        "duree_s": 0.4900936949999277,
+        "duree_s": 0.472430691999989,
         "fin": "4/4 critères sur 1 module(s) — TOUT EST OK"
       },
       {
         "suite": "prng",
         "statut": "OK",
         "code": 0,
-        "duree_s": 0.46589848400003575,
+        "duree_s": 0.4116290540000591,
         "fin": "prng : 8/8 critères — TOUT EST OK"
       },
       {
         "suite": "codage",
         "statut": "OK",
         "code": 0,
-        "duree_s": 0.7810206359999938,
+        "duree_s": 0.7433763330000147,
         "fin": "codage : 3/3 critères — TOUT EST OK"
       },
       {
         "suite": "brouillons",
         "statut": "OK",
         "code": 0,
-        "duree_s": 0.5730146700000205,
+        "duree_s": 0.6012880230000519,
         "fin": "3/3 critères sur 1 module(s) — TOUT EST OK"
       },
       {
         "suite": "attrape",
         "statut": "OK",
         "code": 0,
-        "duree_s": 0.6601326870001003,
+        "duree_s": 0.7304167659999621,
         "fin": "3/3 critères sur 1 module(s) — TOUT EST OK"
       },
       {
         "suite": "hyper",
         "statut": "OK",
         "code": 0,
-        "duree_s": 2.7056698399999277,
+        "duree_s": 2.5401191889998245,
         "fin": "hyper : 4/4 critères — TOUT EST OK"
       },
       {
         "suite": "socle_preuve",
         "statut": "OK",
         "code": 0,
-        "duree_s": 2.0783784660000038,
+        "duree_s": 2.2205940259998442,
         "fin": "10/10 scénarios — TOUT EST OK"
       },
       {
         "suite": "systeme_rinv",
         "statut": "OK",
         "code": 0,
-        "duree_s": 0.4260375059999433,
+        "duree_s": 0.4701871699999174,
         "fin": "18/18 contrôles — TOUT EST OK"
       },
       {
         "suite": "gardien",
         "statut": "OK",
         "code": 0,
-        "duree_s": 1.6423764559999654,
+        "duree_s": 1.623404482000069,
         "fin": "21/21 cas — TOUT EST OK"
       },
       {
         "suite": "terminal",
         "statut": "OK",
         "code": 0,
-        "duree_s": 13.248887012999944,
+        "duree_s": 13.256873956999925,
         "fin": "OK"
       },
       {
         "suite": "runtime",
         "statut": "OK",
         "code": 0,
-        "duree_s": 5.8830149120000215,
+        "duree_s": 5.9200308249999125,
         "fin": "OK"
       },
       {
         "suite": "swarm",
         "statut": "OK",
         "code": 0,
-        "duree_s": 0.9835235680000096,
+        "duree_s": 0.983497386000181,
         "fin": "5/5 critères sur 1 module(s) — TOUT EST OK"
       },
       {
         "suite": "rubik",
         "statut": "OK",
         "code": 0,
-        "duree_s": 0.10440736099997139,
+        "duree_s": 0.11372220199996264,
         "fin": "rubik : 4/4 critères — TOUT EST OK"
       },
       {
         "suite": "distribue",
         "statut": "OK",
         "code": 0,
-        "duree_s": 5.687014696999995,
+        "duree_s": 5.754766436999944,
         "fin": "distribue : 4/4 critères — TOUT EST OK"
       },
       {
         "suite": "etoile",
         "statut": "OK",
         "code": 0,
-        "duree_s": 0.1792306859999826,
+        "duree_s": 0.17660659300008774,
         "fin": "etoile : 6/6 critères — TOUT EST OK"
       }
     ],
@@ -294,9 +294,9 @@
         "fusion"
       ]
     },
-    "duree_murale_s": 25.298221420999994,
-    "duree_sequentielle_estimee_s": 84.02425339800016,
-    "gain_parallele": 3.3213502245755437,
+    "duree_murale_s": 25.312572431000035,
+    "duree_sequentielle_estimee_s": 84.44281515899979,
+    "gain_parallele": 3.336002904848327,
     "paralleles": 4,
     "balayage_hermes": [
       {
@@ -439,12 +439,12 @@
       {
         "module": "passerelle",
         "loc": 170,
-        "runtime_s": 14.13,
+        "runtime_s": 14.06,
         "S": 1.0,
         "P": 0.0,
         "R": 0.0,
-        "C": 0.202758210158334,
-        "Q": 0.797242,
+        "C": 0.20215558952499996,
+        "Q": 0.797844,
         "decision": "ACCEPTER",
         "drapeaux": [
           "gain_non_mesure",
@@ -454,12 +454,12 @@
       {
         "module": "validateur",
         "loc": 393,
-        "runtime_s": 3.58,
+        "runtime_s": 3.51,
         "S": 1.0,
         "P": 0.0,
         "R": 0.0,
-        "C": 0.22630504409166732,
-        "Q": 0.773695,
+        "C": 0.22572598034999927,
+        "Q": 0.774274,
         "decision": "ACCEPTER",
         "drapeaux": [
           "gain_non_mesure",
@@ -473,8 +473,8 @@
         "S": 1.0,
         "P": 0.0,
         "R": 0.0,
-        "C": 0.06472115128333375,
-        "Q": 0.935279,
+        "C": 0.06476969198333321,
+        "Q": 0.93523,
         "decision": "ACCEPTER",
         "drapeaux": [
           "gain_non_mesure",
@@ -484,12 +484,12 @@
       {
         "module": "pinning",
         "loc": 149,
-        "runtime_s": 0.68,
+        "runtime_s": 0.51,
         "S": 1.0,
         "P": 0.0,
         "R": 0.0,
-        "C": 0.0801300787500002,
-        "Q": 0.91987,
+        "C": 0.07872752570000094,
+        "Q": 0.921272,
         "decision": "ACCEPTER",
         "drapeaux": [
           "gain_non_mesure",
@@ -499,12 +499,12 @@
       {
         "module": "fusion",
         "loc": 114,
-        "runtime_s": 1.09,
+        "runtime_s": 1.0,
         "S": 0.6666666666666667,
         "P": 0.0,
         "R": 0.0,
-        "C": 0.0660420942250006,
-        "Q": 0.600625,
+        "C": 0.06537149662499997,
+        "Q": 0.601295,
         "decision": "ACCEPTER",
         "drapeaux": [
           "gain_non_mesure",
@@ -514,12 +514,12 @@
       {
         "module": "hermes",
         "loc": 530,
-        "runtime_s": 1.28,
+        "runtime_s": 1.37,
         "S": 1.0,
         "P": 0.0,
         "R": 0.0,
-        "C": 0.27570155106666655,
-        "Q": 0.724298,
+        "C": 0.276413818041666,
+        "Q": 0.723586,
         "decision": "ACCEPTER",
         "drapeaux": [
           "gain_non_mesure",
@@ -529,12 +529,12 @@
       {
         "module": "ai_mode",
         "loc": 46,
-        "runtime_s": 0.59,
+        "runtime_s": 0.71,
         "S": 1.0,
         "P": 0.0,
         "R": 0.0,
-        "C": 0.02791447399999932,
-        "Q": 0.972086,
+        "C": 0.028884688583334234,
+        "Q": 0.971115,
         "decision": "ACCEPTER",
         "drapeaux": [
           "gain_non_mesure",
@@ -544,12 +544,12 @@
       {
         "module": "scaling",
         "loc": 64,
-        "runtime_s": 6.09,
+        "runtime_s": 6.32,
         "S": 1.0,
         "P": 0.0,
         "R": 0.0,
-        "C": 0.0827523821916673,
-        "Q": 0.917248,
+        "C": 0.08467794489166704,
+        "Q": 0.915322,
         "decision": "ACCEPTER",
         "drapeaux": [
           "gain_non_mesure",
@@ -559,12 +559,12 @@
       {
         "module": "reverie",
         "loc": 66,
-        "runtime_s": 0.98,
+        "runtime_s": 1.03,
         "S": 1.0,
         "P": 0.0,
         "R": 0.0,
-        "C": 0.041199882283333676,
-        "Q": 0.9588,
+        "C": 0.04155411985833333,
+        "Q": 0.958446,
         "decision": "ACCEPTER",
         "drapeaux": [
           "gain_non_mesure",
@@ -574,12 +574,12 @@
       {
         "module": "tls",
         "loc": 200,
-        "runtime_s": 3.44,
+        "runtime_s": 3.46,
         "S": 1.0,
         "P": 0.0,
         "R": 0.0,
-        "C": 0.12865961155833266,
-        "Q": 0.87134,
+        "C": 0.12885559753333384,
+        "Q": 0.871144,
         "decision": "ACCEPTER",
         "drapeaux": [
           "gain_non_mesure",
@@ -589,12 +589,12 @@
       {
         "module": "omega_q",
         "loc": 52,
-        "runtime_s": 0.05,
+        "runtime_s": 0.04,
         "S": 1.0,
         "P": 0.0,
         "R": 0.0,
-        "C": 0.026400879608333563,
-        "Q": 0.973599,
+        "C": 0.026306249600000303,
+        "Q": 0.973694,
         "decision": "ACCEPTER",
         "drapeaux": [
           "gain_non_mesure",
@@ -604,12 +604,12 @@
       {
         "module": "mtd",
         "loc": 81,
-        "runtime_s": 6.4,
+        "runtime_s": 6.47,
         "S": 1.0,
         "P": 0.0,
         "R": 0.0,
-        "C": 0.09386224771666687,
-        "Q": 0.906138,
+        "C": 0.09444075393333348,
+        "Q": 0.905559,
         "decision": "ACCEPTER",
         "drapeaux": [
           "gain_non_mesure",
@@ -623,8 +623,8 @@
         "S": 1.0,
         "P": 0.0,
         "R": 0.0,
-        "C": 0.04102027173333329,
-        "Q": 0.95898,
+        "C": 0.04099230497500048,
+        "Q": 0.959008,
         "decision": "ACCEPTER",
         "drapeaux": [
           "gain_non_mesure",
@@ -634,12 +634,12 @@
       {
         "module": "agi",
         "loc": 79,
-        "runtime_s": 0.98,
+        "runtime_s": 1.12,
         "S": 1.0,
         "P": 0.0,
         "R": 0.0,
-        "C": 0.0476424765666668,
-        "Q": 0.952358,
+        "C": 0.04882511969166778,
+        "Q": 0.951175,
         "decision": "ACCEPTER",
         "drapeaux": [
           "gain_non_mesure",
@@ -649,12 +649,12 @@
       {
         "module": "evasion",
         "loc": 36,
-        "runtime_s": 0.78,
+        "runtime_s": 0.73,
         "S": 1.0,
         "P": 0.0,
         "R": 0.0,
-        "C": 0.02447971960833331,
-        "Q": 0.97552,
+        "C": 0.0240790334500003,
+        "Q": 0.975921,
         "decision": "ACCEPTER",
         "drapeaux": [
           "gain_non_mesure",
@@ -664,12 +664,12 @@
       {
         "module": "guardian",
         "loc": 71,
-        "runtime_s": 0.49,
+        "runtime_s": 0.47,
         "S": 1.0,
         "P": 0.0,
         "R": 0.0,
-        "C": 0.039584114124999396,
-        "Q": 0.960416,
+        "C": 0.03943692243333324,
+        "Q": 0.960563,
         "decision": "ACCEPTER",
         "drapeaux": [
           "gain_non_mesure",
@@ -679,12 +679,12 @@
       {
         "module": "prng",
         "loc": 131,
-        "runtime_s": 0.47,
+        "runtime_s": 0.41,
         "S": 1.0,
         "P": 0.0,
         "R": 0.0,
-        "C": 0.06938248736666697,
-        "Q": 0.930618,
+        "C": 0.06893024211666716,
+        "Q": 0.93107,
         "decision": "ACCEPTER",
         "drapeaux": [
           "gain_non_mesure",
@@ -694,12 +694,12 @@
       {
         "module": "codage",
         "loc": 66,
-        "runtime_s": 0.78,
+        "runtime_s": 0.74,
         "S": 1.0,
         "P": 0.0,
         "R": 0.0,
-        "C": 0.03950850529999995,
-        "Q": 0.960491,
+        "C": 0.03919480277500012,
+        "Q": 0.960805,
         "decision": "ACCEPTER",
         "drapeaux": [
           "gain_non_mesure",
@@ -709,12 +709,12 @@
       {
         "module": "brouillons",
         "loc": 29,
-        "runtime_s": 0.57,
+        "runtime_s": 0.6,
         "S": 1.0,
         "P": 0.0,
         "R": 0.0,
-        "C": 0.019275122250000172,
-        "Q": 0.980725,
+        "C": 0.019510733525000434,
+        "Q": 0.980489,
         "decision": "ACCEPTER",
         "drapeaux": [
           "gain_non_mesure",
@@ -724,12 +724,12 @@
       {
         "module": "attrape",
         "loc": 19,
-        "runtime_s": 0.66,
+        "runtime_s": 0.73,
         "S": 1.0,
         "P": 0.0,
         "R": 0.0,
-        "C": 0.015001105725000834,
-        "Q": 0.984999,
+        "C": 0.015586806383333016,
+        "Q": 0.984413,
         "decision": "ACCEPTER",
         "drapeaux": [
           "gain_non_mesure",
@@ -739,12 +739,12 @@
       {
         "module": "hyper",
         "loc": 62,
-        "runtime_s": 2.71,
+        "runtime_s": 2.54,
         "S": 1.0,
         "P": 0.999808,
         "R": 0.0,
-        "C": 0.05354724866666606,
-        "Q": 1.946261,
+        "C": 0.05216765990833187,
+        "Q": 1.94764,
         "decision": "ACCEPTER",
         "drapeaux": [
           "reprise_non_mesuree"
@@ -753,12 +753,12 @@
       {
         "module": "socle_preuve",
         "loc": 351,
-        "runtime_s": 2.08,
+        "runtime_s": 2.22,
         "S": 1.0,
         "P": 0.0,
         "R": 0.0,
-        "C": 0.19281982055000002,
-        "Q": 0.80718,
+        "C": 0.19400495021666536,
+        "Q": 0.805995,
         "decision": "ACCEPTER",
         "drapeaux": [
           "gain_non_mesure",
@@ -768,12 +768,12 @@
       {
         "module": "systeme_rinv",
         "loc": 445,
-        "runtime_s": 0.43,
+        "runtime_s": 0.47,
         "S": 1.0,
         "P": 0.0,
         "R": 0.0,
-        "C": 0.22605031254999952,
-        "Q": 0.77395,
+        "C": 0.22641822641666598,
+        "Q": 0.773582,
         "decision": "ACCEPTER",
         "drapeaux": [
           "gain_non_mesure",
@@ -783,12 +783,12 @@
       {
         "module": "gardien",
         "loc": 218,
-        "runtime_s": 1.64,
+        "runtime_s": 1.62,
         "S": 1.0,
         "P": 0.0,
         "R": 0.0,
-        "C": 0.12268647046666638,
-        "Q": 0.877314,
+        "C": 0.12252837068333391,
+        "Q": 0.877472,
         "decision": "ACCEPTER",
         "drapeaux": [
           "gain_non_mesure",
@@ -798,12 +798,12 @@
       {
         "module": "terminal",
         "loc": 195,
-        "runtime_s": 13.25,
+        "runtime_s": 13.26,
         "S": 1.0,
         "P": 0.0,
         "R": 0.0,
-        "C": 0.20790739177499953,
-        "Q": 0.792093,
+        "C": 0.20797394964166604,
+        "Q": 0.792026,
         "decision": "ACCEPTER",
         "drapeaux": [
           "gain_non_mesure",
@@ -813,12 +813,12 @@
       {
         "module": "runtime",
         "loc": 141,
-        "runtime_s": 5.88,
+        "runtime_s": 5.92,
         "S": 1.0,
         "P": 0.0,
         "R": 0.0,
-        "C": 0.11952512426666684,
-        "Q": 0.880475,
+        "C": 0.11983359020833259,
+        "Q": 0.880166,
         "decision": "ACCEPTER",
         "drapeaux": [
           "gain_non_mesure",
@@ -832,7 +832,7 @@
         "S": 1.0,
         "P": 0.0,
         "R": 0.0,
-        "C": 0.03569602973333341,
+        "C": 0.03569581155000151,
         "Q": 0.964304,
         "decision": "ACCEPTER",
         "drapeaux": [
@@ -843,12 +843,12 @@
       {
         "module": "rubik",
         "loc": 80,
-        "runtime_s": 0.1,
+        "runtime_s": 0.11,
         "S": 1.0,
         "P": 0.0,
         "R": 1.0,
-        "C": 0.04087006134166643,
-        "Q": 1.95913,
+        "C": 0.04094768501666635,
+        "Q": 1.959052,
         "decision": "ACCEPTER",
         "drapeaux": [
           "gain_non_mesure"
@@ -857,12 +857,12 @@
       {
         "module": "distribue",
         "loc": 99,
-        "runtime_s": 5.69,
+        "runtime_s": 5.75,
         "S": 1.0,
-        "P": 0.5503597939439269,
+        "P": 0.5497271515399138,
         "R": 1.0,
-        "C": 0.09689178914166663,
-        "Q": 2.453468,
+        "C": 0.09745638697499953,
+        "Q": 2.452271,
         "decision": "ACCEPTER",
         "drapeaux": []
       },
@@ -873,8 +873,8 @@
         "S": 1.0,
         "P": 0.0,
         "R": 0.0,
-        "C": 0.031493589049999854,
-        "Q": 0.968506,
+        "C": 0.031471721608334065,
+        "Q": 0.968528,
         "decision": "ACCEPTER",
         "drapeaux": [
           "gain_non_mesure",
@@ -893,11 +893,11 @@
     "Ω Q : S est la part de critères réussis de chaque évidence ; P et R ne valent que si l'évidence mesure un gain ou une reprise, sinon 0 avec drapeau."
   ],
   "execution": {
-    "genere_le": "2026-11-12T20:00:17Z",
+    "genere_le": "2026-11-12T20:03:48Z",
     "commande": "python3 /home/user/automatic-system/plateforme_omega/orchestrator.py",
     "python": "3.13.18",
     "plateforme": "Linux-6.18.44-fc-v378-x86_64-with-glibc2.39",
-    "commit": "1162883f90c464e35a6853b7a5aa9cbd0cac8ac4",
+    "commit": "09f7a56424071df0848ad8f03f39b088c6900c4a",
     "arbre_modifie": true
   }
 }

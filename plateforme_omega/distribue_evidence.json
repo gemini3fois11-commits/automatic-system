@@ -29,11 +29,6 @@
         "tache": 8,
         "travailleur": "T4",
         "faute": "silence"
-      },
-      {
-        "tache": 13,
-        "travailleur": "T4",
-        "faute": "silence"
       }
     ],
     "reprise": 1.0,
@@ -41,11 +36,11 @@
       "T2",
       "T4"
     ],
-    "duree_sequentielle_s": 2.704083781999998,
-    "duree_parallele_s": 1.524992472000008,
-    "gain": 1.773178446221198,
+    "duree_sequentielle_s": 2.505554901000096,
+    "duree_parallele_s": 1.1425299790000736,
+    "gain": 2.192988321578155,
     "paralleles": 4,
-    "delai_silence_s": 0.6760209454999995,
+    "delai_silence_s": 0.626388725250024,
     "criteres": [
       {
         "critere": "toutes les tâches aboutissent, résultats justes",
@@ -55,7 +50,7 @@
       {
         "critere": "2/2 fautes injectées détectées et reprises",
         "ok": true,
-        "detail": "T2:code_3, T4:silence, T4:silence, T4:silence"
+        "detail": "T2:code_3, T4:silence, T4:silence"
       },
       {
         "critere": "seuls les travailleurs fautifs sont écartés",
@@ -65,7 +60,7 @@
       {
         "critere": "gain parallèle mesuré > 1 malgré les fautes",
         "ok": true,
-        "detail": "×1.77 sur 4 voies"
+        "detail": "×2.19 sur 4 voies"
       }
     ]
   },
@@ -75,11 +70,11 @@
     "Avant détection, un travailleur muet peut recevoir plusieurs tâches en parallèle : chacune coûte un délai complet."
   ],
   "execution": {
-    "genere_le": "2026-11-12T20:02:19Z",
+    "genere_le": "2026-11-12T20:05:52Z",
     "commande": "python3 /home/user/automatic-system/plateforme_omega/distribue.py",
     "python": "3.13.18",
     "plateforme": "Linux-6.18.44-fc-v378-x86_64-with-glibc2.39",
-    "commit": "1162883f90c464e35a6853b7a5aa9cbd0cac8ac4",
+    "commit": "09f7a56424071df0848ad8f03f39b088c6900c4a",
     "arbre_modifie": true
   }
 }

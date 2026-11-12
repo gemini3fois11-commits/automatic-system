@@ -79,7 +79,7 @@
           "precision": null
         }
       },
-      "latence_mediane_ms": 0.39533700000000005,
+      "latence_mediane_ms": 0.3923905,
       "latence_plancher_ms": 6e-05
     },
     "iterations": [
@@ -355,11 +355,11 @@
     "Ω Q non calculé (phase 5) : le module n'est pas « terminé » au sens du §11.4."
   ],
   "execution": {
-    "genere_le": "2026-11-12T20:02:01Z",
+    "genere_le": "2026-11-12T20:05:34Z",
     "commande": "python3 /home/user/automatic-system/omega_hermes/loop.py",
     "python": "3.13.18",
     "plateforme": "Linux-6.18.44-fc-v378-x86_64-with-glibc2.39",
-    "commit": "1162883f90c464e35a6853b7a5aa9cbd0cac8ac4",
+    "commit": "09f7a56424071df0848ad8f03f39b088c6900c4a",
     "arbre_modifie": true
   }
 }

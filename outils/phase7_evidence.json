@@ -23,12 +23,12 @@
       {
         "controle": "témoin HMAC en accord sur chaque bloc scellé",
         "ok": true,
-        "detail": "INTÈGRE — 3 bloc(s), tête 2020f5da52ff1ca7… — témoin en accord sur 3 bloc(s)"
+        "detail": "INTÈGRE — 3 bloc(s), tête 933c0c7573edb0ce… — témoin en accord sur 3 bloc(s)"
       },
       {
         "controle": "console générée en HTML statique auto-contenu",
         "ok": true,
-        "detail": "console générée : /home/user/automatic-system/console/plateforme-omega-hermes-v1-0.html · 56622 octets"
+        "detail": "console générée : /home/user/automatic-system/console/plateforme-omega-hermes-v1-0.html · 58437 octets"
       },
       {
         "controle": "vérification Chromium : 0 erreur console (desktop + mobile)",
@@ -61,7 +61,7 @@
       "desktop": {
         "scrollWidth": 1280,
         "clientWidth": 1280,
-        "scrollHeight": 16642,
+        "scrollHeight": 17220,
         "liens": [
           "agent_guard/guard_evidence.json",
           "cryoloop/cryoloop_evidence.json",
@@ -76,6 +76,7 @@
           "omega_hermes/swarm_evidence.json",
           "outils/phase0_evidence.json",
           "outils/phase3_evidence.json",
+          "outils/phase7_evidence.json",
           "plateforme_omega/agi_evidence.json",
           "plateforme_omega/codage_evidence.json",
           "plateforme_omega/distribue_evidence.json",
@@ -106,6 +107,7 @@
           "#m-swarm",
           "#m-squelette",
           "#m-portes_terrain",
+          "#m-presentation",
           "#m-agi",
           "#m-codage",
           "#m-distribue",
@@ -136,6 +138,7 @@
           "omega_hermes/swarm_evidence.json",
           "outils/phase0_evidence.json",
           "outils/phase3_evidence.json",
+          "outils/phase7_evidence.json",
           "plateforme_omega/agi_evidence.json",
           "plateforme_omega/codage_evidence.json",
           "plateforme_omega/distribue_evidence.json",
@@ -154,9 +157,9 @@
           "rinv/systeme_evidence.json",
           "socle_preuve/preuve_evidence.json"
         ],
-        "modules": 30,
+        "modules": 31,
         "verdictTotal": "INCOMPLET",
-        "kpiLignes": 30,
+        "kpiLignes": 31,
         "missionVisible": true,
         "missionText": "Mission — proposée, en attente de confirmation du propriétaire :\n    « Démontrer qu'un système défensif peut prouver son propre refus — et le prouver à un témoin indépendant. »\n    Toute fonctionnalité qui ne sert pas cette phrase est hors périmètre,",
         "debordement_px": 0,
@@ -165,7 +168,7 @@
       "mobile": {
         "scrollWidth": 375,
         "clientWidth": 375,
-        "scrollHeight": 28998,
+        "scrollHeight": 30062,
         "liens": [
           "agent_guard/guard_evidence.json",
           "cryoloop/cryoloop_evidence.json",
@@ -180,6 +183,7 @@
           "omega_hermes/swarm_evidence.json",
           "outils/phase0_evidence.json",
           "outils/phase3_evidence.json",
+          "outils/phase7_evidence.json",
           "plateforme_omega/agi_evidence.json",
           "plateforme_omega/codage_evidence.json",
           "plateforme_omega/distribue_evidence.json",
@@ -210,6 +214,7 @@
           "#m-swarm",
           "#m-squelette",
           "#m-portes_terrain",
+          "#m-presentation",
           "#m-agi",
           "#m-codage",
           "#m-distribue",
@@ -240,6 +245,7 @@
           "omega_hermes/swarm_evidence.json",
           "outils/phase0_evidence.json",
           "outils/phase3_evidence.json",
+          "outils/phase7_evidence.json",
           "plateforme_omega/agi_evidence.json",
           "plateforme_omega/codage_evidence.json",
           "plateforme_omega/distribue_evidence.json",
@@ -258,17 +264,17 @@
           "rinv/systeme_evidence.json",
           "socle_preuve/preuve_evidence.json"
         ],
-        "modules": 30,
+        "modules": 31,
         "verdictTotal": "INCOMPLET",
-        "kpiLignes": 30,
+        "kpiLignes": 31,
         "missionVisible": true,
         "missionText": "Mission — proposée, en attente de confirmation du propriétaire :\n    « Démontrer qu'un système défensif peut prouver son propre refus — et le prouver à un témoin indépendant. »\n    Toute fonctionnalité qui ne sert pas cette phrase est hors périmètre,",
         "debordement_px": 0,
         "erreurs": []
       },
       "liens": {
-        "total": 90,
-        "internes": 60,
+        "total": 93,
+        "internes": 62,
         "manquants": []
       }
     }
@@ -279,11 +285,11 @@
     "Voie microphone du télégraphe non jouée (restée [EXPÉRIMENTAL])."
   ],
   "execution": {
-    "genere_le": "2026-11-12T19:54:11Z",
+    "genere_le": "2026-11-12T20:03:23Z",
     "commande": "python3 /home/user/automatic-system/outils/verifier_phase7.py",
     "python": "3.13.18",
     "plateforme": "Linux-6.18.44-fc-v378-x86_64-with-glibc2.39",
-    "commit": "1162883f90c464e35a6853b7a5aa9cbd0cac8ac4",
+    "commit": "09f7a56424071df0848ad8f03f39b088c6900c4a",
     "arbre_modifie": true
   }
 }

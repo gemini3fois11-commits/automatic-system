@@ -1,6 +1,6 @@
 {
-  "genere_le": "2026-11-12T20:01:33+00:00",
-  "commit": "1162883f90c464e35a6853b7a5aa9cbd0cac8ac4",
+  "genere_le": "2026-11-12T20:05:06+00:00",
+  "commit": "09f7a56424071df0848ad8f03f39b088c6900c4a",
   "exigences": [
     {
       "code": "E-1.1",
@@ -724,7 +724,7 @@
     },
     "echecs_inattendus": [],
     "duree_murale_s": 25.3,
-    "gain_parallele": 3.32,
+    "gain_parallele": 3.34,
     "paralleles": 4,
     "omega_q": {
       "ACCEPTER": 30,

@@ -8,25 +8,25 @@
   "config": {},
   "mesures": {
     "etapes_ms": {
-      "standardisation": -0.008525000000000005,
-      "distances de Mahalanobis": 0.003374,
-      "plateaux": 0.009814,
-      "traits (FFT radix-2 comprise)": 0.353665
+      "distances de Mahalanobis": 0.003376,
+      "plateaux": 0.010928,
+      "standardisation": 0.023924500000000015,
+      "traits (FFT radix-2 comprise)": 0.3889565
     },
     "par_observation_ms_selon_lot": {
-      "1": 0.3984475,
-      "10": 0.16174135,
-      "100": 0.15825301,
-      "1000": 0.196756771
+      "1": 0.4394945,
+      "10": 0.1638166,
+      "100": 0.16060419,
+      "1000": 0.2057664495
     },
     "modele_lineaire_ms": {
-      "fixe": -1.2857028605441763,
-      "par_observation": 0.19778644864282346
+      "fixe": -1.5121924763524108,
+      "par_observation": 0.20697866688155697
     },
     "borne": {
       "battement_s": 5,
       "budget_cpu": 0.5,
-      "noeuds_max_par_battement": 12706,
+      "noeuds_max_par_battement": 12149,
       "machine": "x86_64",
       "coeurs": 4
     },
@@ -34,17 +34,17 @@
       {
         "critere": "coûts par étape mesurés et ordonnés",
         "ok": true,
-        "detail": "standardisation < distances de Mahalanobis < plateaux < traits (FFT radix-2 comprise)"
+        "detail": "distances de Mahalanobis < plateaux < standardisation < traits (FFT radix-2 comprise)"
       },
       {
         "critere": "le traitement par lot amortit le coût fixe (lot 1000 < lot 1)",
         "ok": true,
-        "detail": "0.398 → 0.1968 ms par observation"
+        "detail": "0.439 → 0.2058 ms par observation"
       },
       {
         "critere": "borne explicite : nœuds par battement de 5 s à 50 % de CPU",
         "ok": true,
-        "detail": "12706 nœuds"
+        "detail": "12149 nœuds"
       }
     ]
   },
@@ -53,11 +53,11 @@
     "Un seul cœur utilisé : la borne est celle d'un processus Python + numpy."
   ],
   "execution": {
-    "genere_le": "2026-11-12T20:02:07Z",
+    "genere_le": "2026-11-12T20:05:41Z",
     "commande": "python3 /home/user/automatic-system/omega_hermes/scaling.py",
     "python": "3.13.18",
     "plateforme": "Linux-6.18.44-fc-v378-x86_64-with-glibc2.39",
-    "commit": "1162883f90c464e35a6853b7a5aa9cbd0cac8ac4",
+    "commit": "09f7a56424071df0848ad8f03f39b088c6900c4a",
     "arbre_modifie": true
   }
 }

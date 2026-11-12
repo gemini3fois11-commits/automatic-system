@@ -7,7 +7,7 @@ certification n'est conférée ni revendiquée ; seule la rigueur est visée).*
 
 - **Suite complète** : 226 tests, verdict `OK`.
 - **Cycle plateforme** : 20/21 suites du blueprint
-  OK en 25.3 s (gain ×3.32 sur
+  OK en 25.3 s (gain ×3.34 sur
   4 voies). Échecs connus documentés :
   `fusion`. Échecs inattendus :
   aucun.

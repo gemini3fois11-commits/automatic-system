@@ -43,11 +43,11 @@
     "La discrimination DRAFT / COVERT est une règle sur le trait 31, pas un classifieur."
   ],
   "execution": {
-    "genere_le": "2026-11-12T20:02:09Z",
+    "genere_le": "2026-11-12T20:05:42Z",
     "commande": "python3 /home/user/automatic-system/omega_hermes/phase4.py --module brouillons",
     "python": "3.13.18",
     "plateforme": "Linux-6.18.44-fc-v378-x86_64-with-glibc2.39",
-    "commit": "1162883f90c464e35a6853b7a5aa9cbd0cac8ac4",
+    "commit": "09f7a56424071df0848ad8f03f39b088c6900c4a",
     "arbre_modifie": true
   }
 }
