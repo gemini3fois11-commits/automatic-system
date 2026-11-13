@@ -1,0 +1,125 @@
+{
+  "format": 1,
+  "module": "telegraphe",
+  "phase": 7,
+  "etiquette": "VÉRIFIÉ",
+  "verdict": "OK",
+  "graine": 7,
+  "config": {
+    "mark_hz": 1200,
+    "space_hz": 2200,
+    "baud": 1200,
+    "fs": 48000,
+    "message_reference": "OMEGA-HERMÈS — le transport se prouve à un témoin. Graine 7.",
+    "essais_corruption": 60,
+    "gigue_morse_pct": 30
+  },
+  "mesures": {
+    "afsk": {
+      "octets": 65,
+      "bits": 584,
+      "echantillons": 23360,
+      "duree_ms": 486.667,
+      "crc_x25": "0xc568",
+      "fs": 48000,
+      "mark_hz": 1200,
+      "space_hz": 2200,
+      "baud": 1200,
+      "wav_octets": 46764,
+      "fs_wav": 48000,
+      "exact_memoire": true,
+      "exact_wav": true
+    },
+    "corruption": {
+      "essais": 60,
+      "rejets": 57,
+      "corrects": 3,
+      "octets_faux_livres": 0
+    },
+    "morse": {
+      "propres_exacts": true,
+      "gigue_pct": 30,
+      "gigue_exacts": 15,
+      "gigue_total": 15,
+      "exemple": {
+        "texte": "CQ DE OMEGA HERMES",
+        "code": "-.-. --.- / -.. . / --- -- . --. .- / .... . .-. -- . ..."
+      }
+    },
+    "registre": {
+      "emissions": 3,
+      "temoin_accord_sain": true,
+      "chaine_coherente_apres_reecriture": true,
+      "temoin_detecte_reecriture": true,
+      "seq_fautif": 1,
+      "raison": "desaccord_temoin"
+    },
+    "crc_valeur_de_controle": {
+      "entree": "123456789",
+      "x25": "0x906e"
+    },
+    "criteres": [
+      {
+        "critere": "aller-retour AFSK exact (mémoire)",
+        "ok": true,
+        "detail": "65 o, 584 bits, 23360 éch., 487 ms, CRC 0xc568"
+      },
+      {
+        "critere": "aller-retour AFSK exact (WAV)",
+        "ok": true,
+        "detail": "46764 o WAV à 48000 Hz"
+      },
+      {
+        "critere": "corruption : aucun octet faux livré",
+        "ok": true,
+        "detail": "0 faux sur 60 essais"
+      },
+      {
+        "critere": "corruption : détectée au moins une fois",
+        "ok": true,
+        "detail": "57 rejets, 3 corrects"
+      },
+      {
+        "critere": "Morse aller-retour propre exact",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "critere": "Morse adaptatif exact sous gigue ±30 %",
+        "ok": true,
+        "detail": "15/15"
+      },
+      {
+        "critere": "émissions scellées : témoin en accord",
+        "ok": true,
+        "detail": "3 émissions"
+      },
+      {
+        "critere": "réécriture recalculée détectée par le témoin",
+        "ok": true,
+        "detail": "Γ cohérente, témoin : desaccord_temoin seq 1"
+      },
+      {
+        "critere": "CRC-16/X-25 valeur de contrôle 0x906E",
+        "ok": true,
+        "detail": "0x906e"
+      }
+    ]
+  },
+  "limites": [
+    "Chiffres mesurés ici à 48 000 Hz ; ce ne sont pas les repères historiques du blueprint (22 050 Hz, 6 909 échantillons, CRC 0x141e), calculés sur un autre message et une autre fréquence.",
+    "La démodulation aligne ses fenêtres sur le débit connu du flux généré : aucune récupération d'horloge en aveugle.",
+    "Voie microphone : [EXPÉRIMENTAL], non implémentée et jamais promise (§8.2).",
+    "Le CRC détecte, il n'authentifie pas : l'authentification est le sceau du témoin. Un attaquant qui tient la machine tient journal et secret (§3.2).",
+    "Le décodeur Morse adaptatif suppose au moins un élément d'une unité (point ou silence intra) ; un message tout en traits surestime l'unité.",
+    "Le « télégraphe qui refuse » (BOB en réception, §8.2) n'est pas implémenté : il attend la décision du propriétaire."
+  ],
+  "execution": {
+    "genere_le": "2026-11-13T03:39:33Z",
+    "commande": "python3 /home/user/automatic-system/telegraphe/banc.py",
+    "python": "3.13.18",
+    "plateforme": "Linux-6.18.44-fc-v445-x86_64-with-glibc2.39",
+    "commit": "1162883f90c464e35a6853b7a5aa9cbd0cac8ac4",
+    "arbre_modifie": true
+  }
+}

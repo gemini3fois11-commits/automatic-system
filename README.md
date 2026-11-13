@@ -47,6 +47,8 @@ python3 -m socle_preuve demo             # démonstration du témoin, écrit l'�
 python3 -m rinv.systeme                  # tout le système de bout en bout, écrit l'évidence
 python3 -m omega_hermes.loop             # phase 2 : boucle HERMÈS 200 × 5, écrit l'évidence
 python3 -m cryoloop banc                 # validateur CRYOLOOP Ω∞ : banc + LOOP 001, écrit l'évidence
+python3 -m telegraphe.banc               # phase 7 : télégraphe scellé, écrit l'évidence
+python3 -m console.generer               # phase 7 : console unifiée (console/console.html)
 python3 -m outils.verifier_phase0        # contrôle du squelette
 python3 -m outils.changelog              # régénère CHANGELOG.md
 ```
@@ -60,4 +62,6 @@ python3 -m outils.changelog              # régénère CHANGELOG.md
 | 1+ | `rinv` branché sur le socle : refus prouvés de bout en bout | voir `rinv/systeme_evidence.json` |
 | 2 | HERMÈS cœur : twin, alice, eyes, bob, hermes, loop | voir `omega_hermes/hermes_evidence.json` |
 | 5 (avancé) | Validateur CRYOLOOP Ω∞ ([spécification](cryoloop/SPEC.md)) | voir `cryoloop/cryoloop_evidence.json` |
-| 3 à 7 | Portes, essaim, plateforme, connaissance, présentation | `[SPÉCIFIÉ]` |
+| 7 | Télégraphe scellé : AFSK Bell 202, Morse adaptatif, registre Γ témoigné | voir [`telegraphe/`](telegraphe) et `telegraphe/telegraphe_evidence.json` |
+| 7 | Console unifiée §8.1 (rapport engendré depuis les évidences) | voir [`console/`](console) ([`console.html`](console/console.html)) |
+| 3 à 7 | Portes terrain, essaim, plateforme et connaissance : voir le [CHANGELOG](CHANGELOG.md) phase par phase | `[VÉRIFIÉ]` / `[SIMULÉ]` selon le module |

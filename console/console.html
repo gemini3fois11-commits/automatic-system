@@ -1,0 +1,240 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Console OMEGA-HERMÈS</title><style>
+:root{--fond:#f7f7f5;--texte:#1d1d1b;--doux:#6b6b66;--cadre:#ddd;--accent:#1b5e9c;
+--ok:#1b7a3a;--ko:#b3261e;--boite:#fff}
+@media (prefers-color-scheme:dark){:root{--fond:#151514;--texte:#ecece8;--doux:#a0a09a;
+--cadre:#333;--accent:#6db3f2;--ok:#6fcf8f;--ko:#ff8a80;--boite:#1d1d1b}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--fond);color:var(--texte);font:15px/1.6 system-ui,sans-serif}
+main{max-width:860px;margin:0 auto;padding:24px 16px}
+h1{font-size:1.5rem;margin:0 0 4px}h2{font-size:1.15rem;border-bottom:2px solid var(--accent);
+padding-bottom:4px;margin-top:40px}h3{font-size:1rem;margin:16px 0 6px}
+a{color:var(--accent)}code{font-family:ui-monospace,monospace;font-size:.92em}
+.etq{color:var(--accent);font-weight:600;font-size:.85rem}
+.note{color:var(--doux)}.ok{color:var(--ok)}.echec{color:var(--ko)}
+table{width:100%;border-collapse:collapse;margin:8px 0}
+td,th{border-bottom:1px solid var(--cadre);padding:5px 8px;text-align:left}
+.tableau{overflow-x:auto}
+.widget{background:var(--boite);border:1px solid var(--cadre);border-radius:8px;padding:14px 16px;margin:16px 0}
+.boutons{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+button{font:inherit;padding:7px 14px;border:1px solid var(--accent);background:transparent;
+color:var(--accent);border-radius:6px;cursor:pointer}button:hover{background:var(--accent);color:var(--fond)}
+.sortie{font-family:ui-monospace,monospace;padding:10px;border-radius:6px;border:1px solid var(--cadre);
+white-space:pre-wrap;min-height:1.2em}.sortie.ok{border-color:var(--ok)}.sortie.echec{border-color:var(--ko)}
+.deux{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media (max-width:620px){.deux{grid-template-columns:1fr}}
+ul.attaques{font-size:.92rem;color:var(--doux)}nav{font-size:.9rem;margin:12px 0}nav a{margin-right:12px}
+.pied{margin-top:40px;color:var(--doux);font-size:.88rem;border-top:1px solid var(--cadre);padding-top:12px}
+</style></head><body><main>
+<h1>Console OMEGA-HERMÈS / LOOP</h1>
+<p class="note">Rapport statique engendré depuis les fichiers d'évidence — aucun chiffre
+saisi à la main (blueprint §8.1, §9.1). Deux éléments sont vérifiés en direct dans votre
+navigateur : la chaîne Γ et le manipulateur Morse.</p>
+<nav><a href="#hermes">HERMÈS</a><a href="#registre">Registre</a><a href="#preuve">Preuve</a>
+<a href="#doc">Documentation</a><a href="#telegraphe">Télégraphe</a></nav>
+<section id="hermes"><h2>1 · HERMÈS <span class="etq">[SIMULÉ]</span></h2>
+<p class="note">Résultats enregistrés de la boucle (graine 7),
+données synthétiques. Ce n'est pas une boucle qui tourne dans le navigateur : les
+mathématiques HERMÈS vivent dans <code>omega_hermes/</code> et ne sont pas réécrites
+ici — on n'affiche que ce que Python a mesuré.</p>
+<p><strong>Score global 0.9914</strong> · rejet inconnu 1.000
+· FPR 0.000 · BER 0.021 · exactitude 7 labels 0.685
+· latence médiane 0.406 ms</p>
+<div class="tableau"><table><tr><th>Itération</th><th>Score</th><th>Rejet inconnu</th>
+<th>FPR</th><th>BER</th></tr><tr><td>1</td><td>0.9914</td><td>1.000</td><td>0.000</td><td>0.021</td></tr><tr><td>2</td><td>0.9886</td><td>1.000</td><td>0.000</td><td>0.029</td></tr><tr><td>3</td><td>0.9971</td><td>1.000</td><td>0.000</td><td>0.007</td></tr><tr><td>4</td><td>0.9829</td><td>1.000</td><td>0.000</td><td>0.043</td></tr><tr><td>5</td><td>0.9971</td><td>1.000</td><td>0.000</td><td>0.007</td></tr></table></div></section><section id="registre"><h2>2 · Registre scellé
+<span class="etq">[VÉRIFIÉ]</span></h2>
+<p>Chaque décision — refus compris — est inscrite dans une chaîne Γ (SHA-256 chaîné)
+et scellée par un témoin indépendant. Réécrire un bloc <em>et</em> recalculer la suite
+reproduit une chaîne localement cohérente ; seul le témoin le détecte.</p>
+<p class="note">Socle : 10/10 scénarios,
+Ed25519 12/12 vecteurs RFC 8032.
+rinv : 18/18 contrôles. Attaques rejouées :</p>
+<ul class="attaques"><li>effacer le refus de mallory (bloc 8) avec recalcul — audit local <code>exit 0</code>, témoin <code>exit 4</code></li><li>injecter une transition de mallory dans le registre — audit local <code>exit 0</code>, témoin <code>exit 4</code></li></ul>
+
+<div class="widget"><h3>Vérifier la chaîne Γ, ici, dans votre navigateur</h3>
+<p class="note">SHA-256 recalculé en direct sur un journal réellement scellé par
+<code>socle_preuve.gamma</code>. Le témoin (HMAC/Ed25519) n'est <em>pas</em> rejoué :
+son secret reste hors de la page. Son verdict enregistré est montré plus haut.</p>
+<div class="boutons"><button id="btn-verifier">Vérifier</button>
+<button id="btn-falsifier">Falsifier le bloc 2</button>
+<button id="btn-restaurer">Restaurer</button></div>
+<pre id="sortie-chaine" class="sortie"></pre></div>
+<script>window.__CHAINE__ = ["{\"decision\":\"EMIS\",\"donnees\":{\"crc_x25\":\"0x0ffb\",\"message\":\"SOS\"},\"hash\":\"b05bb9c7a63776f926195e7f0aaf935c0da5a46af1ea753ee87fd840449fc808\",\"prev_hash\":\"0000000000000000000000000000000000000000000000000000000000000000\",\"raison\":\"message_scelle\",\"seq\":0,\"ts\":\"2026-11-13T03:46:48.598893Z\",\"type\":\"emission\"}", "{\"decision\":\"EMIS\",\"donnees\":{\"crc_x25\":\"0x097b\",\"message\":\"OMEGA HERMES\"},\"hash\":\"312a316e77eecf3d1f950ded461822451f3e80d73fb8b57c5f8b9013b4af6bf4\",\"prev_hash\":\"b05bb9c7a63776f926195e7f0aaf935c0da5a46af1ea753ee87fd840449fc808\",\"raison\":\"message_scelle\",\"seq\":1,\"ts\":\"2026-11-13T03:46:48.600227Z\",\"type\":\"emission\"}", "{\"decision\":\"EMIS\",\"donnees\":{\"crc_x25\":\"0x9d0e\",\"message\":\"GRAINE 7\"},\"hash\":\"a4e080873070e2c5b32dd71876643d4b3a04c94954047b841e78b1f78a729c3b\",\"prev_hash\":\"312a316e77eecf3d1f950ded461822451f3e80d73fb8b57c5f8b9013b4af6bf4\",\"raison\":\"message_scelle\",\"seq\":2,\"ts\":\"2026-11-13T03:46:48.600943Z\",\"type\":\"emission\"}", "{\"decision\":\"EMIS\",\"donnees\":{\"crc_x25\":\"0x5a3c\",\"message\":\"CQ DE OMEGA\"},\"hash\":\"598f529ae227a02281aa3818781673cde9cb4e5c9135bae8ae5d15a6e3a10db4\",\"prev_hash\":\"a4e080873070e2c5b32dd71876643d4b3a04c94954047b841e78b1f78a729c3b\",\"raison\":\"message_scelle\",\"seq\":3,\"ts\":\"2026-11-13T03:46:48.601325Z\",\"type\":\"emission\"}"];</script></section><section id="preuve"><h2>3 · Preuve <span class="etq">[VÉRIFIÉ]</span></h2>
+<p><strong>29/30 suites OK</strong> · gain parallèle
+×3.33 · durée murale 24.1 s · Ω Q :
+ACCEPTER 30 / REVOIR 0 / REJETER 0.</p>
+<p class="note">Meilleur balayage HERMÈS : facteur lâche 50,
+entraînement 90/classe → score 0.9960,
+rejet inconnu 1.000, FPR 0.000.</p>
+<p>Connaissance — RAG MRR <strong>0.844</strong> sur 12 documents.</p>
+<p class="echec">Échec assumé — fusion : MRR 0.767 <strong>sous</strong>
+TF-IDF seul. Critère fixé avant la mesure, non retuné (étiquette [VÉRIFIÉ],
+verdict ECHEC). HF actif : False.</p>
+<div class="tableau"><table><tr><th>Stratégie</th><th>MRR</th></tr><tr><td>tfidf</td><td>0.844</td></tr><tr><td>bm25</td><td>0.844</td></tr><tr><td>entites</td><td>0.751</td></tr></table></div></section><section id="doc"><h2>4 · Documentation honnête</h2>
+<p><strong>Mission</strong> — proposée, en attente de confirmation du propriétaire :
+<em>démontrer qu'un système défensif peut prouver son propre refus, et le prouver à un
+témoin indépendant.</em></p>
+<div class="deux"><div><h3>Ce que le système fait</h3><ul>
+<li>Inscrit chaque décision, refus compris, dans une chaîne Γ scellée par un témoin.</li>
+<li>Détecte toute réécriture d'un journal, bloc par bloc, même recalculée.</li>
+<li>Transporte un message (Morse, AFSK Bell 202) et scelle chaque émission.</li>
+<li>Refuse par défaut : hôtes hors allowlist, scripts d'installation, transitions non prouvées.</li>
+</ul></div><div><h3>Ce qu'il ne fait pas</h3><ul>
+<li>Protéger contre qui tient la machine : secret et journal y vivent ensemble (§3.2).</li>
+<li>Promettre la voie microphone du télégraphe : <span class="etq">[EXPÉRIMENTAL]</span>, non vérifiée.</li>
+<li>Faire tourner HERMÈS dans le navigateur : la boucle est en Python, pas réécrite ici.</li>
+<li>Se présenter comme une certification : c'est une démonstration défensive (§1.5, §10.2).</li>
+</ul></div></div>
+<p class="note">Étiquettes d'honnêteté employées partout : [DÉMONTRÉ], [VÉRIFIÉ], [SIMULÉ],
+[SPÉCIFIÉ], [EXPÉRIMENTAL]. Un chiffre sans évidence devient une limite écrite, pas un nombre.</p></section><section id="telegraphe"><h2>5 · Télégraphe <span class="etq">[VÉRIFIÉ]</span>
+<span class="note">(composant, pas la page d'accueil)</span></h2>
+<p>AFSK Bell 202 — mark 1200 Hz / space 2200 Hz, 1200 bauds,
+48000 Hz. Message de référence : 65 octets → 584 bits →
+23360 échantillons (487 ms), CRC 0xc568.
+Aller-retour exact en mémoire et via WAV (46764 octets).</p>
+<p class="note">Corruption : 0 octet faux livré sur 60 essais
+(57 rejets nets). Morse adaptatif : 15/15 exacts
+sous gigue ±30 %. Émissions scellées : 3, témoin en accord ;
+réécriture recalculée détectée (<code>desaccord_temoin</code>).</p>
+<p class="note">Positionnement (§8.2) : Morse (1844), radio (1901), Bell 202 (1976) sont
+anciens. Le seul apport revendiqué est le <strong>sceau vérifiable par un témoin</strong>.</p>
+
+<div class="widget"><h3>Manipulateur Morse — maintenez la barre Espace (ou le bouton)</h3>
+<p class="note">Décodeur à unité de temps <em>adaptative</em> : l'unité est estimée depuis
+votre cadence, jamais donnée. Port fidèle de <code>telegraphe.morse</code>.</p>
+<div class="boutons"><button id="btn-key" type="button">● Appuyer (Espace)</button>
+<button id="btn-rejouer" type="button">Rejouer « CQ DE OMEGA HERMES »</button>
+<button id="btn-vider" type="button">Vider</button></div>
+<p>Signal : <code id="morse-signal"></code></p>
+<p>Décodé : <strong id="morse-texte"></strong></p></div></section>
+<p class="pied">Évidences lues : omega_hermes/hermes_evidence.json, plateforme_omega/plateforme_evidence.json, rag_wiki/fusion_evidence.json, rag_wiki/rag_evidence.json, rinv/systeme_evidence.json, socle_preuve/preuve_evidence.json, telegraphe/telegraphe_evidence.json.
+Dernier cycle plateforme : 2026-11-11T19:15:05Z.</p>
+</main>
+<script>
+const GENESE = "0".repeat(64);
+function canonical(o){
+  if(Array.isArray(o)) return "["+o.map(canonical).join(",")+"]";
+  if(o && typeof o === "object"){
+    return "{"+Object.keys(o).sort().map(k=>JSON.stringify(k)+":"+canonical(o[k])).join(",")+"}";
+  }
+  return JSON.stringify(o);
+}
+function octets(prevAscii, canonStr){
+  const enc = new TextEncoder();
+  const a = enc.encode(prevAscii), b = enc.encode(canonStr);
+  const out = new Uint8Array(a.length + b.length);
+  out.set(a, 0); out.set(b, a.length); return out;
+}
+async function sha256Hex(bytes){
+  const d = await crypto.subtle.digest("SHA-256", bytes);
+  return [...new Uint8Array(d)].map(x=>x.toString(16).padStart(2,"0")).join("");
+}
+async function verifierChaine(lignes){
+  let prev = GENESE;
+  for(let i=0;i<lignes.length;i++){
+    let bloc; try { bloc = JSON.parse(lignes[i]); } catch(_) { return {integre:false, seq:i, raison:"json_invalide"}; }
+    const corps = {}; for(const k of Object.keys(bloc)) if(k!=="hash") corps[k]=bloc[k];
+    if(bloc.prev_hash !== prev) return {integre:false, seq:bloc.seq, raison:"prev_hash_rompu"};
+    const h = await sha256Hex(octets(bloc.prev_hash, canonical(corps)));
+    if(h !== bloc.hash) return {integre:false, seq:bloc.seq, raison:"hash_invalide"};
+    prev = bloc.hash;
+  }
+  return {integre:true, blocs:lignes.length, tete:prev};
+}
+window.verifierChaine = verifierChaine; window.canonical = canonical;
+
+(function(){
+  let lignes = (window.__CHAINE__||[]).slice();
+  const original = lignes.slice();
+  const sortie = document.getElementById("sortie-chaine");
+  async function montrer(){
+    const r = await verifierChaine(lignes);
+    sortie.className = "sortie " + (r.integre ? "ok" : "echec");
+    sortie.textContent = r.integre
+      ? `INTÈGRE — ${r.blocs} bloc(s), tête ${r.tete.slice(0,16)}…`
+      : `ROMPUE — seq ${r.seq} : ${r.raison}`;
+  }
+  const b = id => document.getElementById(id);
+  if(b("btn-verifier")){
+    b("btn-verifier").onclick = montrer;
+    b("btn-falsifier").onclick = () => {
+      if(lignes.length < 2) return;
+      const o = JSON.parse(lignes[1]);
+      o.donnees = Object.assign({}, o.donnees, {message:"FALSIFIE"});
+      lignes[1] = JSON.stringify(o); montrer();
+    };
+    b("btn-restaurer").onclick = () => { lignes = original.slice(); montrer(); };
+    montrer();
+  }
+})();
+
+// ---- Morse (port fidèle de telegraphe.morse) ----
+const MORSE = {A:".-",B:"-...",C:"-.-.",D:"-..",E:".",F:"..-.",G:"--.",H:"....",I:"..",
+J:".---",K:"-.-",L:".-..",M:"--",N:"-.",O:"---",P:".--.",Q:"--.-",R:".-.",S:"...",T:"-",
+U:"..-",V:"...-",W:".--",X:"-..-",Y:"-.--",Z:"--..","0":"-----","1":".----","2":"..---",
+"3":"...--","4":"....-","5":".....","6":"-....","7":"--...","8":"---..","9":"----.",
+".":".-.-.-",",":"--..--","?":"..--..","/":"-..-."};
+const INV = Object.fromEntries(Object.entries(MORSE).map(([k,v])=>[v,k]));
+function morseEncode(t){
+  return t.toUpperCase().trim().split(/\s+/).map(mot =>
+    [...mot].map(c => { if(!(c in MORSE)) throw "caractere_hors_code:"+c; return MORSE[c]; }).join(" ")
+  ).join(" / ");
+}
+function estimerUnite(durees){
+  const s = [...durees].sort((a,b)=>a-b);
+  let g = [s[0]];
+  for(let i=0;i<s.length-1;i++){ if(s[i+1]-s[i] > 0.6*s[i]) break; g.push(s[i+1]); }
+  return g.reduce((a,b)=>a+b,0)/g.length;
+}
+function morseDecode(ev){
+  const sons = ev.filter(x=>x[0]===1);
+  if(!sons.length) throw "aucun_son";
+  const u = estimerUnite(ev.map(x=>x[1]));
+  let sy = [], cur = [];
+  for(const [etat,duree] of ev){
+    if(etat===1) cur.push(duree >= 2*u ? "-" : ".");
+    else if(duree >= 5*u){ sy.push(cur.join("")); cur=[]; sy.push("/"); }
+    else if(duree >= 2*u){ sy.push(cur.join("")); cur=[]; }
+  }
+  sy.push(cur.join(""));
+  let mots = [], mot = [];
+  for(const p of sy){ if(p==="/"){ mots.push(mot.join(" ")); mot=[]; } else if(p) mot.push(p); }
+  if(mot.length) mots.push(mot.join(" "));
+  return mots.filter(m=>m).map(mot =>
+    mot.split(" ").map(s => { if(!(s in INV)) throw "symbole_inconnu:"+s; return INV[s]; }).join("")
+  ).join(" ");
+}
+window.morseEncode = morseEncode; window.morseDecode = morseDecode;
+function dureesDepuisTexte(t, unite){
+  const ev = [];
+  morseEncode(t).split(" / ").forEach((mot,mi)=>{
+    if(mi>0) ev.push([0,7*unite]);
+    mot.split(" ").forEach((sym,li)=>{
+      if(li>0) ev.push([0,3*unite]);
+      [...sym].forEach((sg,si)=>{ if(si>0) ev.push([0,unite]); ev.push([1,(sg==="-"?3:1)*unite]); });
+    });
+  });
+  return ev;
+}
+(function(){
+  const sig = document.getElementById("morse-signal"), txt = document.getElementById("morse-texte");
+  if(!sig) return;
+  let ev = [], tDown = null, tUp = null;
+  function rendre(){
+    sig.textContent = ev.map(x=>x[0]===1 ? "▇".repeat(Math.max(1,Math.round(x[1]/80))) : " ".repeat(Math.max(1,Math.round(x[1]/80)))).join("");
+    try { txt.textContent = morseDecode(ev) || "—"; } catch(err){ txt.textContent = "("+err+")"; }
+  }
+  function down(){ const now=performance.now(); if(tUp!==null) ev.push([0, now-tUp]); tDown=now; }
+  function up(){ const now=performance.now(); if(tDown!==null) ev.push([1, now-tDown]); tUp=now; rendre(); }
+  const btn = document.getElementById("btn-key");
+  btn.addEventListener("mousedown", down); btn.addEventListener("mouseup", up);
+  btn.addEventListener("touchstart", ev2=>{ev2.preventDefault();down();}, {passive:false});
+  btn.addEventListener("touchend", ev2=>{ev2.preventDefault();up();}, {passive:false});
+  let espace=false;
+  document.addEventListener("keydown", ev2=>{ if(ev2.code==="Space" && !espace){ espace=true; ev2.preventDefault(); down(); }});
+  document.addEventListener("keyup", ev2=>{ if(ev2.code==="Space"){ espace=false; ev2.preventDefault(); up(); }});
+  document.getElementById("btn-vider").onclick = ()=>{ ev=[]; tDown=tUp=null; rendre(); };
+  document.getElementById("btn-rejouer").onclick = ()=>{ ev = dureesDepuisTexte("CQ DE OMEGA HERMES", 120); tDown=tUp=null; rendre(); };
+})();
+</script></body></html>
