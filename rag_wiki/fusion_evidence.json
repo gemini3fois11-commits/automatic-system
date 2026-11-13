@@ -31,6 +31,90 @@
       "rrf_morceaux_plafond_3_par_document": 0.558
     },
     "mode": "rrf_morceaux",
+    "diagnostic": {
+      "morceaux": 1649,
+      "documents": 12,
+      "rang_or_par_voie": {
+        "Quel est le satellite naturel de la Terre ?": {
+          "tfidf": 1,
+          "bm25": 1,
+          "entites": 185,
+          "fusion": 11
+        },
+        "Quelle étoile se trouve au centre du système solaire ?": {
+          "tfidf": 4,
+          "bm25": 4,
+          "entites": 265,
+          "fusion": 23
+        },
+        "Quelle planète est surnommée la planète rouge ?": {
+          "tfidf": 1,
+          "bm25": 1,
+          "entites": 1,
+          "fusion": 1
+        },
+        "Qu'est-ce qu'une fonction de hachage cryptographique ?": {
+          "tfidf": 1,
+          "bm25": 1,
+          "entites": 1,
+          "fusion": 1
+        },
+        "Quelles fonctions composent la famille SHA-2 ?": {
+          "tfidf": 1,
+          "bm25": 1,
+          "entites": 1,
+          "fusion": 1
+        },
+        "Qui a inventé le code Morse ?": {
+          "tfidf": 2,
+          "bm25": 2,
+          "entites": 1,
+          "fusion": 1
+        },
+        "À quoi sert le filtre de Kalman ?": {
+          "tfidf": 1,
+          "bm25": 1,
+          "entites": 1,
+          "fusion": 1
+        },
+        "Quelle est la complexité de la transformation de Fourier rapide ?": {
+          "tfidf": 1,
+          "bm25": 1,
+          "entites": 1,
+          "fusion": 1
+        }
+      },
+      "tfidf_bm25_rang_or_identique": {
+        "questions": 8,
+        "identiques": 8
+      },
+      "echecs_detailles": [
+        {
+          "question": "Quel est le satellite naturel de la Terre ?",
+          "or": "Lune",
+          "distracteur_en_tete": "Terre",
+          "morceaux_distracteur_devant_or_voie_entites": 184,
+          "rang_or_par_voie": {
+            "tfidf": 1,
+            "bm25": 1,
+            "entites": 185,
+            "fusion": 11
+          }
+        },
+        {
+          "question": "Quelle étoile se trouve au centre du système solaire ?",
+          "or": "Soleil",
+          "distracteur_en_tete": "Système solaire",
+          "morceaux_distracteur_devant_or_voie_entites": 262,
+          "rang_or_par_voie": {
+            "tfidf": 4,
+            "bm25": 4,
+            "entites": 265,
+            "fusion": 23
+          }
+        }
+      ]
+    },
     "criteres": [
       {
         "critere": "3 stratégies indépendantes + fusion RRF k = 60",
@@ -51,6 +135,7 @@
   },
   "limites": [
     "Sur ce corpus, la fusion RRF fait moins bien que TF-IDF seul : la stratégie « entités » classe d'un bloc tous les morceaux d'un document cité dans la question (« Terre » pour la Lune).",
+    "Cause structurelle mesurée (voir mesures.diagnostic) : tfidf et bm25 donnent le même rang-or sur les 8 questions — ce ne sont pas deux voix indépendantes mais une seule, forte ; RRF n'a donc que deux voix réelles, la seconde étant « entités », la plus faible et la seule à s'effondrer. Sur les deux échecs, 184 puis 262 morceaux du document distracteur passent devant l'or dans « entités », et RRF (rangs seuls, k = 60) n'accorde pas assez de poids aux rangs 1 de TF-IDF pour le rattraper.",
     "Variantes essayées puis abandonnées pour ne pas ajuster le système à l'évaluation : fusion par documents (MRR 0.754), plafond de 3 morceaux par document (0,558, mesure d'une version antérieure du code).",
     "Analyse des pertes : (1) « satellite naturel de la Terre » — TF-IDF et BM25 placent en tête la phrase exacte de l'article Lune, mais la stratégie entités vote pour l'article Terre et la fusion la suit ; (2) « étoile au centre du système solaire » — toutes les stratégies ratent le rang 1, le boost du titre attirant vers l'article Système solaire.",
     "La mesure par titre de document est elle-même imparfaite : pour « Qui a inventé le code Morse ? », TF-IDF répond juste depuis l'article Télégraphie électrique (« inventé par Samuel Morse en 1838 ») et la mesure le compte au rang 2. Une mesure par présence de la réponse serait plus juste ; elle n'a pas été substituée après coup au critère fixé d'avance.",
@@ -58,11 +143,11 @@
     "8 questions fixées à l'avance ; échantillon trop petit pour conclure sur la généralisation."
   ],
   "execution": {
-    "genere_le": "2026-11-11T19:15:47Z",
+    "genere_le": "2026-11-13T04:14:09Z",
     "commande": "python3 /home/user/automatic-system/rag_wiki/fusion.py --eval",
     "python": "3.13.18",
-    "plateforme": "Linux-6.18.44-fc-v378-x86_64-with-glibc2.39",
-    "commit": "a8a2e952ef58f602d687f937efc165db8fae05ad",
+    "plateforme": "Linux-6.18.44-fc-v445-x86_64-with-glibc2.39",
+    "commit": "648c90e22413a1f7ea6a5b859573d2194ae3cf03",
     "arbre_modifie": true
   }
 }

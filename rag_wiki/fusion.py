@@ -89,6 +89,46 @@ class Fusion:
         return sorted(morceau, key=lambda i: (-doc[self.morceaux[i]["titre"]], -morceau[i], i))
 
 
+def diagnostic(f: "Fusion", morceaux: list[dict]) -> dict:
+    """Mesure, question par question, pourquoi la fusion perd — sans rien changer au classement.
+
+    Tout est calculé ici (règle d'or §9.1) : rang du 1er morceau-or par voie et en
+    fusion, redondance tfidf/bm25 (même rang-or ⇒ voix non indépendantes), et, pour
+    chaque échec, le document qui prend la tête et combien de ses morceaux passent
+    devant l'or dans la voie « entités » (l'inondation).
+    """
+    voies = dict(f.strategies)
+
+    def rang_or(ordre, titre):
+        return next((r + 1 for r, i in enumerate(ordre) if morceaux[i]["titre"] == titre), None)
+
+    rang_or_par_voie, identiques, echecs = {}, 0, []
+    for q, titre in QUESTIONS:
+        ordres = {n: voies[n](q) for n in voies}
+        fus = f.classer(q)
+        gr = {n: rang_or(ordres[n], titre) for n in voies}
+        grf = rang_or(fus, titre)
+        rang_or_par_voie[q] = {**gr, "fusion": grf}
+        if gr["tfidf"] == gr["bm25"]:
+            identiques += 1
+        if grf and grf > 1:
+            distracteur = morceaux[fus[0]]["titre"]
+            gidx = next(i for i in fus if morceaux[i]["titre"] == titre)
+            pos_or = ordres["entites"].index(gidx)
+            devant = sum(1 for i in ordres["entites"][:pos_or]
+                         if morceaux[i]["titre"] == distracteur)
+            echecs.append({"question": q, "or": titre, "distracteur_en_tete": distracteur,
+                           "morceaux_distracteur_devant_or_voie_entites": devant,
+                           "rang_or_par_voie": {**gr, "fusion": grf}})
+    return {
+        "morceaux": len(morceaux),
+        "documents": len(set(m["titre"] for m in morceaux)),
+        "rang_or_par_voie": rang_or_par_voie,
+        "tfidf_bm25_rang_or_identique": {"questions": len(QUESTIONS), "identiques": identiques},
+        "echecs_detailles": echecs,
+    }
+
+
 _FUSION = None
 
 
@@ -116,9 +156,14 @@ def main(argv) -> int:
         "mrr_fusion": fus["mrr"], "rangs_fusion": fus["rangs"], "questions": len(QUESTIONS),
         "variantes_ecartees": {"rrf_documents_puis_morceaux": par_documents["mrr"],
                                "rrf_morceaux_plafond_3_par_document": 0.558},
-        "mode": "rrf_morceaux"},
+        "mode": "rrf_morceaux", "diagnostic": diagnostic(f, morceaux)},
         ["Sur ce corpus, la fusion RRF fait moins bien que TF-IDF seul : la stratégie « entités » classe "
          "d'un bloc tous les morceaux d'un document cité dans la question (« Terre » pour la Lune).",
+         "Cause structurelle mesurée (voir mesures.diagnostic) : tfidf et bm25 donnent le même rang-or sur "
+         "les 8 questions — ce ne sont pas deux voix indépendantes mais une seule, forte ; RRF n'a donc que "
+         "deux voix réelles, la seconde étant « entités », la plus faible et la seule à s'effondrer. Sur les "
+         "deux échecs, 184 puis 262 morceaux du document distracteur passent devant l'or dans « entités », et "
+         "RRF (rangs seuls, k = 60) n'accorde pas assez de poids aux rangs 1 de TF-IDF pour le rattraper.",
          f"Variantes essayées puis abandonnées pour ne pas ajuster le système à l'évaluation : fusion par "
          f"documents (MRR {par_documents['mrr']:.3f}), plafond de 3 morceaux par document (0,558, mesure d'une "
          "version antérieure du code).",
