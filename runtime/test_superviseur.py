@@ -156,14 +156,16 @@ class SuperviseurUnitaire(unittest.TestCase):
     def sleep_isole(self, duree="30"):
         p = subprocess.Popen(["sleep", duree], start_new_session=True)
         self.vivants.append(p)
-        # Attendre que l'enfant ait fait setsid (pgid == pid) : avant cela il est encore
-        # dans le groupe du test, et un killpg(pid) viserait un groupe inexistant. En
+        # Attendre que l'enfant soit vraiment établi : setsid fait (pgid == pid, sinon un
+        # killpg viserait un groupe inexistant) ET exec fait (cmdline rempli, sinon le
+        # registre enregistrerait None et _orphelin ne reconnaîtrait pas l'orphelin). En
         # production l'orphelin lu au registre tourne depuis longtemps ; ce sas reproduit
         # cette condition et évite une course propre au test sous forte charge.
-        fin = time.monotonic() + 5
+        attendu = ["sleep", duree]
+        fin = time.monotonic() + 10
         while time.monotonic() < fin:
             try:
-                if os.getpgid(p.pid) == p.pid:
+                if os.getpgid(p.pid) == p.pid and cmdline(p.pid) == attendu:
                     break
             except ProcessLookupError:
                 break
