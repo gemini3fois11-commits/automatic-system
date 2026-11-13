@@ -1,6 +1,6 @@
 {
-  "genere_le": "2026-11-12T20:05:06+00:00",
-  "commit": "09f7a56424071df0848ad8f03f39b088c6900c4a",
+  "genere_le": "2026-11-13T04:15:00+00:00",
+  "commit": "c66bb14824bf59c4db009ceecf2c6bd6deb48277",
   "exigences": [
     {
       "code": "E-1.1",
@@ -304,7 +304,7 @@
         {
           "chemin": "runtime/superviseur.py",
           "existe": true,
-          "sha256": "ad9ce095972b9ec6"
+          "sha256": "c63986f2bc9fd7f5"
         }
       ],
       "tests": [
@@ -476,7 +476,7 @@
         {
           "chemin": "runtime/superviseur.py",
           "existe": true,
-          "sha256": "ad9ce095972b9ec6"
+          "sha256": "c63986f2bc9fd7f5"
         }
       ],
       "tests": [
@@ -723,8 +723,8 @@
       "fusion": "MRR de la fusion RRF sous TF-IDF seul sur ce corpus ; critère fixé avant la mesure (voir rag_wiki/fusion_evidence.json)"
     },
     "echecs_inattendus": [],
-    "duree_murale_s": 25.3,
-    "gain_parallele": 3.34,
+    "duree_murale_s": 29.8,
+    "gain_parallele": 3.39,
     "paralleles": 4,
     "omega_q": {
       "ACCEPTER": 30,
@@ -740,7 +740,7 @@
     }
   },
   "tests": {
-    "total": 226,
+    "total": 243,
     "verdict": "OK",
     "duree_s": null,
     "sortie_finale": "OK"
@@ -751,9 +751,9 @@
   },
   "couverture": {
     "exit": 0,
-    "pct_total": 71.9,
-    "stmts": 6718,
-    "branches": 1376,
+    "pct_total": 73.5,
+    "stmts": 6852,
+    "branches": 1390,
     "plus_bas_5": [
       {
         "fichier": "console/generer.py",
@@ -836,10 +836,6 @@
       {
         "fichier": "plateforme_omega/watcher.py",
         "pct": 0.0
-      },
-      {
-        "fichier": "runtime/superviseur.py",
-        "pct": 25.2
       },
       {
         "fichier": "cryoloop_gateway/ticket.py",
