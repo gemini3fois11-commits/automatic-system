@@ -1,0 +1,16 @@
+[Unit]
+Description=OMEGA-TAILS Invariant Gate — Boot Integrity Check
+DefaultDependencies=no
+After=local-fs.target
+Before=omega-amnestic.service sysinit.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/local/bin/omega-invariant-gate
+# If the gate fails, the system must not continue booting
+SuccessExitStatus=0
+FailureAction=reboot
+
+[Install]
+WantedBy=sysinit.target

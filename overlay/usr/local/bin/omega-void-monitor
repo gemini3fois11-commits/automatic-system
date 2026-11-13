@@ -1,0 +1,2 @@
+#!/bin/bash
+exec /usr/local/lib/omega-tails/void-monitor/monitor.sh "$@"

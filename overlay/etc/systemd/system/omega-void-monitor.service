@@ -1,0 +1,15 @@
+[Unit]
+Description=OMEGA-TAILS Void Monitor — Persistence Sentinel
+After=omega-amnestic.service
+Wants=omega-amnestic.service
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/omega-void-monitor
+Restart=on-failure
+RestartSec=3
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
