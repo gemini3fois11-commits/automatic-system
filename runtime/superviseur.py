@@ -121,7 +121,11 @@ class Superviseur:
         relances = 0
         while not self._arret:
             enfant = subprocess.Popen(self.commande, start_new_session=True, stdin=subprocess.DEVNULL)
-            ecrire_atomique(self.registre, {"pid": enfant.pid, "cmdline": cmdline(enfant.pid),
+            # On enregistre la commande lancée, pas cmdline(pid) : juste après le fork l'enfant
+            # n'a pas toujours fini son exec, et /proc rendrait une valeur vide. L'identité d'un
+            # orphelin se vérifie ensuite en comparant cette commande au cmdline(pid) relu au
+            # redémarrage, qui vaut bien self.commande une fois l'exec faite.
+            ecrire_atomique(self.registre, {"pid": enfant.pid, "cmdline": self.commande,
                                             "relances": relances, "demarre": time.time()})
             self._noter("DEMARRAGE", "service_lance", pid=enfant.pid, relances=relances)
             while enfant.poll() is None and not self._arret:

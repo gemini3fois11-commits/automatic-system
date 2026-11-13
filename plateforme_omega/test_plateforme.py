@@ -21,7 +21,8 @@ class Plateforme(unittest.TestCase):
         cls.m = cls.doc["mesures"]
 
     def test_aucun_echec_inattendu(self):
-        self.assertEqual(self.m["echecs_inattendus"], [])
+        details = [(s["suite"], s["fin"]) for s in self.m["suites"] if s["statut"] == "ECHEC"]
+        self.assertEqual(self.m["echecs_inattendus"], [], details)
 
     def test_critere_du_blueprint_au_moins_20_sur_21(self):
         self.assertEqual(self.m["blueprint"]["absentes"], [])
