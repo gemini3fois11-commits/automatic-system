@@ -35,6 +35,7 @@ EVIDENCES = {
     "rag": "rag_wiki/rag_evidence.json",
     "fusion": "rag_wiki/fusion_evidence.json",
     "telegraphe": "telegraphe/telegraphe_evidence.json",
+    "reception": "telegraphe/reception_evidence.json",
 }
 
 
@@ -177,7 +178,30 @@ votre cadence, jamais donnée. Port fidèle de <code>telegraphe.morse</code>.</p
 <button id="btn-rejouer" type="button">Rejouer « CQ DE OMEGA HERMES »</button>
 <button id="btn-vider" type="button">Vider</button></div>
 <p>Signal : <code id="morse-signal"></code></p>
-<p>Décodé : <strong id="morse-texte"></strong></p></div></section>"""
+<p>Décodé : <strong id="morse-texte"></strong></p></div>
+{_sous_section_reception(d)}</section>"""
+
+
+def _sous_section_reception(d: dict) -> str:
+    rc = d["reception"]["mesures"]
+    v = rc["verdicts"]
+    lignes = "".join(
+        f"<tr><td>{e(s['scenario'])}</td>"
+        f"<td class=\"{'ok' if s['decision']=='ACCEPTE' else 'echec' if s['decision']=='REFUSE' else ''}\">"
+        f"{e(s['decision'])}</td><td><code>{e(s['raison'])}</code></td></tr>"
+        for s in rc["scenarios"])
+    r = rc["reecriture"]
+    return f"""<div class="widget"><h3>Le télégraphe qui refuse
+<span class="etq">{e(etiquette(d['reception']))}</span></h3>
+<p class="note">Doctrine BOB appliquée à la réception (§8.2) : deux portes (CRC, puis
+émetteur allowlisté + HMAC non rejoué), trois verdicts. L'inconnu est mis en
+<strong>quarantaine avec raison écrite</strong>, jamais livré en silence ; chaque verdict
+est scellé dans une chaîne Γ témoignée. Résultats enregistrés, graine {e(d['reception']['graine'])}.</p>
+<p>ACCEPTE {v['ACCEPTE']} · QUARANTAINE {v['QUARANTAINE']} · REFUSE {v['REFUSE']} ·
+{rc['sceau']['blocs']} verdicts scellés, témoin en accord ·
+réécriture d'un verdict détectée (<code>{e(r['raison'])}</code>).</p>
+<div class="tableau"><table><tr><th>Scénario reçu</th><th>Verdict</th><th>Raison</th></tr>
+{lignes}</table></div></div>"""
 
 
 # ---------------------------------------------------------------- script

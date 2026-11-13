@@ -35,4 +35,5 @@
 - Phase 6 · `fusion` · **ECHEC** `[VÉRIFIÉ]` · 2026-11-13T04:15:10Z · [évidence](rag_wiki/fusion_evidence.json)
 - Phase 6 · `pinning` · **OK** `[VÉRIFIÉ]` · 2026-11-11T19:15:46Z · [évidence](rag_wiki/pinning_evidence.json)
 - Phase 6 · `rag` · **OK** `[VÉRIFIÉ]` · 2026-11-11T19:15:46Z · [évidence](rag_wiki/rag_evidence.json)
+- Phase 7 · `reception` · **OK** `[VÉRIFIÉ]` · 2026-11-13T04:22:21Z · [évidence](telegraphe/reception_evidence.json)
 - Phase 7 · `telegraphe` · **OK** `[VÉRIFIÉ]` · 2026-11-13T03:52:18Z · [évidence](telegraphe/telegraphe_evidence.json)

@@ -17,8 +17,9 @@ déjà scellée est refusé bloc par bloc, même après recalcul de toute la cha
 
 ```bash
 python3 -m telegraphe.banc                 # bout en bout, écrit telegraphe_evidence.json
-python3 -m unittest telegraphe.test_trame telegraphe.test_afsk \
-                    telegraphe.test_morse telegraphe.test_registre
+python3 -m telegraphe.banc_reception       # télégraphe qui refuse, écrit reception_evidence.json
+python3 -m unittest telegraphe.test_trame telegraphe.test_afsk telegraphe.test_morse \
+                    telegraphe.test_registre telegraphe.test_reception
 ```
 
 - `trame` : trame HDLC, bourrage de bits, FCS **CRC-16/X-25** (contrôle `b"123456789"` = `0x906E`).
@@ -31,6 +32,11 @@ python3 -m unittest telegraphe.test_trame telegraphe.test_afsk \
   `symbole_inconnu`, `aucun_son`, `vide`.
 - `registre` : scelle chaque émission (texte, octets, CRC, taille du signal — jamais
   le son) dans une chaîne Γ du socle de preuve avec témoin HMAC ou Ed25519.
+- `reception` : le **télégraphe qui refuse** (§8.2). Deux portes (intégrité CRC, puis
+  identité : émetteur de l'allowlist + HMAC valide, non rejoué), trois verdicts —
+  `ACCEPTE` / `QUARANTAINE` / `REFUSE` — façon BOB. L'inconnu est mis en quarantaine
+  **avec raison écrite** (`emetteur_inconnu`, `authentification_invalide`, `rejeu`),
+  jamais livré en silence ; chaque verdict est scellé dans une chaîne Γ témoignée.
 
 ## Tests
 
@@ -57,5 +63,7 @@ le fichier, pas ici.
   deux fichiers.
 - Le décodeur Morse adaptatif suppose au moins un élément d'une unité (un point ou
   un silence intra-caractère) ; un message tout en traits surestime l'unité.
-- Le **« télégraphe qui refuse »** (BOB en réception, quarantaine de l'inconnu,
-  §8.2) n'est **pas** implémenté : il attend la décision du propriétaire.
+- Le **« télégraphe qui refuse »** (`reception`) authentifie l'émetteur, pas le
+  contenu : une clé volée produit des `ACCEPTE` valides. L'anti-rejeu est en mémoire
+  (perdu au redémarrage) et il n'y a **pas d'horloge** : la fraîcheur n'est pas jugée,
+  la fenêtre δ reste à spécifier (§14.3). Voir `reception_evidence.json`.

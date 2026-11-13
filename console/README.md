@@ -47,4 +47,3 @@ suite `unittest` car elle demande un navigateur.
   mais ne font pas partie de la suite `unittest` automatique.
 - La page reflète l'état des évidences **au moment de la génération** ; relancer les
   bancs puis `python3 -m console.generer` pour la rafraîchir.
-- Le « télégraphe qui refuse » (§8.2) n'est pas présenté : il n'est pas implémenté.

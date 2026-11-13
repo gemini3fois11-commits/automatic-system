@@ -1,0 +1,136 @@
+{
+  "format": 1,
+  "module": "reception",
+  "phase": 7,
+  "etiquette": "VÉRIFIÉ",
+  "verdict": "OK",
+  "graine": 7,
+  "config": {
+    "allowlist": [
+      "F5OEG",
+      "OMEGA"
+    ],
+    "auth": "HMAC-SHA256",
+    "verdicts": [
+      "ACCEPTE",
+      "QUARANTAINE",
+      "REFUSE"
+    ]
+  },
+  "mesures": {
+    "scenarios": [
+      {
+        "scenario": "émetteur connu, authentifié (via AFSK réel)",
+        "decision": "ACCEPTE",
+        "raison": "authentifie",
+        "attendu": [
+          "ACCEPTE",
+          "authentifie"
+        ],
+        "ok": true
+      },
+      {
+        "scenario": "authentification invalide (mauvaise clé)",
+        "decision": "QUARANTAINE",
+        "raison": "authentification_invalide",
+        "attendu": [
+          "QUARANTAINE",
+          "authentification_invalide"
+        ],
+        "ok": true
+      },
+      {
+        "scenario": "émetteur inconnu (hors allowlist)",
+        "decision": "QUARANTAINE",
+        "raison": "emetteur_inconnu",
+        "attendu": [
+          "QUARANTAINE",
+          "emetteur_inconnu"
+        ],
+        "ok": true
+      },
+      {
+        "scenario": "rejeu d'un message déjà accepté",
+        "decision": "QUARANTAINE",
+        "raison": "rejeu",
+        "attendu": [
+          "QUARANTAINE",
+          "rejeu"
+        ],
+        "ok": true
+      },
+      {
+        "scenario": "trame corrompue (CRC rompu)",
+        "decision": "REFUSE",
+        "raison": "crc_invalide",
+        "attendu": [
+          "REFUSE",
+          "crc_invalide"
+        ],
+        "ok": true
+      },
+      {
+        "scenario": "second émetteur connu, authentifié",
+        "decision": "ACCEPTE",
+        "raison": "authentifie",
+        "attendu": [
+          "ACCEPTE",
+          "authentifie"
+        ],
+        "ok": true
+      }
+    ],
+    "verdicts": {
+      "ACCEPTE": 2,
+      "QUARANTAINE": 3,
+      "REFUSE": 1
+    },
+    "sceau": {
+      "blocs": 6,
+      "temoin_accord": true
+    },
+    "reecriture": {
+      "chaine_coherente": true,
+      "temoin_detecte": true,
+      "seq_fautif": 1,
+      "raison": "desaccord_temoin"
+    },
+    "criteres": [
+      {
+        "critere": "chaque scénario rend le verdict attendu",
+        "ok": true,
+        "detail": "6/6"
+      },
+      {
+        "critere": "l'inconnu est mis en quarantaine avec une raison écrite, jamais livré en silence",
+        "ok": true,
+        "detail": "3 quarantaine(s) : authentification_invalide, emetteur_inconnu, rejeu"
+      },
+      {
+        "critere": "tout verdict scellé, chaîne intègre et témoin en accord",
+        "ok": true,
+        "detail": "6 blocs"
+      },
+      {
+        "critere": "réécriture d'un verdict détectée par le témoin",
+        "ok": true,
+        "detail": "Γ cohérente, témoin : desaccord_temoin seq 1"
+      }
+    ]
+  },
+  "limites": [
+    "Le gardien n'authentifie pas le CONTENU d'un émetteur légitime compromis : une clé volée produit des ACCEPTE valides.",
+    "Secret partagé sur la machine : qui tient la machine tient clé et journal (§3.2).",
+    "Anti-rejeu par (indicatif, seq) en mémoire : perdu au redémarrage, comme la quarantaine d'agent de GARDIEN.",
+    "Pas d'horloge : la fraîcheur n'est pas jugée (un message authentique ancien, non rejoué dans cette session, passerait). La fenêtre δ reste à spécifier (§14.3).",
+    "C'est un banc : indicatifs et clés synthétiques, pas une station réelle."
+  ],
+  "execution": {
+    "genere_le": "2026-11-13T04:22:21Z",
+    "commande": "python3 /home/user/automatic-system/telegraphe/banc_reception.py",
+    "python": "3.13.18",
+    "plateforme": "Linux-6.18.44-fc-v445-x86_64-with-glibc2.39",
+    "commit": "0a93245a7f6c3236df0df77af41a1e9625c69721",
+    "arbre_modifie": true
+  }
+}
