@@ -60,7 +60,7 @@ son secret reste hors de la page. Son verdict enregistré est montré plus haut.
 <button id="btn-falsifier">Falsifier le bloc 2</button>
 <button id="btn-restaurer">Restaurer</button></div>
 <pre id="sortie-chaine" class="sortie"></pre></div>
-<script>window.__CHAINE__ = ["{\"decision\":\"EMIS\",\"donnees\":{\"crc_x25\":\"0x0ffb\",\"message\":\"SOS\"},\"hash\":\"a0757251dc0b114e96f8ef59ac4952f55aaed46f9845e5294d1964f6630521ca\",\"prev_hash\":\"0000000000000000000000000000000000000000000000000000000000000000\",\"raison\":\"message_scelle\",\"seq\":0,\"ts\":\"2026-11-13T04:23:10.682320Z\",\"type\":\"emission\"}", "{\"decision\":\"EMIS\",\"donnees\":{\"crc_x25\":\"0x097b\",\"message\":\"OMEGA HERMES\"},\"hash\":\"6b0ea6845cccb2e75f57783f2d456394da1540383cb914d37fda0095c7f85730\",\"prev_hash\":\"a0757251dc0b114e96f8ef59ac4952f55aaed46f9845e5294d1964f6630521ca\",\"raison\":\"message_scelle\",\"seq\":1,\"ts\":\"2026-11-13T04:23:10.683368Z\",\"type\":\"emission\"}", "{\"decision\":\"EMIS\",\"donnees\":{\"crc_x25\":\"0x9d0e\",\"message\":\"GRAINE 7\"},\"hash\":\"2884d9b62c0e0e1a661bea3cd7f615c88ed37f32118d45b5a5ed325c7dbae4ef\",\"prev_hash\":\"6b0ea6845cccb2e75f57783f2d456394da1540383cb914d37fda0095c7f85730\",\"raison\":\"message_scelle\",\"seq\":2,\"ts\":\"2026-11-13T04:23:10.683704Z\",\"type\":\"emission\"}", "{\"decision\":\"EMIS\",\"donnees\":{\"crc_x25\":\"0x5a3c\",\"message\":\"CQ DE OMEGA\"},\"hash\":\"04ed96c1b4525a69d663a571b2ef5b7d82bbed8c63298a3b23312c3c9fa52286\",\"prev_hash\":\"2884d9b62c0e0e1a661bea3cd7f615c88ed37f32118d45b5a5ed325c7dbae4ef\",\"raison\":\"message_scelle\",\"seq\":3,\"ts\":\"2026-11-13T04:23:10.684071Z\",\"type\":\"emission\"}"];</script></section><section id="preuve"><h2>3 · Preuve <span class="etq">[VÉRIFIÉ]</span></h2>
+<script>window.__CHAINE__ = ["{\"decision\":\"EMIS\",\"donnees\":{\"crc_x25\":\"0x0ffb\",\"message\":\"SOS\"},\"hash\":\"570e5fe9d5f00526c98b418b8b97eed5cb3006f30db42693d969b2540c39dc8c\",\"prev_hash\":\"0000000000000000000000000000000000000000000000000000000000000000\",\"raison\":\"message_scelle\",\"seq\":0,\"ts\":\"2026-11-13T04:35:06.720407Z\",\"type\":\"emission\"}", "{\"decision\":\"EMIS\",\"donnees\":{\"crc_x25\":\"0x097b\",\"message\":\"OMEGA HERMES\"},\"hash\":\"169544b1f31c2a9dfd2d80e94f0fe719cb4193ef0bbc471e11a1123b0d41867a\",\"prev_hash\":\"570e5fe9d5f00526c98b418b8b97eed5cb3006f30db42693d969b2540c39dc8c\",\"raison\":\"message_scelle\",\"seq\":1,\"ts\":\"2026-11-13T04:35:06.721927Z\",\"type\":\"emission\"}", "{\"decision\":\"EMIS\",\"donnees\":{\"crc_x25\":\"0x9d0e\",\"message\":\"GRAINE 7\"},\"hash\":\"669526c0eeeb588fbb887eb458294f28e830050eedf5454310b7d9980bfa2fb1\",\"prev_hash\":\"169544b1f31c2a9dfd2d80e94f0fe719cb4193ef0bbc471e11a1123b0d41867a\",\"raison\":\"message_scelle\",\"seq\":2,\"ts\":\"2026-11-13T04:35:06.722688Z\",\"type\":\"emission\"}", "{\"decision\":\"EMIS\",\"donnees\":{\"crc_x25\":\"0x5a3c\",\"message\":\"CQ DE OMEGA\"},\"hash\":\"5f19bb69d128fcb3f4b73ed2465f11fba64f2a3fc12055d2df2980df8beb12be\",\"prev_hash\":\"669526c0eeeb588fbb887eb458294f28e830050eedf5454310b7d9980bfa2fb1\",\"raison\":\"message_scelle\",\"seq\":3,\"ts\":\"2026-11-13T04:35:06.723169Z\",\"type\":\"emission\"}"];</script></section><section id="preuve"><h2>3 · Preuve <span class="etq">[VÉRIFIÉ]</span></h2>
 <p><strong>29/30 suites OK</strong> · gain parallèle
 ×3.33 · durée murale 24.1 s · Ω Q :
 ACCEPTER 30 / REVOIR 0 / REJETER 0.</p>
@@ -99,6 +99,12 @@ sous gigue ±30 %. Émissions scellées : 3, témoin en accord ;
 réécriture recalculée détectée (<code>desaccord_temoin</code>).</p>
 <p class="note">Positionnement (§8.2) : Morse (1844), radio (1901), Bell 202 (1976) sont
 anciens. Le seul apport revendiqué est le <strong>sceau vérifiable par un témoin</strong>.</p>
+<p class="note">Voie microphone <span class="etq">[EXPÉRIMENTAL]</span> : récepteur à
+synchronisation aveugle, vérifié <strong>seulement</strong> sur boucle locale dégradée
+synthétiquement — plancher 100 % à 0 dB,
+0 faux positif sur
+200 essais de bruit pur. Aucun canal
+acoustique réel ; rien n'est promis sur une vraie transmission par le son.</p>
 
 <div class="widget"><h3>Manipulateur Morse — maintenez la barre Espace (ou le bouton)</h3>
 <p class="note">Décodeur à unité de temps <em>adaptative</em> : l'unité est estimée depuis
@@ -119,7 +125,7 @@ est scellé dans une chaîne Γ témoignée. Résultats enregistrés, graine 7.<
 réécriture d'un verdict détectée (<code>desaccord_temoin</code>).</p>
 <div class="tableau"><table><tr><th>Scénario reçu</th><th>Verdict</th><th>Raison</th></tr>
 <tr><td>émetteur connu, authentifié (via AFSK réel)</td><td class="ok">ACCEPTE</td><td><code>authentifie</code></td></tr><tr><td>authentification invalide (mauvaise clé)</td><td class="">QUARANTAINE</td><td><code>authentification_invalide</code></td></tr><tr><td>émetteur inconnu (hors allowlist)</td><td class="">QUARANTAINE</td><td><code>emetteur_inconnu</code></td></tr><tr><td>rejeu d&#x27;un message déjà accepté</td><td class="">QUARANTAINE</td><td><code>rejeu</code></td></tr><tr><td>trame corrompue (CRC rompu)</td><td class="echec">REFUSE</td><td><code>crc_invalide</code></td></tr><tr><td>second émetteur connu, authentifié</td><td class="ok">ACCEPTE</td><td><code>authentifie</code></td></tr></table></div></div></section>
-<p class="pied">Évidences lues : omega_hermes/hermes_evidence.json, plateforme_omega/plateforme_evidence.json, rag_wiki/fusion_evidence.json, rag_wiki/rag_evidence.json, rinv/systeme_evidence.json, socle_preuve/preuve_evidence.json, telegraphe/reception_evidence.json, telegraphe/telegraphe_evidence.json.
+<p class="pied">Évidences lues : omega_hermes/hermes_evidence.json, plateforme_omega/plateforme_evidence.json, rag_wiki/fusion_evidence.json, rag_wiki/rag_evidence.json, rinv/systeme_evidence.json, socle_preuve/preuve_evidence.json, telegraphe/micro_evidence.json, telegraphe/reception_evidence.json, telegraphe/telegraphe_evidence.json.
 Dernier cycle plateforme : 2026-11-11T19:15:05Z.</p>
 </main>
 <script>

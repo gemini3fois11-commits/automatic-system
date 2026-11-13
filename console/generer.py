@@ -36,6 +36,7 @@ EVIDENCES = {
     "fusion": "rag_wiki/fusion_evidence.json",
     "telegraphe": "telegraphe/telegraphe_evidence.json",
     "reception": "telegraphe/reception_evidence.json",
+    "micro": "telegraphe/micro_evidence.json",
 }
 
 
@@ -170,6 +171,12 @@ sous gigue ±{mo['gigue_pct']} %. Émissions scellées : {r['emissions']}, témo
 réécriture recalculée détectée (<code>{e(r['raison'])}</code>).</p>
 <p class="note">Positionnement (§8.2) : Morse (1844), radio (1901), Bell 202 (1976) sont
 anciens. Le seul apport revendiqué est le <strong>sceau vérifiable par un témoin</strong>.</p>
+<p class="note">Voie microphone <span class="etq">{e(etiquette(d['micro']))}</span> : récepteur à
+synchronisation aveugle, vérifié <strong>seulement</strong> sur boucle locale dégradée
+synthétiquement — plancher 100 % à {e(d['micro']['mesures']['snr_plancher_100pct_db'])} dB,
+{d['micro']['mesures']['faux_positifs']['faux']} faux positif sur
+{d['micro']['mesures']['faux_positifs']['essais']} essais de bruit pur. Aucun canal
+acoustique réel ; rien n'est promis sur une vraie transmission par le son.</p>
 
 <div class="widget"><h3>Manipulateur Morse — maintenez la barre Espace (ou le bouton)</h3>
 <p class="note">Décodeur à unité de temps <em>adaptative</em> : l'unité est estimée depuis

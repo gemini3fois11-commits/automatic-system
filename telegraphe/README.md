@@ -18,8 +18,9 @@ déjà scellée est refusé bloc par bloc, même après recalcul de toute la cha
 ```bash
 python3 -m telegraphe.banc                 # bout en bout, écrit telegraphe_evidence.json
 python3 -m telegraphe.banc_reception       # télégraphe qui refuse, écrit reception_evidence.json
+python3 -m telegraphe.banc_micro           # voie micro (synchro aveugle), écrit micro_evidence.json
 python3 -m unittest telegraphe.test_trame telegraphe.test_afsk telegraphe.test_morse \
-                    telegraphe.test_registre telegraphe.test_reception
+                    telegraphe.test_registre telegraphe.test_reception telegraphe.test_micro
 ```
 
 - `trame` : trame HDLC, bourrage de bits, FCS **CRC-16/X-25** (contrôle `b"123456789"` = `0x906E`).
@@ -32,6 +33,11 @@ python3 -m unittest telegraphe.test_trame telegraphe.test_afsk telegraphe.test_m
   `symbole_inconnu`, `aucun_son`, `vide`.
 - `registre` : scelle chaque émission (texte, octets, CRC, taille du signal — jamais
   le son) dans une chaîne Γ du socle de preuve avec témoin HMAC ou Ed25519.
+- `micro` : **voie microphone** `[EXPÉRIMENTAL]` — récepteur AFSK à **synchronisation
+  aveugle** (retrait du continu, AGC, détection d'onset par énergie de bande, phase
+  sous-bit par essais validés au CRC). Décode un flux audio sans début connu ; la
+  capture micro→échantillons est au programme de l'appelant. Vérifié uniquement sur
+  boucle locale dégradée synthétiquement, jamais sur un vrai canal acoustique.
 - `reception` : le **télégraphe qui refuse** (§8.2). Deux portes (intégrité CRC, puis
   identité : émetteur de l'allowlist + HMAC valide, non rejoué), trois verdicts —
   `ACCEPTE` / `QUARANTAINE` / `REFUSE` — façon BOB. L'inconnu est mis en quarantaine
@@ -57,7 +63,12 @@ le fichier, pas ici.
   une autre fréquence. On ne recopie pas un chiffre non reproduit.
 - La démodulation aligne ses fenêtres sur le **débit connu** du flux généré ici :
   pas de récupération d'horloge en aveugle.
-- **Voie microphone** : `[EXPÉRIMENTAL]`, non implémentée, jamais promise (§8.2).
+- **Voie microphone** (`micro`) : `[EXPÉRIMENTAL]`. Le récepteur à synchro aveugle
+  est vérifié **seulement** sur une boucle locale dégradée synthétiquement (bruit
+  blanc, décalage, gain, continu, silences) — plancher 100 % et faux positifs dans
+  `micro_evidence.json`. **Aucun** micro ni canal acoustique réel ; rien n'est promis
+  sur une vraie transmission par le son (§8.2). Suppose fs et débit connus, trame
+  unique, bruit gaussien (ni multitrajet, ni évanouissement).
 - Le CRC n'authentifie pas. Les garanties du sceau tombent si le secret du témoin
   vit sur la même machine que le journal (§3.2), ou sous troncature cohérente des
   deux fichiers.
