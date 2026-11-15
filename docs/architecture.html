@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Architecture OMEGA-HERMÈS</title>
+<meta name="description" content="Vue complète : socle de preuve, portes locales et vérification de bout en bout.">
+<style>
+  /* Layout : une pile verticale de couches, du socle de preuve vers la vérification ;
+     esthétique de registre scellé — encre, parchemin froid, sceau vert. */
+  :root{
+    --bg:#f5f5f1; --surface:#fffdf9; --fg:#1a1c1e; --muted:#5c6267; --line:#dedcd3;
+    --seal:#0f6e5e; --seal-soft:rgba(15,110,94,.10); --ok:#1b7a3a; --ko:#b3261e;
+    --font-d:"Space Grotesk",system-ui,sans-serif;
+    --font-b:"Inter",system-ui,sans-serif;
+    --font-m:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+    --bg:#141619; --surface:#1c1f23; --fg:#ecece8; --muted:#9aa0a6; --line:#2c3036;
+    --seal:#4fd1b5; --seal-soft:rgba(79,209,181,.12); --ok:#6fcf8f; --ko:#ff8a80; color-scheme:dark;
+  }}
+  :root[data-theme="dark"]{
+    --bg:#141619; --surface:#1c1f23; --fg:#ecece8; --muted:#9aa0a6; --line:#2c3036;
+    --seal:#4fd1b5; --seal-soft:rgba(79,209,181,.12); --ok:#6fcf8f; --ko:#ff8a80; color-scheme:dark;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font-b);line-height:1.55;
+    -webkit-font-smoothing:antialiased}
+  .wrap{max-width:980px;margin:0 auto;
+    padding-left:max(16px,env(safe-area-inset-left,0px));
+    padding-right:max(16px,env(safe-area-inset-right,0px));
+    padding-block:40px 64px}
+  h1,h2,h3{font-family:var(--font-d);text-wrap:balance;line-height:1.15;margin:0}
+  .eyebrow{font-family:var(--font-d);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--seal);font-weight:600}
+  code,.mono{font-family:var(--font-m);font-size:.86em}
+  /* header */
+  header{border-bottom:1px solid var(--line);padding-bottom:28px;margin-bottom:40px}
+  h1{font-size:clamp(2rem,6vw,3rem);font-weight:700;margin:.3em 0 .5em;letter-spacing:-.01em}
+  .mission{font-family:var(--font-d);font-weight:500;font-size:clamp(1.05rem,3.2vw,1.4rem);
+    color:var(--fg);max-width:40ch;margin:0}
+  .mission b{color:var(--seal);font-weight:600}
+  .meta{margin-top:20px;display:flex;flex-wrap:wrap;gap:8px}
+  .chip{font-family:var(--font-m);font-size:.74rem;color:var(--muted);border:1px solid var(--line);
+    border-radius:999px;padding:4px 11px;background:var(--surface)}
+  /* sections */
+  section{margin-top:48px}
+  .shead{display:flex;align-items:baseline;gap:12px;margin-bottom:20px}
+  .num{font-family:var(--font-d);font-weight:700;color:var(--seal);font-size:1rem;
+    border:1.5px solid var(--seal);border-radius:50%;width:1.9em;height:1.9em;flex:0 0 auto;
+    display:grid;place-items:center;font-size:.8rem}
+  .shead h2{font-size:clamp(1.15rem,3.6vw,1.5rem);font-weight:600}
+  .shead p{margin:2px 0 0;color:var(--muted);font-size:.9rem}
+  /* cards */
+  .duo{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px;
+    min-width:0}
+  .card h3{font-size:1rem;font-weight:600;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+  .card h3 .g{color:var(--seal);font-family:var(--font-m);font-weight:700}
+  .card p{margin:0;color:var(--muted);font-size:.9rem}
+  .card ul{margin:10px 0 0;padding-left:18px;color:var(--muted);font-size:.86rem}
+  .card li{margin:3px 0}
+  /* pipeline */
+  .pipe{display:flex;flex-wrap:wrap;align-items:stretch;gap:10px}
+  .stn{flex:1 1 150px;min-width:0;background:var(--surface);border:1px solid var(--line);
+    border-radius:10px;padding:13px 14px}
+  .stn .k{font-family:var(--font-m);font-size:.7rem;color:var(--seal);letter-spacing:.04em}
+  .stn .v{font-weight:600;font-size:.92rem;margin-top:3px}
+  .stn .d{color:var(--muted);font-size:.8rem;margin-top:3px}
+  .arrow{align-self:center;color:var(--muted);font-size:1.1rem;flex:0 0 auto}
+  .verdict{margin-top:16px;background:var(--seal-soft);border:1px solid var(--seal);
+    border-radius:12px;padding:16px 18px}
+  .verdict h3{font-size:.95rem;font-weight:600;margin-bottom:10px;font-family:var(--font-d)}
+  .vrow{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+  .vstep{font-size:.86rem;flex:1 1 180px;min-width:0}
+  .vstep b{display:block;font-family:var(--font-m);font-size:.78rem;margin-bottom:2px}
+  .local{color:var(--muted)} .local b{color:var(--muted)}
+  .detect b{color:var(--ok)} .detect .ex{color:var(--ok);font-weight:700}
+  .exko{color:var(--ko);font-weight:700}
+  /* modules grid */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(224px,1fr));gap:12px}
+  .mod{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:14px 15px;
+    min-width:0;display:flex;flex-direction:column;gap:5px}
+  .mod .top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+  .mod .name{font-family:var(--font-m);font-weight:600;font-size:.84rem;color:var(--fg);
+    overflow-wrap:anywhere}
+  .mod .loc{font-family:var(--font-m);font-size:.72rem;color:var(--muted);flex:0 0 auto;
+    font-variant-numeric:tabular-nums}
+  .mod .role{font-size:.82rem;color:var(--muted)}
+  .mod .proof{font-size:.8rem;color:var(--seal);font-weight:500;margin-top:auto;padding-top:4px}
+  /* stats */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px}
+  .stat{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:16px}
+  .stat .n{font-family:var(--font-d);font-weight:700;font-size:1.7rem;letter-spacing:-.02em;
+    font-variant-numeric:tabular-nums;color:var(--fg)}
+  .stat .l{font-size:.78rem;color:var(--muted);margin-top:2px}
+  /* red lines */
+  .red{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .red .r{display:flex;gap:12px;padding:13px 18px;border-top:1px solid var(--line);align-items:baseline}
+  .red .r:first-child{border-top:0}
+  .red .x{color:var(--ko);font-weight:700;flex:0 0 auto;font-size:.95rem}
+  .red .t{font-size:.9rem}
+  .red .t b{font-weight:600}
+  .red .by{color:var(--muted);font-size:.82rem}
+  .red .by code{color:var(--seal)}
+  /* footer */
+  footer{margin-top:52px;border-top:1px solid var(--line);padding-top:22px;color:var(--muted);
+    font-size:.84rem}
+  footer .cmds{display:flex;flex-direction:column;gap:6px;margin:12px 0 18px;overflow-x:auto}
+  footer code{background:var(--surface);border:1px solid var(--line);border-radius:6px;
+    padding:6px 10px;white-space:nowrap;display:inline-block}
+  footer .fin{display:flex;flex-wrap:wrap;gap:6px 16px}
+  a{color:var(--seal)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Architecture · vue complète</span>
+    <h1>OMEGA-HERMÈS</h1>
+    <p class="mission">Démontrer qu'un système défensif peut <b>prouver son propre refus — et le prouver à un témoin indépendant.</b></p>
+    <div class="meta">
+      <span class="chip">~11 563 lignes Python</span>
+      <span class="chip">14 modules</span>
+      <span class="chip">1 noyau C++</span>
+      <span class="chip">écoute 127.0.0.1 seulement</span>
+      <span class="chip">branche claude/inversion-system-algebra</span>
+    </div>
+  </header>
+
+  <section>
+    <div class="shead"><span class="num">1</span><div><h2>Le socle de preuve</h2>
+      <p>Deux primitives que toutes les couches réutilisent. C'est <em>ça</em>, la preuve.</p></div></div>
+    <div class="duo">
+      <div class="card">
+        <h3><span class="g">Γ</span>Chaîne Γ</h3>
+        <p>Journal append-only JSONL, chaque bloc chaîné par SHA-256 au précédent.</p>
+        <ul>
+          <li>mode 600, verrou <code>flock</code> + verrou de thread</li>
+          <li>réécrire un bloc casse le chaînage</li>
+          <li>OCC : écriture refusée si la tête a bougé</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="g">✓</span>Témoin indépendant</h3>
+        <p>Un second sceau, hors de portée du système audité.</p>
+        <ul>
+          <li>HMAC-SHA256 ou Ed25519 <b>Python pur</b> (RFC 8032)</li>
+          <li>recoupé avec <code>cryptography</code> (25 vecteurs)</li>
+          <li>détecte bloc par bloc : rompue, désaccord, bloc non témoigné</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="num">2</span><div><h2>La preuve, de bout en bout</h2>
+      <p>Chaque décision — acceptation comme refus — entre dans Γ, puis est scellée.</p></div></div>
+    <div class="pipe">
+      <div class="stn"><div class="k">canal</div><div class="v">Canal volatil</div><div class="d">/dev/shm</div></div>
+      <span class="arrow">→</span>
+      <div class="stn"><div class="k">trame</div><div class="v">CRC-16/X-25</div><div class="d">décodée ou rejetée</div></div>
+      <span class="arrow">→</span>
+      <div class="stn"><div class="k">porte</div><div class="v">Invariant Gate</div><div class="d">I₁–I₅</div></div>
+      <span class="arrow">→</span>
+      <div class="stn"><div class="k">registre</div><div class="v">Γ acceptés + refus</div><div class="d">tout est inscrit</div></div>
+      <span class="arrow">→</span>
+      <div class="stn"><div class="k">sceau</div><div class="v">Témoin</div><div class="d">signe chaque bloc</div></div>
+    </div>
+    <div class="verdict">
+      <h3>L'attaque sur la preuve — démontrée, pas affirmée</h3>
+      <div class="vrow">
+        <div class="vstep"><b>on efface un refus</b>puis on recalcule toute la chaîne</div>
+        <span class="arrow">→</span>
+        <div class="vstep local"><b>audit local</b>trompé — sort <span class="ex" style="color:inherit">exit 0</span></div>
+        <span class="arrow">→</span>
+        <div class="vstep detect"><b>le témoin</b>DÉTECTE — <span class="ex">exit 4</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="num">3</span><div><h2>Les couches</h2>
+      <p>14 modules sur le socle commun. Chacun prouve ce qu'il refuse.</p></div></div>
+    <div class="grid">
+      <div class="mod"><div class="top"><span class="name">socle_preuve</span><span class="loc">1089</span></div><div class="role">Chaîne Γ + témoin</div><div class="proof">la preuve elle-même</div></div>
+      <div class="mod"><div class="top"><span class="name">rinv</span><span class="loc">967</span></div><div class="role">Invariant Gate I₁–I₅, auto-suture</div><div class="proof">accepte / refuse, scelle tout</div></div>
+      <div class="mod"><div class="top"><span class="name">omega_hermes</span><span class="loc">1333</span></div><div class="role">Jumeau · ALICE · EYES · BOB</div><div class="proof">rejette l'inconnu</div></div>
+      <div class="mod"><div class="top"><span class="name">plateforme_omega</span><span class="loc">1426</span></div><div class="role">12 modules + Ω Q + orchestrateur</div><div class="proof">veto si l'attaquant réussit</div></div>
+      <div class="mod"><div class="top"><span class="name">cryoloop</span><span class="loc">899</span></div><div class="role">Validateur 8 étapes</div><div class="proof">ACCEPT / PENDING / REJECT</div></div>
+      <div class="mod"><div class="top"><span class="name">rag_wiki</span><span class="loc">575</span></div><div class="role">RAG Wikipédia + épinglage TLS</div><div class="proof">cite ou avoue ; rejette le MITM</div></div>
+      <div class="mod"><div class="top"><span class="name">agent_guard</span><span class="loc">475</span></div><div class="role">GARDIEN · allowlist exacte</div><div class="proof">refuse par défaut</div></div>
+      <div class="mod"><div class="top"><span class="name">outils</span><span class="loc">466</span></div><div class="role">Évidence, changelog</div><div class="proof">aucun chiffre à la main</div></div>
+      <div class="mod"><div class="top"><span class="name">dossier</span><span class="loc">346</span></div><div class="role">Dossier de vérification</div><div class="proof">trace exigence → évidence</div></div>
+      <div class="mod"><div class="top"><span class="name">cryoloop_gateway</span><span class="loc">281</span></div><div class="role">Passerelle Ed25519, anti-rejeu</div><div class="proof">vérifie, n'exécute rien</div></div>
+      <div class="mod"><div class="top"><span class="name">telegraphe</span><span class="loc">231</span></div><div class="role">AFSK Bell 202, Goertzel</div><div class="proof">chaque trame scellée</div></div>
+      <div class="mod"><div class="top"><span class="name">terminal_auth</span><span class="loc">227</span></div><div class="role">Terminal · allowlist cmd+args</div><div class="proof">exécute l'autorisé seul</div></div>
+      <div class="mod"><div class="top"><span class="name">console</span><span class="loc">203</span></div><div class="role">Console statique, 0 CDN</div><div class="proof">rend l'évidence</div></div>
+      <div class="mod"><div class="top"><span class="name">runtime</span><span class="loc">167</span></div><div class="role">Superviseur · relances bornées</div><div class="proof">zéro persistance cachée</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="num">4</span><div><h2>La discipline de vérification</h2>
+      <p>Aucun chiffre sans une exécution qui le produit.</p></div></div>
+    <div class="stats">
+      <div class="stat"><div class="n">253</div><div class="l">tests, verdict OK</div></div>
+      <div class="stat"><div class="n">74,2 %</div><div class="l">couverture (branches)</div></div>
+      <div class="stat"><div class="n">20/21</div><div class="l">suites blueprint</div></div>
+      <div class="stat"><div class="n">31</div><div class="l">fichiers d'évidence</div></div>
+      <div class="stat"><div class="n">0·3·4</div><div class="l">témoin : intègre · rompue · désaccord</div></div>
+      <div class="stat"><div class="n">1</div><div class="l">seul échec, documenté (fusion RRF)</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="num">5</span><div><h2>Lignes rouges — refusées par conception</h2>
+      <p>Pas des promesses : le code les fait respecter.</p></div></div>
+    <div class="red">
+      <div class="r"><span class="x">✕</span><div class="t"><b>Pas de persistance cachée</b> — ni <code>~/.bashrc</code>, ni crontab, ni service root.<div class="by">imposé par <code>test_aucune_persistance_cachee</code></div></div></div>
+      <div class="r"><span class="x">✕</span><div class="t"><b>Pas d'exécution distante</b> — la passerelle vérifie et journalise, n'exécute jamais.<div class="by">test statique : <code>subprocess / pty / ctypes</code> interdits à l'import</div></div></div>
+      <div class="r"><span class="x">✕</span><div class="t"><b>Pas d'exfiltration ni d'écoute ouverte</b> — allowlist exacte, <code>127.0.0.1</code> seulement.<div class="by">imposé par l'allowlist du GARDIEN + refus par défaut</div></div></div>
+      <div class="r"><span class="x">✕</span><div class="t"><b>Pas d'effacement de journaux ni d'anti-forensics</b> — Γ est append-only et témoigné.<div class="by">imposé par le chaînage SHA-256 + le témoin</div></div></div>
+      <div class="r"><span class="x">✕</span><div class="t"><b>Pas de capture d'identifiants, pas de playbook financier.</b><div class="by">seule la dynamique de frappe par catégories est permise (<code>guardian</code>)</div></div></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="eyebrow" style="color:var(--muted)">Vérifiable soi-même</div>
+    <div class="cmds">
+      <code>omega-preuve verifier JOURNAL.jsonl --temoin T.jsonl --secret ~/coffre/t.secret</code>
+      <code>python3 -m plateforme_omega.orchestrator</code>
+      <code>python3 -m dossier.generer</code>
+    </div>
+    <div class="fin">
+      <span>Commit <code class="mono">222e278</code></span>
+      <span>253 tests · ruff propre · 74,2 %</span>
+      <span>Aucune certification revendiquée — seule la discipline d'ingénierie.</span>
+    </div>
+  </footer>
+</div>
+</body>
+</html>
