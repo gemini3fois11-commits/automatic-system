@@ -57,7 +57,7 @@ def kpi_ligne(d: dict) -> str:
             f'<td><span class="pastille {cat}">[{etq}]</span></td>'
             f'<td class="chiffre">{prop}</td>'
             f'<td><small>{html.escape(d["execution"]["genere_le"])}</small></td>'
-            f'<td><small><a href="{html.escape(d["_chemin"])}">évidence</a></small></td></tr>')
+            f'<td><small><a href="../{html.escape(d["_chemin"])}">évidence</a></small></td></tr>')
 
 
 def bloc_module(d: dict) -> str:
@@ -70,7 +70,7 @@ def bloc_module(d: dict) -> str:
             f'<h3><code>{html.escape(d["module"])}</code>'
             f'<span class="pastille {ETIQUETTES.get(d["etiquette"], "ko")}">[{etq}]</span>'
             f'<small> phase {d["phase"]} · verdict <strong>{d["verdict"]}</strong></small></h3>'
-            f'<p class="src">Évidence : <a href="{html.escape(d["_chemin"])}"><code>{html.escape(d["_chemin"])}</code></a> '
+            f'<p class="src">Évidence : <a href="../{html.escape(d["_chemin"])}"><code>{html.escape(d["_chemin"])}</code></a> '
             f'· générée {html.escape(d["execution"]["genere_le"])} · commit '
             f'<code>{html.escape((d["execution"].get("commit") or "")[:7])}</code></p>'
             f'<h4>Critères</h4><ul class="criteres">{liste or "<li>(aucun critère listé)</li>"}</ul>'
