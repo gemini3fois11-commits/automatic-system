@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "omega-hermes"
+dynamic = ["version"]
+description = "Plateforme OMEGA-HERMÈS : portes locales auditables qui prouvent leurs refus à un témoin indépendant"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = ["numpy>=1.24"]
+
+[project.optional-dependencies]
+dev = ["coverage>=7", "ruff", "cryptography"]
+
+# CLI des opérations (voir docs/OPERATION.md). Chaque cible existe et lit sys.argv.
+[project.scripts]
+omega-gardien = "agent_guard.guard:main"
+omega-passerelle = "cryoloop_gateway.gateway:main"
+omega-terminal = "terminal_auth.server:main"
+omega-keygen = "cryoloop_gateway.keygen:main"
+omega-ticket = "cryoloop_gateway.ticket:main"
+omega-superviseur = "runtime.superviseur:main"
+omega-preuve = "socle_preuve.__main__:main"
+omega-orchestrateur = "plateforme_omega.orchestrator:main"
+omega-dossier = "dossier.generer:main"
+omega-cryoloop = "cryoloop.__main__:main"
+
+[tool.setuptools]
+packages = [
+    "agent_guard",
+    "cryoloop",
+    "cryoloop_gateway",
+    "dossier",
+    "omega_hermes",
+    "outils",
+    "plateforme_omega",
+    "rag_wiki",
+    "rinv",
+    "runtime",
+    "socle_preuve",
+    "telegraphe",
+    "terminal_auth",
+]
+
+[tool.setuptools.dynamic]
+version = { file = "VERSION" }
+
+[tool.setuptools.package-data]
+agent_guard = ["allowlist.json"]
+rag_wiki = ["pinned_certs/*.der", "corpus.json"]
