@@ -1,20 +1,20 @@
 # Dossier de vérification final — Plateforme OMEGA-HERMÈS / LOOP
 
-*2026-11-13 · discipline d'ingénierie type NASA (conformément au §10.2 du blueprint, aucune
+*2026-11-15 · discipline d'ingénierie type NASA (conformément au §10.2 du blueprint, aucune
 certification n'est conférée ni revendiquée ; seule la rigueur est visée).*
 
 ## Résumé exécutable
 
-- **Suite complète** : 243 tests, verdict `OK`.
+- **Suite complète** : 253 tests, verdict `OK`.
 - **Cycle plateforme** : 20/21 suites du blueprint
-  OK en 29.8 s (gain ×3.39 sur
+  OK en 31.1 s (gain ×3.35 sur
   4 voies). Échecs connus documentés :
   `fusion`. Échecs inattendus :
   aucun.
 - **Ω Q** : {"ACCEPTER": 30, "REVOIR": 0, "REJETER": 0} sur 30 évaluations.
 - **Analyse statique** (ruff `E9,F63,F7,F82,F401,F841`) : PROPRE.
-- **Couverture** : 73.5 % (6852 instructions,
-  1390 branches) ; les points bas documentés plus bas.
+- **Couverture** : 74.2 % (6935 instructions,
+  1394 branches) ; les points bas documentés plus bas.
 - **Évidences** (31) : {"ECHEC": 1, "OK": 30}.
 - **Étiquettes** : {"D\u00c9MONTR\u00c9": 2, "SIMUL\u00c9": 12, "V\u00c9RIFI\u00c9": 17}.
 
@@ -67,11 +67,9 @@ Modules du cœur sous 80 % de couverture (cause documentée) :
 - `plateforme_omega/rubik.py` : 0.0 %
 - `plateforme_omega/tls.py` : 0.0 %
 - `plateforme_omega/watcher.py` : 0.0 %
-- `cryoloop_gateway/ticket.py` : 54.5 %
-- `rag_wiki/pinning.py` : 55.0 %
 - `rag_wiki/corpus.py` : 56.0 %
 - `plateforme_omega/commun.py` : 58.3 %
-- `cryoloop_gateway/keygen.py` : 63.2 %
+- `rag_wiki/pinning.py` : 65.1 %
 - `plateforme_omega/omega_q.py` : 76.7 %
 - `cryoloop/validateur.py` : 78.1 %
 - `outils/evidence.py` : 78.2 %
