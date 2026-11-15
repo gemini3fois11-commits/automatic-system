@@ -1,10 +1,36 @@
 import os
+import shutil
+import tempfile
 import unittest
 
 from rag_wiki import pinning
 from rag_wiki.corpus import charger, nettoyer
 from rag_wiki.fusion import Fusion, repondre
 from rag_wiki.rag import IndexTFIDF, decouper, jetons, mrr, repondre_avec
+
+
+def _der_len(n: int) -> bytes:
+    if n < 0x80:
+        return bytes([n])
+    corps = n.to_bytes((n.bit_length() + 7) // 8, "big")
+    return bytes([0x80 | len(corps)]) + corps
+
+
+def _tlv(tag: int, contenu: bytes) -> bytes:
+    return bytes([tag]) + _der_len(len(contenu)) + contenu
+
+
+def _seq(*enfants: bytes) -> bytes:
+    return _tlv(0x30, b"".join(enfants))
+
+
+def _cert(champs: list[bytes]) -> bytes:
+    """Certificat DER synthétique : SEQUENCE { TBSCertificate(champs) }.
+
+    analyser() ne lit que le premier enfant (le TBS) ; inutile de forger
+    l'algorithme de signature ni la signature.
+    """
+    return _seq(_seq(*champs))
 
 
 class Corpus(unittest.TestCase):
@@ -85,6 +111,40 @@ class Epinglage(unittest.TestCase):
         for mauvais in (b"", b"\x30", b"\x30\x84\xff\xff\xff\xff", b"\x02\x01\x00"):
             with self.assertRaises(pinning.DERInvalide):
                 pinning.analyser(mauvais)
+
+    def test_longueur_longue_invalide_refusee(self):
+        # Forme longue mal encodée : 0 octet de longueur, > 4 octets, longueur au-delà de la fin.
+        for mauvais in (b"\x30\x80", b"\x30\x85\x01\x02\x03\x04\x05", b"\x30\x84\xff"):
+            with self.assertRaises(pinning.DERInvalide):
+                pinning.analyser(mauvais)
+
+    def test_tbs_sans_version_six_champs_accepte(self):
+        # Pas de [0] version : le parseur ne saute rien et lit directement les six champs.
+        i, s, spki = _seq(b"\x01"), _seq(b"\x02"), _seq(b"\x03")
+        champs = [_tlv(0x02, b"\x00"), _tlv(0x02, b"\x00"), i, _seq(), s, spki]
+        r = pinning.analyser(_cert(champs))
+        self.assertEqual((r["issuer"], r["subject"], r["spki"]), (i, s, spki))
+
+    def test_tbs_incomplet_refuse(self):
+        # Cinq champs, pas de version : TBSCertificate incomplet.
+        with self.assertRaises(pinning.DERInvalide):
+            pinning.analyser(_cert([_tlv(0x02, b"\x00")] * 5))
+
+    def test_chaine_non_liee_refusee(self):
+        def cert(issuer, subject):
+            return _cert([_tlv(0x02, b"\x00"), _tlv(0x02, b"\x00"), issuer, _seq(), subject, _seq(b"\x09")])
+        a = cert(_seq(b"\xAA"), _seq(b"\x01"))
+        b = cert(_seq(b"\xBB"), _seq(b"\x02"))      # subject de b ≠ issuer de a
+        self.assertEqual(pinning.verifier_chaine([a, b], set()), ("PINNED_FAIL", "chaine_non_liee"))
+
+    @unittest.skipUnless(shutil.which("openssl"), "openssl requis")
+    def test_interception_rejetee(self):
+        # Une feuille letsencrypt.org ré-émise par une autorité étrangère : la chaîne est liée
+        # par les noms mais ne porte aucune clé épinglée → refusée. C'est la propriété centrale.
+        ep = set(pinning.charger_epingles().values())
+        with tempfile.TemporaryDirectory() as tmp:
+            forgee = pinning.chaine_interception(tmp)
+        self.assertEqual(pinning.verifier_chaine(forgee, ep), ("PINNED_FAIL", "aucune_epingle"))
 
 
 if __name__ == "__main__":
