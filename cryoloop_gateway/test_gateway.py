@@ -7,7 +7,7 @@ import tempfile
 import threading
 import unittest
 
-from cryoloop_gateway import keygen
+from cryoloop_gateway import keygen, ticket
 from cryoloop_gateway.gateway import DOSSIER, construire
 from cryoloop_gateway.ticket import fabriquer
 from socle_preuve import ed25519
@@ -248,6 +248,66 @@ class KeygenEtArchitecture(unittest.TestCase):
         self.assertFalse(appels & {"system", "popen", "execv", "execve", "spawnv", "fork"})
         self.assertNotIn("eval", {n.func.id for n in ast.walk(arbre)
                                   if isinstance(n, ast.Call) and isinstance(n.func, ast.Name)})
+
+
+class OutilsDuProprietaire(unittest.TestCase):
+    """Outils côté propriétaire (keygen, ticket), exercés en direct, CLI comprise.
+
+    Les refus de keygen sont des invariants de sécurité : la clé privée n'est jamais
+    écrite dans le dépôt, ni écrasée.
+    """
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.hors = self.tmp.name                      # hors du dépôt
+
+    @staticmethod
+    def _muet(f, *a):
+        import contextlib
+        import io
+        with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
+            return f(*a)
+
+    def test_keygen_genere_cle_600_et_epingle(self):
+        cle, etat = os.path.join(self.hors, "p.cle"), os.path.join(self.hors, "etat")
+        pub = keygen.generer(cle, etat)
+        self.assertEqual(stat.S_IMODE(os.stat(cle).st_mode), 0o600)
+        with open(cle, "rb") as fh:
+            self.assertEqual(pub, ed25519.cle_publique(fh.read()).hex())
+        with open(os.path.join(etat, "cle_publique.hex")) as fh:
+            self.assertEqual(fh.read().strip(), pub)
+
+    def test_keygen_refuse_la_cle_dans_le_depot(self):
+        with self.assertRaises(ValueError):
+            keygen.generer(os.path.join(keygen.RACINE, "fuite.cle"), os.path.join(self.hors, "e"))
+        self.assertFalse(os.path.exists(os.path.join(keygen.RACINE, "fuite.cle")))
+
+    def test_keygen_refuse_d_ecraser(self):
+        cle = os.path.join(self.hors, "p.cle")
+        keygen.generer(cle, os.path.join(self.hors, "e1"))
+        with self.assertRaises(FileExistsError):
+            keygen.generer(cle, os.path.join(self.hors, "e2"))
+
+    def test_keygen_main_succes_puis_refus(self):
+        cle, etat = os.path.join(self.hors, "m.cle"), os.path.join(self.hors, "e")
+        self.assertEqual(self._muet(keygen.main, ["--cle-privee", cle, "--etat", etat]), 0)
+        self.assertEqual(self._muet(keygen.main, ["--cle-privee", cle, "--etat", etat]), 2)
+
+    def test_ticket_main_signe_un_ticket_structure(self):
+        import contextlib
+        import io
+        cle = os.path.join(self.hors, "t.cle")
+        with open(os.open(cle, os.O_WRONLY | os.O_CREAT, 0o600), "wb") as fh:
+            fh.write(bytes(range(32)))
+        sortie = io.StringIO()
+        with contextlib.redirect_stdout(sortie):
+            rc = ticket.main(["--cle-privee", cle, "--action", "inscrire"])
+        self.assertEqual(rc, 0)
+        signe = json.loads(sortie.getvalue())
+        self.assertEqual(signe["ticket"]["action"], "inscrire")
+        self.assertEqual(len(signe["ticket"]["id"]), 32)
+        self.assertEqual(len(bytes.fromhex(signe["signature"])), 64)
 
 
 if __name__ == "__main__":
