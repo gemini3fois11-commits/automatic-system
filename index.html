@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>OMEGA-HERMÈS</title>
+<style>
+  :root{
+    --bg:#f5f5f1; --surface:#fffdf9; --fg:#1a1c1e; --muted:#5c6267; --line:#dedcd3;
+    --seal:#0f6e5e; --seal-soft:rgba(15,110,94,.08);
+    --font-d:"Space Grotesk",system-ui,sans-serif; --font-b:system-ui,-apple-system,sans-serif;
+    --font-m:ui-monospace,Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+    --bg:#141619; --surface:#1c1f23; --fg:#ecece8; --muted:#9aa0a6; --line:#2c3036;
+    --seal:#4fd1b5; --seal-soft:rgba(79,209,181,.10); color-scheme:dark;
+  }}
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font-b);line-height:1.55}
+  .wrap{max-width:760px;margin:0 auto;
+    padding-left:max(16px,env(safe-area-inset-left,0px));
+    padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:48px 64px}
+  .eyebrow{font-family:var(--font-d);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--seal);font-weight:600}
+  h1{font-family:var(--font-d);font-size:clamp(1.8rem,6vw,2.6rem);font-weight:700;margin:.3em 0 .2em}
+  .sub{color:var(--muted);margin:0 0 32px;max-width:54ch}
+  .grid{display:grid;gap:14px}
+  a.card{display:block;text-decoration:none;color:inherit;background:var(--surface);
+    border:1px solid var(--line);border-radius:14px;padding:20px 22px;transition:border-color .15s}
+  a.card:hover{border-color:var(--seal)}
+  a.card:focus-visible{outline:2px solid var(--seal);outline-offset:2px}
+  .card h2{font-family:var(--font-d);font-size:1.1rem;font-weight:600;margin:0 0 4px;
+    display:flex;align-items:center;gap:10px}
+  .card h2 .g{font-family:var(--font-m);color:var(--seal);font-weight:700}
+  .card p{margin:0;color:var(--muted);font-size:.92rem}
+  .card .go{color:var(--seal);font-size:.84rem;font-weight:600;margin-top:10px;font-family:var(--font-m)}
+  .note{margin-top:30px;background:var(--seal-soft);border:1px solid var(--seal);border-radius:12px;
+    padding:16px 20px;font-size:.88rem}
+  .note b{font-family:var(--font-d)}
+  .note code{font-family:var(--font-m);font-size:.84em;color:var(--seal)}
+  footer{margin-top:28px;color:var(--muted);font-size:.8rem;font-family:var(--font-m)}
+  a.plain{color:var(--seal)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="eyebrow">Plateforme de preuve · 127.0.0.1</span>
+  <h1>OMEGA-HERMÈS</h1>
+  <p class="sub">Un système défensif qui prouve ses propres refus à un témoin indépendant. Trois vues statiques, générées depuis les évidences — aucun chiffre saisi à la main.</p>
+
+  <div class="grid">
+    <a class="card" href="console/plateforme-omega-hermes-v1-0.html">
+      <h2><span class="g">▣</span>Console — tableau de bord</h2>
+      <p>État de chaque module, depuis tous les <code>*_evidence.json</code>.</p>
+      <div class="go">ouvrir →</div>
+    </a>
+    <a class="card" href="docs/architecture.html">
+      <h2><span class="g">◈</span>Architecture — vue complète</h2>
+      <p>Le socle de preuve, le flux « prouver son refus », les 14 couches, les lignes rouges.</p>
+      <div class="go">ouvrir →</div>
+    </a>
+    <a class="card" href="plateforme_omega/plateforme_omega.html">
+      <h2><span class="g">⊞</span>Orchestrateur — cycle plateforme</h2>
+      <p>Les ~30 suites, Ω Q (Q = S+P+R−C) et le balayage HERMÈS du dernier cycle.</p>
+      <div class="go">ouvrir →</div>
+    </a>
+  </div>
+
+  <div class="note">
+    <b>Vues statiques vs portes vivantes.</b> Les trois cartes ci-dessus sont des pages HTML
+    servies directement — aucune installation requise. Les <b>portes vivantes</b> (GARDIEN
+    <code>:8090</code>, passerelle <code>:8077</code>, terminal <code>:8076</code>) sont des
+    serveurs : <code>pip install -e .</code> puis <code>omega-gardien</code> /
+    <code>omega-passerelle</code> / <code>omega-terminal</code>. Elles démarrent en SETUP_MODE
+    et n'écoutent que la boucle locale. Voir <a class="plain" href="docs/OPERATION.md">le guide opérateur</a>.
+  </div>
+
+  <footer>statique · 0 CDN · branche claude/inversion-system-algebra-0ju4et</footer>
+</div>
+</body>
+</html>
