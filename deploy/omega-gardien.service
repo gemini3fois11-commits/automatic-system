@@ -1,0 +1,39 @@
+# Gabarit d'unité systemd — PORTÉE UTILISATEUR (systemctl --user), jamais root.
+#
+# À installer par le PROPRIÉTAIRE, sur SA machine, sous SON compte :
+#   mkdir -p ~/.config/systemd/user
+#   cp deploy/omega-gardien.service ~/.config/systemd/user/
+#   # adapter les chemins ci-dessous à votre installation, puis :
+#   systemctl --user daemon-reload
+#   systemctl --user enable --now omega-gardien
+#
+# Rien n'est auto-installé : l'agent n'exécute aucun `systemctl`. Voir deploy/README.md.
+
+[Unit]
+Description=OMEGA-HERMÈS — GARDIEN (mandataire HTTP à allowlist, 127.0.0.1:8090)
+Documentation=file:%h/omega-hermes/docs/OPERATION.md
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/omega-hermes
+# omega-gardien est le point d'entrée installé par `pip install -e .` ; il n'écoute
+# que 127.0.0.1 (garanti en code). Adapter le chemin si pip a installé ailleurs.
+ExecStart=%h/.local/bin/omega-gardien --port 8090 --etat %h/.local/state/omega-hermes/gardien
+Restart=on-failure
+RestartSec=2
+
+# Durcissement : aucun privilège nouveau, système en lecture seule, seule la boucle
+# locale est permise. La plateforme ne demande rien de plus.
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=%h/.local/state/omega-hermes
+ProtectControlGroups=yes
+ProtectKernelModules=yes
+ProtectKernelTunables=yes
+RestrictAddressFamilies=AF_INET AF_UNIX
+
+[Install]
+WantedBy=default.target
